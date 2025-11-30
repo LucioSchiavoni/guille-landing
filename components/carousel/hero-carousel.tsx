@@ -1,59 +1,77 @@
 "use client"
 
+
 import { useEffect, useState } from "react"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
+import { urlFor } from "@/lib/sanity"
+
 interface Slide {
-  id: number
+  id: number | string
   image: string
   title: string
   subtitle?: string
   description?: string
 }
 
-// Placeholder slides - replace with your actual images
+interface HeroCarouselProps {
+  products?: any[]
+}
+
+
 const slides: Slide[] = [
   {
     id: 1,
-    image: "https://drive.google.com/file/d/1-uIo1ppyws2lVtDTD2VB_mw-isy9z_0x/view?usp=sharing",
-    title: "20% OFF",
+    image: "https://res.cloudinary.com/dbk2t0jy3/image/upload/v1764163500/Generated_Image_October_15_2025_-_3_08PM_sskozd.png",
+    title: "10% OFF",
     subtitle: "en tu primera compra online",
     description: "Ecoamigable",
   },
   {
     id: 2,
-    image: "/elegant-home-lighting.jpg",
-    title: "NUEVOS PRODUCTOS",
+    image: "https://res.cloudinary.com/dbk2t0jy3/image/upload/v1764163499/Generated_Image_October_15_2025_-_3_14PM_uz21dl.png",
+    title: "20% OFF",
     subtitle: "Caja de masas",
     description: "Ecoamigable",
   },
   {
     id: 3,
-    image: "/outdoor-lighting-solutions.jpg",
-    title: "NUEVOS PRODUCTOS",
+    image: "https://res.cloudinary.com/dbk2t0jy3/image/upload/v1764163497/Generated_Image_October_15_2025_-_2_49PM_hyep06.png",
+    title: "30% OFF",
     subtitle: "Sobre antigrasa",
     description: "Ecoamigable",
   },
   {
     id: 4,
-    image: "/smart-home-lighting.png",
-    title: "NUEVOS PRODUCTOS",
+    image: "https://res.cloudinary.com/dbk2t0jy3/image/upload/v1764163498/Generated_Image_October_15_2025_-_3_16PM_nylkek.png",
+    title: "40% OFF",
     subtitle: "Caja de masas",
     description: "Ecoamigable",
   },
 ]
 
-export default function HeroCarousel() {
+export default function HeroCarousel({ products = [] }: HeroCarouselProps) {
   const [currentSlide, setCurrentSlide] = useState(0)
   const [isAutoPlaying, setIsAutoPlaying] = useState(true)
 
+  // Map products to slides if available, otherwise use default slides
+  const activeSlides: Slide[] = products.length > 0
+    ? products.map((product) => ({
+      id: product._id,
+      image: product.image?.asset?._ref ? urlFor(product.image).url() : "/placeholder.svg",
+      title: product.name,
+      subtitle: product.price ? `$${product.price}` : undefined,
+      description: product.description
+    }))
+    : slides
+
   const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % slides.length)
+    setCurrentSlide((prev) => (prev + 1) % activeSlides.length)
   }
 
   const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length)
+    setCurrentSlide((prev) => (prev - 1 + activeSlides.length) % activeSlides.length)
   }
 
   const goToSlide = (index: number) => {
@@ -66,45 +84,43 @@ export default function HeroCarousel() {
 
     const interval = setInterval(() => {
       nextSlide()
-    }, 5000) // Change slide every 5 seconds
+    }, 5000)
 
     return () => clearInterval(interval)
   }, [isAutoPlaying, currentSlide])
 
   return (
     <div
-      className="relative w-full h-[500px] md:h-[600px] overflow-hidden bg-muted"
+      className="relative w-full h-[500px] md:h-[600px] overflow-hidden bg-muted z-0"
       onMouseEnter={() => setIsAutoPlaying(false)}
       onMouseLeave={() => setIsAutoPlaying(true)}
     >
       {/* Slides */}
       <div className="relative w-full h-full">
-        {slides.map((slide, index) => (
+        {activeSlides.map((slide, index) => (
           <div
             key={slide.id}
-            className={`absolute inset-0 transition-all duration-700 ease-in-out ${
-              index === currentSlide
-                ? "opacity-100 translate-x-0"
-                : index < currentSlide
-                  ? "opacity-0 -translate-x-full"
-                  : "opacity-0 translate-x-full"
-            }`}
+            className={`absolute inset-0 transition-all duration-1000 ease-in-out ${index === currentSlide
+              ? "opacity-100 scale-100"
+              : "opacity-0 scale-105"
+              }`}
           >
-            <img src={slide.image || "/placeholder.svg"} alt={slide.title} className="w-full h-full object-cover" />
+            <div className="absolute inset-0 bg-black/5">
+              <img
+                src={slide.image || "/placeholder.svg"}
+                alt={slide.title}
+                className="absolute inset-0 w-full h-full object-contain object-center bg-gradient-to-r from-green-300 to-green-800"
+              />
+            </div>
 
             {/* Overlay gradient */}
-            <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/30 to-transparent" />
+            <div className="absolute inset-0 bg-linear-to-r from-black/50 via-black/30 to-transparent" />
 
             {/* Content */}
-            <div className="absolute inset-0 flex items-center">
-              <div className="container mx-auto px-4 md:px-8">
-                <div className="max-w-2xl space-y-4 animate-fade-in">
-                  {/* Welcome badge */}
-                  <div className="inline-block bg-background/95 backdrop-blur-sm px-6 py-3 rounded-lg border-2 border-dashed border-foreground shadow-lg transform -rotate-2">
-                    <p className="font-serif italic text-2xl md:text-3xl text-foreground">
-                      Promo <span className="font-bold">bienvenida</span>
-                    </p>
-                  </div>
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="container mx-auto px-4 md:px-8 flex flex-col items-center text-center">
+                <div className="max-w-3xl space-y-6 animate-fade-in">
+
 
                   {/* Main title */}
                   <h2 className="text-5xl md:text-7xl font-bold text-white drop-shadow-lg">{slide.title}</h2>
@@ -157,15 +173,14 @@ export default function HeroCarousel() {
 
       {/* Slide indicators */}
       <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-2">
-        {slides.map((_, index) => (
+        {activeSlides.map((_, index) => (
           <button
             key={index}
             onClick={() => goToSlide(index)}
-            className={`transition-all ${
-              index === currentSlide
-                ? "w-12 h-3 bg-primary rounded-full"
-                : "w-3 h-3 bg-background/60 hover:bg-background/80 rounded-full"
-            }`}
+            className={`transition-all ${index === currentSlide
+              ? "w-12 h-3 bg-primary rounded-full"
+              : "w-3 h-3 bg-background/60 hover:bg-background/80 rounded-full"
+              }`}
             aria-label={`Ir a slide ${index + 1}`}
           />
         ))}

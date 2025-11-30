@@ -1,18 +1,18 @@
+import Image from "next/image"
+
 export default function Logo() {
-    return (
-      <div className="flex items-center gap-2 flex-shrink-0">
-        <div className="flex items-center gap-1">
-          {/* Logo placeholder - you can replace with your actual logo */}
-          <div className="text-primary font-bold text-2xl flex items-center">
-          <h1>Logo</h1>
-           
-          </div>
-          <div className="ml-2">
-            <h1 className="text-lg font-bold text-foreground tracking-wide">TODOENPACKAGING</h1>
-            <p className="text-xs text-muted-foreground">Productos ecoamigables</p>
-          </div>
+  return (
+    <div className="flex items-center gap-2 flex-shrink-0">
+      <div className="flex items-center gap-1">
+        <div className="relative h-16 w-48 flex items-center justify-center">
+          <img
+            src="https://res.cloudinary.com/dbk2t0jy3/image/upload/v1764163493/LOGO_-_fondo_transparente_ioekip.png"
+            alt="TodoEnPackaging Logo"
+            className="h-full w-full object-contain"
+          />
         </div>
+
       </div>
-    )
-  }
-  
+    </div>
+  )
+}

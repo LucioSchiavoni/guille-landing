@@ -1,0 +1,327 @@
+{
+  "categorias": [
+    {
+      "id": "bandejas",
+      "nombre": "Bandejas",
+      "subcategorias": [
+        {
+          "id": "bandejas-aluminio",
+          "nombre": "Aluminio",
+          "items": ["500 ml", "750 ml", "1100 ml", "1500 ml"]
+        },
+        {
+          "id": "bandejas-carton",
+          "nombre": "Cartón",
+          "items": []
+        },
+        {
+          "id": "bandejas-espuma",
+          "nombre": "Espuma Plast",
+          "items": []
+        },
+        {
+          "id": "bandejas-pet",
+          "nombre": "PET",
+          "items": []
+        },
+        {
+          "id": "bandejas-polipropileno",
+          "nombre": "Polipropileno",
+          "items": []
+        },
+        {
+          "id": "bandejas-polipapel",
+          "nombre": "Polipapel",
+          "items": []
+        }
+      ]
+    },
+    {
+      "id": "bolsas",
+      "nombre": "Bolsas",
+      "subcategorias": [
+        {
+          "id": "bolsas-alta-densidad-granel",
+          "nombre": "Alta Densidad (A Granel x Kilo)",
+          "variantes": [
+            {
+              "tipo": "Plano",
+              "items": []
+            },
+            {
+              "tipo": "Rollo",
+              "items": []
+            }
+          ]
+        },
+        {
+          "id": "bolsas-alta-densidad-rollo",
+          "nombre": "Alta Densidad x Unidad en Rollo",
+          "items": ["10x20", "12x20", "12x24", "16x24", "20x30", "20x60", "24x35", "24x50", "28x40", "28x50", "35x50", "Hoja (separador)"]
+        },
+        {
+          "id": "bolsas-alta-densidad-sistema",
+          "nombre": "Alta Densidad Sistema Unisold",
+          "variantes": [
+            {
+              "tipo": "Ipon",
+              "items": ["30x40 (1000)", "39x50 (750)", "39x60 (420)"]
+            },
+            {
+              "tipo": "Fondo Estrella",
+              "items": ["29x40 (900)", "34x50 (720)", "39x60 (480)"]
+            },
+            {
+              "tipo": "Coex",
+              "items": ["30x40 (900)", "35x50 (720)", "40x60 (400)"]
+            }
+          ]
+        },
+        {
+          "id": "bolsas-homebag",
+          "nombre": "Homebag (sin cono)",
+          "items": ["29x40", "34x50", "39x60"]
+        },
+        {
+          "id": "bolsas-color",
+          "nombre": "Color (*Unidad)",
+          "items": ["28x40", "35x50", "40x60"]
+        },
+        {
+          "id": "bolsas-baja-densidad",
+          "nombre": "Baja Densidad (A Granel x Kilo)",
+          "items": ["10x15", "12x20", "16x24", "20x30", "20x60", "24x35", "24x50", "28x40", "28x50", "35x50"]
+        },
+        {
+          "id": "bolsas-polipropileno",
+          "nombre": "Polipropileno (A Granel x Kilo)",
+          "items": ["10x15", "12x20", "16x24", "20x30", "20x60", "24x35", "24x50", "28x40", "28x50", "35x50", "Hoja (separador)"]
+        },
+        {
+          "id": "bolsas-residuos-negro-granel",
+          "nombre": "Residuos Negro (A Granel x Kilo)",
+          "items": ["50x55cm", "70cmx1mts", "1x1mts", "1.20x1.40mts"]
+        },
+        {
+          "id": "bolsas-residuos-negro-unidad",
+          "nombre": "Residuos Negro (*Unidad - Económicas)",
+          "variantes": [
+            {
+              "tipo": "Ecobol (plano)",
+              "items": ["50x55 (10u)", "50x55 (30u)", "70x1 (10u)"]
+            },
+            {
+              "tipo": "Fira + (rollo)",
+              "items": ["50x55 (10u)", "50x55 (30u)", "70x1 (10u)"]
+            },
+            {
+              "tipo": "Canmai (rollo)",
+              "items": ["50x55 (100)"]
+            }
+          ]
+        },
+        {
+          "id": "bolsas-residuos-blanco",
+          "nombre": "Residuos Blanco (*Unidad - Baño)",
+          "variantes": [
+            {
+              "tipo": "Canmai (rollo)",
+              "items": ["30x40 (100)"]
+            }
+          ]
+        },
+        {
+          "id": "bolsas-residuos-resistentes",
+          "nombre": "Residuos + Resistentes (*Unidad - Papelera)",
+          "variantes": [
+            {
+              "tipo": "Naranja",
+              "items": ["50x55 (30U)"]
+            },
+            {
+              "tipo": "Verde",
+              "items": ["50x55 (30U)"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "papel",
+      "nombre": "Papel",
+      "subcategorias": [
+        {
+          "id": "papel-kilo",
+          "nombre": "Papel x Kilo",
+          "variantes": [
+            {
+              "tipo": "Blancas",
+              "items": ["N°1", "N°3"]
+            },
+            {
+              "tipo": "Marrón",
+              "items": ["N°1", "N°3", "N°5"]
+            }
+          ]
+        },
+        {
+          "id": "papel-delivery",
+          "nombre": "Papel Delivery x Unidad",
+          "variantes": [
+            {
+              "tipo": "Marrón",
+              "items": ["N°6", "N°7", "N°8", "N°11"]
+            }
+          ]
+        },
+        {
+          "id": "papel-asa",
+          "nombre": "Papel con Asa x Unidad",
+          "variantes": [
+            {
+              "tipo": "Marrón",
+              "items": ["N°6", "N°8"]
+            }
+          ]
+        },
+        {
+          "id": "papel-pouch",
+          "nombre": "Papel Pouch con Visor (con cierre) x Unidad",
+          "items": ["N°2", "N°3", "N°4", "N°6"]
+        }
+      ]
+    },
+    {
+      "id": "botellas",
+      "nombre": "Botellas",
+      "subcategorias": [
+        {
+          "id": "botellas-pet",
+          "nombre": "PET con tapa negra",
+          "items": ["200 ml", "300 ml", "500 ml"]
+        }
+      ]
+    },
+    {
+      "id": "bowls",
+      "nombre": "Bowls",
+      "subcategorias": [
+        {
+          "id": "bowls-polipapel",
+          "nombre": "Polipapel con tapa PET",
+          "items": ["500 ml", "750 ml", "1000 ml", "1300 ml"]
+        }
+      ]
+    },
+    {
+      "id": "budinera",
+      "nombre": "Budinera",
+      "subcategorias": [
+        {
+          "id": "budinera-aluminio",
+          "nombre": "De aluminio sin tapa",
+          "items": ["500 ml"]
+        }
+      ]
+    },
+    {
+      "id": "cajas",
+      "nombre": "Cajas",
+      "subcategorias": [
+        {
+          "id": "cajas-blancas",
+          "nombre": "Masas y Postres Blancas",
+          "items": ["Cuarto", "Medio", "Kilo"]
+        },
+        {
+          "id": "cajas-impresas",
+          "nombre": "Masas y Postres Impresas",
+          "items": ["Medio", "Kilo"]
+        },
+        {
+          "id": "cajas-especiales",
+          "nombre": "Especiales",
+          "items": ["Hamburguesas", "Ravioles"]
+        },
+        {
+          "id": "cajas-pizza",
+          "nombre": "Pizza Impresa",
+          "items": ["28x28", "32x32", "20x50", "42x42"]
+        },
+        {
+          "id": "cajas-delivery",
+          "nombre": "Delivery Marrón",
+          "items": ["20x30", "11x13", "14.5x17.5"]
+        },
+        {
+          "id": "cajas-chivito",
+          "nombre": "Chivito Impresa",
+          "items": ["Chivito-1", "Chivito-2"]
+        }
+      ]
+    },
+    {
+      "id": "cinta-adhesiva",
+      "nombre": "Cinta Adhesiva",
+      "subcategorias": [
+        {
+          "id": "cinta-transparente",
+          "nombre": "Transparente",
+          "items": ["Fina 24mm", "Fina 48mm", "Gruesa 24mm", "Gruesa 48mm"]
+        },
+        {
+          "id": "cinta-marron",
+          "nombre": "Marrón",
+          "items": ["Gruesa 48mm"]
+        }
+      ]
+    },
+    {
+      "id": "cubiertos",
+      "nombre": "Cubiertos",
+      "subcategorias": [
+        {
+          "id": "cubiertos-bamboo",
+          "nombre": "Bamboo",
+          "items": ["Cucharas", "Tenedores", "Cuchillos"]
+        },
+        {
+          "id": "cubiertos-polipropileno",
+          "nombre": "Polipropileno Blancas",
+          "items": ["Cucharas", "Tenedores", "Cuchillos", "Cucharita"]
+        },
+        {
+          "id": "cubiertos-palita",
+          "nombre": "Palita Helado",
+          "items": ["Pequeña", "Grande"]
+        },
+        {
+          "id": "cubiertos-especiales",
+          "nombre": "Cucharas Especiales",
+          "items": ["Sundae"]
+        },
+        {
+          "id": "cubiertos-reforzado",
+          "nombre": "Reforzado Negro",
+          "items": ["Cucharas", "Tenedores", "Cuchillos"]
+        },
+        {
+          "id": "cubiertos-mixto",
+          "nombre": "Mixto Color",
+          "items": ["Cucharas", "Tenedores", "Cuchillos"]
+        }
+      ]
+    },
+    {
+      "id": "copas",
+      "nombre": "Copas",
+      "subcategorias": [
+        {
+          "id": "copas-simil-cristal",
+          "nombre": "Símil Cristal",
+          "items": ["Vino", "Champagne", "Licor"]
+        }
+      ]
+    }
+  ]
+}
