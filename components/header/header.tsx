@@ -22,7 +22,7 @@ export default function Header({ categorias }: HeaderProps) {
 
           {/* Search Bar - Centered */}
           <div className="flex-1 w-full max-w-2xl flex justify-center">
-            <SearchBar />
+            <SearchBar categorias={categorias} />
           </div>
 
           {/* Contact Button - Right aligned */}

@@ -62,7 +62,50 @@ export const menuQuery = groq`
     "subcategorias": *[_type == "subcategory" && category._ref == ^._id && active == true] | order(order asc) {
       "id": _id,
       "nombre": name,
-      "items": *[_type == "product" && subcategory._ref == ^._id && active == true] | order(order asc).name
+      "items": *[_type == "product" && subcategory._ref == ^._id && active == true] | order(order asc) {
+        "name": name,
+        "slug": slug.current
+      }
+    }
+  }
+`
+
+export const productBySlugQuery = groq`
+  *[_type == "product" && slug.current == $slug][0] {
+    _id,
+    name,
+    slug,
+    description,
+    image,
+    price,
+    subcategory->{
+      name,
+      slug,
+      category->{
+        name,
+        slug
+      }
+    }
+  }
+`
+
+export const advancedSearchQuery = groq`
+  *[_type == "product" && active == true && 
+    ($searchTerm == "" || name match $searchTerm + "*" || subcategory->name match $searchTerm + "*" || subcategory->category->name match $searchTerm + "*") &&
+    ($filterType != "category" || subcategory->category._id == $filterId) &&
+    ($filterType != "subcategory" || subcategory._id == $filterId)
+  ] | order(name asc) {
+    _id,
+    name,
+    slug,
+    description,
+    image,
+    price,
+    subcategory->{
+      name,
+      category->{
+        name
+      }
     }
   }
 `

@@ -1,5 +1,6 @@
 "use client"
 
+import Link from "next/link"
 import { useState } from "react"
 import type { Categoria } from "@/types/menu"
 
@@ -121,22 +122,26 @@ export default function MenuMobile({ categorias }: MenuMobileProps) {
                                         {variante.tipo}
                                       </div>
                                       {variante.items.map((item, itemIdx) => (
-                                        <div
+                                        <Link
                                           key={itemIdx}
-                                          className="text-sm text-foreground/80 py-1.5 px-3 hover:bg-primary/5 hover:text-primary rounded cursor-pointer transition-colors"
+                                          href={`/producto/${item.slug}`}
+                                          className="block text-sm text-foreground/80 py-1.5 px-3 hover:bg-primary/5 hover:text-primary rounded cursor-pointer transition-colors"
+                                          onClick={() => setIsOpen(false)}
                                         >
-                                          {item}
-                                        </div>
+                                          {item.name}
+                                        </Link>
                                       ))}
                                     </div>
                                   ))
                                   : sub.items?.map((item, idx) => (
-                                    <div
+                                    <Link
                                       key={idx}
-                                      className="text-sm text-foreground/80 py-1.5 px-3 hover:bg-primary/5 hover:text-primary rounded cursor-pointer transition-colors"
+                                      href={`/producto/${item.slug}`}
+                                      className="block text-sm text-foreground/80 py-1.5 px-3 hover:bg-primary/5 hover:text-primary rounded cursor-pointer transition-colors"
+                                      onClick={() => setIsOpen(false)}
                                     >
-                                      {item}
-                                    </div>
+                                      {item.name}
+                                    </Link>
                                   ))}
                               </div>
                             )}

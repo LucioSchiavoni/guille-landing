@@ -1,0 +1,374 @@
+[
+  {
+    "categoria": "BANDEJAS",
+    "material": "CARTÓN",
+    "subcategoria": "BC-00",
+    "productos": [
+      "BC-02",
+      "BC-03",
+      "BC-03",
+      "BC-04",
+      "BC-05"
+    ]
+  },
+  {
+    "categoria": "BANDEJAS",
+    "material": "ESPUMA PLAST",
+    "subcategoria": "BLANCAS ECONÓMICAS",
+    "productos": [
+      "C-01",
+      "C-02",
+      "C-03",
+      "C-05",
+      "C-20",
+      "C-54"
+    ]
+  },
+  {
+    "categoria": "BANDEJAS",
+    "material": "ESPUMA PLAST",
+    "subcategoria": "BLANCAS DARNEL",
+    "productos": [
+      "BP-617",
+      "BP-618",
+      "BP-619",
+      "BP-8S",
+      "BP-625"
+    ]
+  },
+  {
+    "categoria": "BANDEJAS",
+    "material": "ESPUMA PLAST",
+    "subcategoria": "NEGRAS DARNEL",
+    "productos": [
+      "BP-617N",
+      "BP-618N",
+      "BP-619N"
+    ]
+  },
+  {
+    "categoria": "BANDEJAS",
+    "material": "PET",
+    "subcategoria": "PROPACK",
+    "productos": [
+      "B102PET",
+      "B103PET",
+      "B105PET",
+      "B107PET"
+    ]
+  },
+  {
+    "categoria": "BANDEJAS",
+    "material": "POLIPROPILENO",
+    "subcategoria": "PROPACK",
+    "productos": [
+      "102PP-PRO",
+      "103PP-PRO",
+      "105PP-PRO",
+      "107PP-PRO"
+    ]
+  },
+  {
+    "categoria": "BANDEJAS",
+    "material": "POLIPROPILENO",
+    "subcategoria": "BANDEX",
+    "productos": [
+      "102PP-BAN",
+      "103PP-BAN",
+      "105PP-BAN",
+      "107PP-BAN"
+    ]
+  },
+  {
+    "categoria": "BOLSAS",
+    "material": "ALTA DENSIDAD",
+    "subcategoria": "10X20",
+    "productos": [
+      "12X24",
+      "16X24",
+      "20X30",
+      "20X60",
+      "24X35",
+      "24X50",
+      "28X40",
+      "28X50",
+      "35X50"
+    ]
+  },
+  {
+    "categoria": "BOLSAS",
+    "material": "ALTA DENSIDAD",
+    "subcategoria": "IPON",
+    "productos": [
+      "39*50(750)",
+      "39*60(420)"
+    ]
+  },
+  {
+    "categoria": "BOLSAS",
+    "material": "SISTEMA UNISOLD",
+    "subcategoria": "FONDO ESTRELLA",
+    "productos": [
+      "29*40(900)",
+      "34*50(720)",
+      "39*60(480)"
+    ]
+  },
+  {
+    "categoria": "BOLSAS",
+    "material": "SISTEMA UNISOLD",
+    "subcategoria": "COEX",
+    "productos": [
+      "35*50(720)",
+      "40*60(400)"
+    ]
+  },
+  {
+    "categoria": "BOLSAS",
+    "material": "ALTA DENSIDAD",
+    "subcategoria": "29*40",
+    "productos": [
+      "39*60"
+    ]
+  },
+  {
+    "categoria": "BOLSAS",
+    "material": "ALTA DENSIDAD",
+    "subcategoria": "28*40",
+    "productos": [
+      "40*60"
+    ]
+  },
+  {
+    "categoria": "BOLSAS",
+    "material": "BAJA DENSIDAD",
+    "subcategoria": "10X15",
+    "productos": [
+      "16X24",
+      "20X30",
+      "20X60",
+      "24X35",
+      "24X50",
+      "28X40",
+      "28X50",
+      "35X50"
+    ]
+  },
+  {
+    "categoria": "BOLSAS",
+    "material": "CAMISETA",
+    "subcategoria": "BIODEGRADABLE",
+    "productos": [
+      "VERDE",
+      "BLANCA"
+    ]
+  },
+  {
+    "categoria": "BOLSAS",
+    "material": "CAMISETA",
+    "subcategoria": "REUTELIZABLE",
+    "productos": [
+      "CHICA",
+      "MEDIANA",
+      "GRANDE"
+    ]
+  },
+  {
+    "categoria": "BOLSAS",
+    "material": "LAVADERO",
+    "subcategoria": "BLANCAS",
+    "productos": [
+      "60X60",
+      "60X90"
+    ]
+  },
+  {
+    "categoria": "BOLSAS",
+    "material": "POLIPROPILENO",
+    "subcategoria": "10X15",
+    "productos": [
+      "16X24",
+      "20X30",
+      "20X60",
+      "24X35",
+      "24X50",
+      "28X40",
+      "28X50",
+      "35X50"
+    ]
+  },
+  {
+    "categoria": "BOLSAS",
+    "material": "RESIDUOS NEGRO",
+    "subcategoria": "50*55cm",
+    "productos": [
+      "1*1mts",
+      "1.20*1.40mts"
+    ]
+  },
+  {
+    "categoria": "BOLSAS",
+    "material": "RESIDUOS NEGRO",
+    "subcategoria": "ECOBOL (plano)",
+    "productos": [
+      "50*55(10u)",
+      "50*55(30u)",
+      "70*1(10u)"
+    ]
+  },
+  {
+    "categoria": "BOLSAS",
+    "material": "*unidad-(económicas)",
+    "subcategoria": "FIRA + (rollo)",
+    "productos": [
+      "50*55(10u)",
+      "50*55(30u)",
+      "70*1(10u)"
+    ]
+  },
+  {
+    "categoria": "BOLSAS",
+    "material": "*unidad-(económicas)",
+    "subcategoria": "CANMAI (rollo)",
+    "productos": [
+      "50*55(100)"
+    ]
+  },
+  {
+    "categoria": "BOLSAS",
+    "material": "RESIDUOS blanco",
+    "subcategoria": "CANMAI (rollo)",
+    "productos": [
+      "30*40(100)"
+    ]
+  },
+  {
+    "categoria": "BOLSAS",
+    "material": "PAPEL X KILO",
+    "subcategoria": "BLANCAS",
+    "productos": [
+      "N°1",
+      "N°3"
+    ]
+  },
+  {
+    "categoria": "BOLSAS",
+    "material": "PAPEL X KILO",
+    "subcategoria": "MARRÓN",
+    "productos": [
+      "N°1",
+      "N°3",
+      "N°5"
+    ]
+  },
+  {
+    "categoria": "BOLSAS",
+    "material": "PAPEL DELIVERY",
+    "subcategoria": "MARRÓN",
+    "productos": [
+      "N°6",
+      "N°7",
+      "N°8",
+      "N°11"
+    ]
+  },
+  {
+    "categoria": "BOLSAS",
+    "material": "PAPEL CON ASA",
+    "subcategoria": "MARRÓN",
+    "productos": [
+      "N°6",
+      "N°8"
+    ]
+  },
+  {
+    "categoria": "BOLSAS",
+    "material": "X UNIDAD",
+    "subcategoria": "X UNIDAD",
+    "productos": [
+      "|"
+    ]
+  },
+  {
+    "categoria": "BOLSAS",
+    "material": "PAPEL POUCH CON VISOR",
+    "subcategoria": "N°2",
+    "productos": [
+      "N°4",
+      "N°6"
+    ]
+  },
+  {
+    "categoria": "CAJAS",
+    "material": "(ESPECIALES)",
+    "subcategoria": "HAMBURGUESAS",
+    "productos": [
+      "RAVIOLES"
+    ]
+  },
+  {
+    "categoria": "CAJAS",
+    "material": "PIZZA",
+    "subcategoria": "28*28",
+    "productos": [
+      "20*50",
+      "42*42"
+    ]
+  },
+  {
+    "categoria": "CAJAS",
+    "material": "DELIVERY",
+    "subcategoria": "20*30",
+    "productos": [
+      "14,5*17,5"
+    ]
+  },
+  {
+    "categoria": "CUBIERTOS",
+    "material": "POLIPROPILENO",
+    "subcategoria": "BLANCAS",
+    "productos": [
+      "CUCHARAS",
+      "TENEDORES",
+      "CUCHILLOS",
+      "CUCHARITA"
+    ]
+  },
+  {
+    "categoria": "CUBIERTOS",
+    "material": "POLIPROPILENO",
+    "subcategoria": "PALITA HELADO",
+    "productos": [
+      "PEQUEÑA",
+      "GRANDE"
+    ]
+  },
+  {
+    "categoria": "CUBIERTOS",
+    "material": "POLIPROPILENO",
+    "subcategoria": "CUACHARAS ESPECIALES",
+    "productos": [
+      "SUNDAE"
+    ]
+  },
+  {
+    "categoria": "CUBIERTOS",
+    "material": "POLIPROPILENO",
+    "subcategoria": "REFORZADO NEGRO",
+    "productos": [
+      "CUCHARAS",
+      "TENEDORES",
+      "CUCHILLOS"
+    ]
+  },
+  {
+    "categoria": "CUBIERTOS",
+    "material": "POLIPROPILENO",
+    "subcategoria": "MIXTO COLOR",
+    "productos": [
+      "CUCHARAS",
+      "TENEDORES",
+      "CUCHILLOS"
+    ]
+  }
+]

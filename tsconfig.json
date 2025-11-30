@@ -29,6 +29,6 @@
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
     "**/*.mts"
-  ],
+, "sanity/import-sanity.ts", "sanity/import-sanity.ts"  ],
   "exclude": ["node_modules"]
 }

@@ -1,18 +1,18 @@
 export interface MenuItem {
   id: string;
   nombre: string;
-  items?: string[];
+  items?: { name: string; slug: string }[];
 }
 
 export interface Variante {
   tipo: string;
-  items: string[];
+  items: { name: string; slug: string }[];
 }
 
 export interface Subcategoria {
   id: string;
   nombre: string;
-  items?: string[];
+  items?: { name: string; slug: string }[];
   variantes?: Variante[];
 }
 

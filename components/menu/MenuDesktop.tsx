@@ -1,5 +1,7 @@
 "use client"
 
+import Link from "next/link"
+
 import { useState, useEffect, useRef } from "react"
 import type { Categoria } from "@/types/menu"
 
@@ -103,24 +105,26 @@ export default function MenuDesktop({ categorias }: MenuDesktopProps) {
                                           {variante.tipo}
                                         </div>
                                         {variante.items.map((item, itemIdx) => (
-                                          <div
+                                          <Link
                                             key={itemIdx}
-                                            className="px-2 py-1.5 text-sm text-foreground/80 hover:text-primary hover:bg-primary/5 rounded-md cursor-pointer transition-colors"
+                                            href={`/producto/${item.slug}`}
+                                            className="block px-2 py-1.5 text-sm text-foreground/80 hover:text-primary hover:bg-primary/5 rounded-md cursor-pointer transition-colors"
                                           >
-                                            {item}
-                                          </div>
+                                            {item.name}
+                                          </Link>
                                         ))}
                                       </div>
                                     ))
                                   ) : (
                                     <div className="px-2">
                                       {sub.items?.map((item, idx) => (
-                                        <div
+                                        <Link
                                           key={idx}
-                                          className="px-2 py-1.5 text-sm text-foreground/80 hover:text-primary hover:bg-primary/5 rounded-md cursor-pointer transition-colors"
+                                          href={`/producto/${item.slug}`}
+                                          className="block px-2 py-1.5 text-sm text-foreground/80 hover:text-primary hover:bg-primary/5 rounded-md cursor-pointer transition-colors"
                                         >
-                                          {item}
-                                        </div>
+                                          {item.name}
+                                        </Link>
                                       ))}
                                     </div>
                                   )}
