@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { useState } from "react"
+import { useState, Suspense } from "react"
 import { Search } from "lucide-react"
 import type { Categoria } from "@/types/menu"
 import { Button } from "@/components/ui/button"
@@ -42,9 +42,10 @@ export default function MenuMobile({ categorias }: MenuMobileProps) {
           {/* Top Section: Search Bar (Aligned with Header) */}
           <div className="px-4 py-3 border-b flex items-center justify-between gap-4 bg-background z-10">
             <div className="flex-1">
-              <SearchCommand categorias={categorias} onSearch={() => setOpen(false)} />
+              <Suspense fallback={<div className="w-full h-10 bg-muted/50 rounded-md animate-pulse" />}>
+                <SearchCommand categorias={categorias} onSearch={() => setOpen(false)} />
+              </Suspense>
             </div>
-
           </div>
 
           <div className="flex-1 overflow-y-auto">
@@ -65,7 +66,6 @@ export default function MenuMobile({ categorias }: MenuMobileProps) {
               >
                 Productos
               </Link>
-
               <div className="w-px h-3 bg-border" />
               <Link
                 href="/contacto"
@@ -150,6 +150,6 @@ export default function MenuMobile({ categorias }: MenuMobileProps) {
           </div>
         </div>
       </SheetContent>
-    </Sheet >
+    </Sheet>
   )
 }

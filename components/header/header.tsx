@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, Suspense } from "react"
 import Link from "next/link"
 import { Phone } from "lucide-react"
 import Logo from "./logo"
@@ -56,7 +56,9 @@ export default function Header({ categorias }: HeaderProps) {
 
             {/* Search - Centered & Wide on Desktop */}
             <div className="flex flex-1 max-w-2xl mx-auto">
-              <SearchCommand categorias={categorias} />
+              <Suspense fallback={<div className="w-full h-10 bg-muted/50 rounded-md animate-pulse" />}>
+                <SearchCommand categorias={categorias} />
+              </Suspense>
             </div>
 
             {/* Actions */}
