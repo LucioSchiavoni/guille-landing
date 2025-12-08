@@ -56,7 +56,7 @@ export const productsBySubcategoryQuery = groq`
 
 // Get full menu structure: Categories -> Subcategories -> Products (as items)
 export const menuQuery = groq`
-  *[_type == "category" && active == true] | order(order asc) {
+  *[_type == "category" && active == true && name != "Destacados" && name != "DESTACADOS"] | order(order asc) {
     "id": _id,
     "nombre": name,
     "subcategorias": *[_type == "subcategory" && category._ref == ^._id && active == true] | order(order asc) {
@@ -64,7 +64,8 @@ export const menuQuery = groq`
       "nombre": name,
       "items": *[_type == "product" && subcategory._ref == ^._id && active == true] | order(order asc) {
         "name": name,
-        "slug": slug.current
+        "slug": slug.current,
+        "image": image
       }
     }
   }
@@ -92,8 +93,9 @@ export const productBySlugQuery = groq`
 export const advancedSearchQuery = groq`
   *[_type == "product" && active == true && 
     ($searchTerm == "" || name match $searchTerm + "*" || subcategory->name match $searchTerm + "*" || subcategory->category->name match $searchTerm + "*") &&
-    ($filterType != "category" || subcategory->category._id == $filterId) &&
-    ($filterType != "subcategory" || subcategory._id == $filterId)
+    ($filterType != "category" || subcategory->category._ref == $filterId) &&
+    ($filterType != "subcategory" || subcategory._ref == $filterId) &&
+    subcategory->category->name != "Destacados" && subcategory->category->name != "DESTACADOS"
   ] | order(name asc) {
     _id,
     name,

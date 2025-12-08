@@ -1,10 +1,8 @@
 "use client"
 
-
 import { useEffect, useState } from "react"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
-
 import { urlFor } from "@/lib/sanity"
 
 interface Slide {
@@ -18,7 +16,6 @@ interface Slide {
 interface HeroCarouselProps {
   products?: any[]
 }
-
 
 const slides: Slide[] = [
   {
@@ -52,6 +49,7 @@ const slides: Slide[] = [
 ]
 
 export default function HeroCarousel({ products = [] }: HeroCarouselProps) {
+  const [currentPair, setCurrentPair] = useState(0)
   const [currentSlide, setCurrentSlide] = useState(0)
   const [isAutoPlaying, setIsAutoPlaying] = useState(true)
 
@@ -66,16 +64,28 @@ export default function HeroCarousel({ products = [] }: HeroCarouselProps) {
     }))
     : slides
 
+  // Ensure we have pairs for desktop. If odd, duplicate the first one to the end.
+  const pairedSlides = [...activeSlides]
+  if (pairedSlides.length % 2 !== 0) {
+    pairedSlides.push(pairedSlides[0])
+  }
+
+  const pairs = []
+  for (let i = 0; i < pairedSlides.length; i += 2) {
+    pairs.push({
+      left: pairedSlides[i],
+      right: pairedSlides[i + 1]
+    })
+  }
+
   const nextSlide = () => {
+    setCurrentPair((prev) => (prev + 1) % pairs.length)
     setCurrentSlide((prev) => (prev + 1) % activeSlides.length)
   }
 
   const prevSlide = () => {
+    setCurrentPair((prev) => (prev - 1 + pairs.length) % pairs.length)
     setCurrentSlide((prev) => (prev - 1 + activeSlides.length) % activeSlides.length)
-  }
-
-  const goToSlide = (index: number) => {
-    setCurrentSlide(index)
   }
 
   // Auto-play functionality
@@ -87,7 +97,9 @@ export default function HeroCarousel({ products = [] }: HeroCarouselProps) {
     }, 5000)
 
     return () => clearInterval(interval)
-  }, [isAutoPlaying, currentSlide])
+  }, [isAutoPlaying, pairs.length, activeSlides.length])
+
+  if (activeSlides.length === 0) return null
 
   return (
     <div
@@ -95,55 +107,94 @@ export default function HeroCarousel({ products = [] }: HeroCarouselProps) {
       onMouseEnter={() => setIsAutoPlaying(false)}
       onMouseLeave={() => setIsAutoPlaying(true)}
     >
-      {/* Slides */}
-      <div className="relative w-full h-full">
+      {/* --- DESKTOP VIEW (Split Vertical Scroll) --- */}
+      <div className="hidden md:flex w-full h-full">
+        {/* Left Column - Scrolls Top to Bottom */}
+        <div className="relative w-1/2 h-full overflow-hidden">
+          <div
+            className="absolute w-full h-full transition-transform duration-1000 ease-in-out"
+            style={{ transform: `translateY(${currentPair * 100}%)` }}
+          >
+            {pairs.map((pair, index) => (
+              <div
+                key={`left-${pair.left.id}-${index}`}
+                className="absolute w-full h-full"
+                style={{ top: `-${index * 100}%` }}
+              >
+                <div className="relative w-full h-full group">
+                  <img
+                    src={pair.left.image}
+                    alt={pair.left.title}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors" />
+                  <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-4 text-white">
+                    <h2 className="text-3xl md:text-5xl font-bold drop-shadow-lg mb-2">{pair.left.title}</h2>
+                    {pair.left.subtitle && (
+                      <p className="text-lg md:text-xl font-medium drop-shadow-md">{pair.left.subtitle}</p>
+                    )}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Right Column - Scrolls Bottom to Top */}
+        <div className="relative w-1/2 h-full overflow-hidden">
+          <div
+            className="absolute w-full h-full transition-transform duration-1000 ease-in-out"
+            style={{ transform: `translateY(-${currentPair * 100}%)` }}
+          >
+            {pairs.map((pair, index) => (
+              <div
+                key={`right-${pair.right.id}-${index}`}
+                className="absolute w-full h-full"
+                style={{ top: `${index * 100}%` }}
+              >
+                <div className="relative w-full h-full group">
+                  <img
+                    src={pair.right.image}
+                    alt={pair.right.title}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors" />
+                  <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-4 text-white">
+                    <h2 className="text-3xl md:text-5xl font-bold drop-shadow-lg mb-2">{pair.right.title}</h2>
+                    {pair.right.subtitle && (
+                      <p className="text-lg md:text-xl font-medium drop-shadow-md">{pair.right.subtitle}</p>
+                    )}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* --- MOBILE VIEW (Single Slide) --- */}
+      <div className="md:hidden w-full h-full relative">
         {activeSlides.map((slide, index) => (
           <div
-            key={slide.id}
-            className={`absolute inset-0 transition-all duration-1000 ease-in-out ${index === currentSlide
-              ? "opacity-100 scale-100"
-              : "opacity-0 scale-105"
+            key={`mobile-${slide.id}`}
+            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${index === currentSlide ? "opacity-100 z-10" : "opacity-0 z-0"
               }`}
           >
-            <div className="absolute inset-0 bg-black/5">
+            <div className="relative w-full h-full">
               <img
-                src={slide.image || "/placeholder.svg"}
+                src={slide.image}
                 alt={slide.title}
-                className="absolute inset-0 w-full h-full object-contain object-center bg-gradient-to-r from-green-300 to-green-800"
+                className="w-full h-full object-cover"
               />
-            </div>
-
-            {/* Overlay gradient */}
-            <div className="absolute inset-0 bg-linear-to-r from-black/50 via-black/30 to-transparent" />
-
-            {/* Content */}
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="container mx-auto px-4 md:px-8 flex flex-col items-center text-center">
-                <div className="max-w-3xl space-y-6 animate-fade-in">
-
-
-                  {/* Main title */}
-                  <h2 className="text-5xl md:text-7xl font-bold text-white drop-shadow-lg">{slide.title}</h2>
-
-                  {/* Subtitle */}
-                  {slide.subtitle && (
-                    <p className="text-xl md:text-2xl text-white font-medium drop-shadow-md">{slide.subtitle}</p>
-                  )}
-
-                  {/* Website badge */}
-                  <div className="inline-block bg-white px-6 py-3 rounded-full shadow-xl">
-                    <p className="text-foreground font-bold text-lg">
-                      todoenpackaging<span className="text-primary">.uy</span>
-                    </p>
-                  </div>
-
-                  {/* Description */}
-                  {slide.description && (
-                    <p className="text-xl md:text-3xl font-serif italic text-white drop-shadow-lg mt-4">
-                      {slide.description}
-                    </p>
-                  )}
-                </div>
+              <div className="absolute inset-0 bg-black/30" />
+              <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-4 text-white">
+                <h2 className="text-4xl font-bold drop-shadow-lg mb-3">{slide.title}</h2>
+                {slide.subtitle && (
+                  <p className="text-xl font-medium drop-shadow-md mb-2">{slide.subtitle}</p>
+                )}
+                {slide.description && (
+                  <p className="text-lg font-serif italic drop-shadow-md opacity-90">{slide.description}</p>
+                )}
               </div>
             </div>
           </div>
@@ -155,7 +206,7 @@ export default function HeroCarousel({ products = [] }: HeroCarouselProps) {
         variant="outline"
         size="icon"
         onClick={prevSlide}
-        className="absolute left-4 top-1/2 -translate-y-1/2 h-12 w-12 rounded-full bg-background/80 backdrop-blur-sm hover:bg-background border-2 shadow-lg transition-all hover:scale-110"
+        className="absolute left-4 top-1/2 -translate-y-1/2 h-12 w-12 rounded-full bg-background/80 backdrop-blur-sm hover:bg-background border-2 shadow-lg transition-all hover:scale-110 z-20"
         aria-label="Anterior"
       >
         <ChevronLeft className="h-6 w-6" />
@@ -165,39 +216,53 @@ export default function HeroCarousel({ products = [] }: HeroCarouselProps) {
         variant="outline"
         size="icon"
         onClick={nextSlide}
-        className="absolute right-4 top-1/2 -translate-y-1/2 h-12 w-12 rounded-full bg-background/80 backdrop-blur-sm hover:bg-background border-2 shadow-lg transition-all hover:scale-110"
+        className="absolute right-4 top-1/2 -translate-y-1/2 h-12 w-12 rounded-full bg-background/80 backdrop-blur-sm hover:bg-background border-2 shadow-lg transition-all hover:scale-110 z-20"
         aria-label="Siguiente"
       >
         <ChevronRight className="h-6 w-6" />
       </Button>
 
       {/* Slide indicators */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-2">
-        {activeSlides.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => goToSlide(index)}
-            className={`transition-all ${index === currentSlide
-              ? "w-12 h-3 bg-primary rounded-full"
-              : "w-3 h-3 bg-background/60 hover:bg-background/80 rounded-full"
-              }`}
-            aria-label={`Ir a slide ${index + 1}`}
-          />
-        ))}
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-2 z-20">
+        {/* Desktop Indicators */}
+        <div className="hidden md:flex gap-2">
+          {pairs.map((_, index) => (
+            <button
+              key={`desktop-dot-${index}`}
+              onClick={() => {
+                setCurrentPair(index)
+                // Approximate sync for mobile slide
+                setCurrentSlide(index * 2)
+              }}
+              className={`transition-all ${index === currentPair
+                ? "w-12 h-3 bg-primary rounded-full"
+                : "w-3 h-3 bg-white/60 hover:bg-white/80 rounded-full"
+                }`}
+              aria-label={`Ir a grupo ${index + 1}`}
+            />
+          ))}
+        </div>
+        {/* Mobile Indicators */}
+        <div className="flex md:hidden gap-2">
+          {activeSlides.map((_, index) => (
+            <button
+              key={`mobile-dot-${index}`}
+              onClick={() => {
+                setCurrentSlide(index)
+                // Approximate sync for desktop pair
+                setCurrentPair(Math.floor(index / 2))
+              }}
+              className={`transition-all ${index === currentSlide
+                ? "w-12 h-3 bg-primary rounded-full"
+                : "w-3 h-3 bg-white/60 hover:bg-white/80 rounded-full"
+                }`}
+              aria-label={`Ir a slide ${index + 1}`}
+            />
+          ))}
+        </div>
       </div>
 
-      {/* WhatsApp button (like in the original) */}
-      <a
-        href="https://wa.me/your-number"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="fixed bottom-6 right-6 z-50 bg-[#25D366] hover:bg-[#20BA5A] text-white rounded-full p-4 shadow-2xl transition-all hover:scale-110"
-        aria-label="Contactar por WhatsApp"
-      >
-        <svg className="h-8 w-8" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
-        </svg>
-      </a>
+
     </div>
   )
 }

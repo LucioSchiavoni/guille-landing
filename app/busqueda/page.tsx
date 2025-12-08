@@ -1,5 +1,6 @@
 import { client, urlFor } from "@/lib/sanity"
 import { advancedSearchQuery } from "@/lib/queries"
+import { normalizeText } from "@/lib/utils"
 import Image from "next/image"
 import Link from "next/link"
 
@@ -17,11 +18,26 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
     const { q, filterId, filterType } = await searchParams
     const searchTerm = q || ""
 
-    const products = await client.fetch(advancedSearchQuery, {
-        searchTerm,
+    const allProducts = await client.fetch(advancedSearchQuery, {
+        searchTerm: "", // Fetch all to filter client-side
         filterId: filterId || null,
         filterType: filterType || null
     })
+
+    const products = searchTerm
+        ? allProducts.filter((product: any) => {
+            const normalizedQuery = normalizeText(searchTerm)
+            const normalizedName = normalizeText(product.name)
+            const normalizedSubcategory = product.subcategory?.name ? normalizeText(product.subcategory.name) : ""
+            const normalizedCategory = product.subcategory?.category?.name ? normalizeText(product.subcategory.category.name) : ""
+
+            return (
+                normalizedName.includes(normalizedQuery) ||
+                normalizedSubcategory.includes(normalizedQuery) ||
+                normalizedCategory.includes(normalizedQuery)
+            )
+        })
+        : allProducts
 
     return (
         <div className="container mx-auto px-4 py-8 min-h-screen">

@@ -162,26 +162,29 @@ export default function SearchBar({ categorias = [] }: SearchBarProps) {
       {/* Mobile Search Overlay */}
       {isMobileSearchOpen && (
         <div className="absolute inset-x-0 top-0 z-50 bg-background p-4 shadow-md lg:hidden animate-in slide-in-from-top-2 duration-200">
-          <form onSubmit={handleSearch} className="flex items-center gap-2">
-            <div className="relative flex-1">
+          <form onSubmit={handleSearch} className="w-full">
+            <div className="relative flex items-center w-full">
+              <Search className="absolute left-4 h-4 w-4 text-muted-foreground/70 pointer-events-none" />
               <input
-                ref={inputRef}
-                type="text"
-                placeholder="Buscar..."
+                type="search"
+                placeholder="Buscar productos..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full px-4 py-2.5 pr-10 border border-input rounded-lg bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring transition-all"
+                className={cn(
+                  "w-full pl-11 pr-4 h-11",
+                  "bg-white/70 dark:bg-black/30",
+                  "backdrop-blur-xl backdrop-saturate-150",
+                  "border border-white/30 dark:border-white/10",
+                  "shadow-[0_8px_32px_rgba(0,0,0,0.08)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.3)]",
+                  "rounded-2xl",
+                  "text-sm font-medium placeholder:text-muted-foreground/60",
+                  "focus-visible:ring-2 focus-visible:ring-emerald-500/30",
+                  "focus-visible:border-emerald-500/50",
+                  "focus-visible:bg-white/90 dark:focus-visible:bg-black/50",
+                  "transition-all duration-300",
+                )}
               />
-              <Search className="absolute right-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
             </div>
-            <button
-              type="button"
-              onClick={() => setIsMobileSearchOpen(false)}
-              className="p-2 text-muted-foreground hover:text-foreground"
-            >
-              <span className="sr-only">Cerrar</span>
-              <X className="h-6 w-6" />
-            </button>
           </form>
         </div>
       )}

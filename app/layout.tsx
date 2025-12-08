@@ -2,6 +2,7 @@ import type React from "react"
 import type { Metadata } from "next"
 import { Montserrat, Merriweather, Source_Code_Pro } from "next/font/google"
 import "./globals.css"
+import WhatsAppButton from "@/components/ui/whatsapp-button"
 
 // <CHANGE> Updated fonts to match the design system
 const montserrat = Montserrat({ subsets: ["latin"], variable: "--font-sans" })
@@ -41,8 +42,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  modal,
 }: Readonly<{
   children: React.ReactNode
+  modal: React.ReactNode
 }>) {
   return (
     <html lang="es">
@@ -50,6 +53,8 @@ export default function RootLayout({
         className={`${montserrat.variable} ${merriweather.variable} ${sourceCodePro.variable} font-sans antialiased`}
       >
         {children}
+        {modal}
+        <WhatsAppButton />
       </body>
     </html>
   )
