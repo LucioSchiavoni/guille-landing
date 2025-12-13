@@ -28,6 +28,7 @@ export const productsQuery = groq`
     slug,
     description,
     image,
+    gallery,
     price,
     subcategory->{
       _id,
@@ -78,6 +79,7 @@ export const productBySlugQuery = groq`
     slug,
     description,
     image,
+    gallery,
     price,
     subcategory->{
       name,
@@ -117,10 +119,29 @@ export const featuredProductsQuery = groq`
   *[_type == "product" && active == true && subcategory->category->name == "Destacados"] | order(order asc) {
     _id,
     name,
+    slug,
     description,
     image {
       asset
     },
+    gallery,
     price
+  }
+`
+
+// Get products in offer
+export const offerProductsQuery = groq`
+  *[_type == "product" && active == true && oferta == true] | order(order asc) {
+    _id,
+    name,
+    slug,
+    description,
+    image {
+      asset
+    },
+    gallery,
+    price,
+    oferta,
+    descuento
   }
 `

@@ -35,11 +35,29 @@ export default defineType({
         }),
         defineField({
             name: 'image',
-            title: 'Imagen',
+            title: 'Imagen Principal',
             type: 'image',
             options: {
                 hotspot: true,
             },
+        }),
+        defineField({
+            name: 'gallery',
+            title: 'Galería de Imágenes',
+            type: 'array',
+            of: [
+                {
+                    type: 'image',
+                    options: {
+                        hotspot: true,
+                    },
+                },
+            ],
+        }),
+        defineField({
+            name: 'price',
+            title: 'Precio',
+            type: 'number',
         }),
         defineField({
             name: 'order',
@@ -52,6 +70,20 @@ export default defineType({
             title: 'Activo',
             type: 'boolean',
             initialValue: true,
+        }),
+        defineField({
+            name: 'oferta',
+            title: 'En Oferta',
+            type: 'boolean',
+            initialValue: false,
+            description: 'Marcar si el producto está en oferta',
+        }),
+        defineField({
+            name: 'descuento',
+            title: 'Porcentaje de Descuento',
+            type: 'number',
+            description: 'Porcentaje de descuento (ej: 20 para 20%)',
+            validation: (Rule) => Rule.min(0).max(100),
         }),
     ],
 })

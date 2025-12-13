@@ -18,9 +18,69 @@ const sourceCodePro = Source_Code_Pro({
 })
 
 export const metadata: Metadata = {
-  title: "TODOENPACKAGING",
-  description: "Empresa dedicada a brindar la mejor atencion en envoltorios plasticos y de papel para su comercio ofreciendo un amplio catalogo de productos genericos y personalizados.",
-  generator: "Lucio Schiavoni",
+  metadataBase: new URL('https://todoenpackaging.com'),
+  title: {
+    default: "TodoEnPackaging - Soluciones Eco-Friendly para Packaging Alimenticio",
+    template: "%s | TodoEnPackaging",
+  },
+  description: "Empresa dedicada a la distribución de envoltorios descartables eco-friendly y productos de higiene para la industria alimenticia. Productos a base de pulpa de papel, bagazo de caña y fibra de bambú. Envíos a todo Uruguay.",
+  keywords: [
+    "packaging eco-friendly",
+    "envoltorios descartables",
+    "packaging alimenticio Uruguay",
+    "productos biodegradables",
+    "packaging sostenible",
+    "envoltorios ecológicos",
+    "packaging caña de azúcar",
+    "packaging bambú",
+    "productos descartables",
+    "packaging restaurantes",
+    "packaging delivery",
+  ],
+  authors: [{ name: "TodoEnPackaging" }],
+  creator: "TodoEnPackaging",
+  publisher: "TodoEnPackaging",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  openGraph: {
+    type: "website",
+    locale: "es_UY",
+    url: "https://todoenpackaging.com",
+    siteName: "TodoEnPackaging",
+    title: "TodoEnPackaging - Soluciones Eco-Friendly para Packaging Alimenticio",
+    description: "Distribución de envoltorios descartables eco-friendly y productos de higiene para la industria alimenticia en Uruguay.",
+    images: [
+      {
+        url: "https://res.cloudinary.com/dbk2t0jy3/image/upload/v1764163493/LOGO_-_fondo_transparente_ioekip.png",
+        width: 1200,
+        height: 630,
+        alt: "TodoEnPackaging Logo",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "TodoEnPackaging - Soluciones Eco-Friendly para Packaging Alimenticio",
+    description: "Distribución de envoltorios descartables eco-friendly y productos de higiene para la industria alimenticia en Uruguay.",
+    images: ["https://res.cloudinary.com/dbk2t0jy3/image/upload/v1764163493/LOGO_-_fondo_transparente_ioekip.png"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  verification: {
+    google: 'google-site-verification-code',
+  },
   icons: {
     icon: [
       {

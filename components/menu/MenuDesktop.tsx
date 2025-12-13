@@ -290,6 +290,14 @@ export default function MenuDesktop({ categorias }: MenuDesktopProps) {
         </li>
         <li>
           <Link
+            href="/#sostenibilidad"
+            className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+          >
+            Sostenibilidad
+          </Link>
+        </li>
+        <li>
+          <Link
             href="/contacto"
             className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
           >
