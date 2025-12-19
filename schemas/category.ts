@@ -13,9 +13,9 @@ export default defineType({
         }),
         defineField({
             name: 'rubro',
-            title: 'Rubro',
-            type: 'reference',
-            to: [{ type: 'rubro' }],
+            title: 'Rubros',
+            type: 'array',
+            of: [{ type: 'reference', to: [{ type: 'rubro' }] }],
         }),
         defineField({
             name: 'slug',

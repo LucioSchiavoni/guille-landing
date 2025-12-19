@@ -36,7 +36,8 @@ export default async function ProductosPage({ searchParams }: ProductosPageProps
     }
 
     // Fetch categories for the filter component
-    const categorias: Categoria[] = await client.fetch(menuQuery)
+    // Note: menuQuery now returns { rubros, miscellaneousCategories }
+    const { rubros, miscellaneousCategories } = await client.fetch(menuQuery)
 
     // Fetch all products based on filters (ignoring search term at Sanity level)
     const allProducts = await client.fetch(advancedSearchQuery, {
@@ -63,11 +64,11 @@ export default async function ProductosPage({ searchParams }: ProductosPageProps
 
     return (
         <div className="">
-            <Header categorias={categorias} />
+            <Header rubros={rubros} miscellaneousCategories={miscellaneousCategories} />
 
             <div className="lg:hidden p-4 border-b bg-gray-50">
                 <Suspense fallback={<div className="w-full h-10 bg-gray-200 rounded-md animate-pulse" />}>
-                    <SearchCommand categorias={categorias} />
+                    <SearchCommand rubros={rubros} />
                 </Suspense>
             </div>
             {/* Filters Component

@@ -10,16 +10,16 @@ import { SearchCommand } from "@/components/header/SearchCommand"
 export const revalidate = 60
 
 export default async function SustainabilityPage() {
-    const categorias = await client.fetch(menuQuery)
+    const { rubros, miscellaneousCategories } = await client.fetch(menuQuery)
 
     return (
         <>
             <div className="min-h-screen bg-background">
-                <Header categorias={categorias} />
+                <Header rubros={rubros} miscellaneousCategories={miscellaneousCategories} />
 
                 <div className="lg:hidden p-4 border-b bg-gray-50">
                     <Suspense fallback={<div className="w-full h-10 bg-gray-200 rounded-md animate-pulse" />}>
-                        <SearchCommand categorias={categorias} />
+                        <SearchCommand rubros={rubros} />
                     </Suspense>
                 </div>
 

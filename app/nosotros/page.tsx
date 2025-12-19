@@ -18,11 +18,11 @@ export const metadata: Metadata = {
 }
 
 export default async function Nosotros() {
-  const categorias = await client.fetch(menuQuery)
+  const { rubros, miscellaneousCategories } = await client.fetch(menuQuery)
 
   return (
     <div className="min-h-screen bg-background overflow-x-hidden">
-      <Header categorias={categorias} />
+      <Header rubros={rubros} miscellaneousCategories={miscellaneousCategories} />
 
       <main className="bg-background">
         <AboutSection />

@@ -55,18 +55,37 @@ export const productsBySubcategoryQuery = groq`
   }
 `
 
-// Get full menu structure: Categories -> Subcategories -> Products (as items)
+// Get full menu structure: Rubros -> Categories -> Subcategories -> Products (as items)
 export const menuQuery = groq`
-  *[_type == "category" && active == true && name != "Destacados" && name != "DESTACADOS"] | order(order asc) {
-    "id": _id,
-    "nombre": name,
-    "subcategorias": *[_type == "subcategory" && category._ref == ^._id && active == true] | order(order asc) {
+  {
+    "rubros": *[_type == "rubro" && active == true] | order(order asc) {
       "id": _id,
       "nombre": name,
-      "items": *[_type == "product" && subcategory._ref == ^._id && active == true] | order(order asc) {
-        "name": name,
-        "slug": slug.current,
-        "image": image
+      "categorias": *[_type == "category" && references(^._id) && active == true] | order(order asc) {
+        "id": _id,
+        "nombre": name,
+        "subcategorias": *[_type == "subcategory" && category._ref == ^._id && active == true] | order(order asc) {
+          "id": _id,
+          "nombre": name,
+          "items": *[_type == "product" && subcategory._ref == ^._id && active == true] | order(order asc) {
+            "name": name,
+            "slug": slug.current,
+            "image": image
+          }
+        }
+      }
+    },
+    "miscellaneousCategories": *[_type == "category" && !defined(rubro) && active == true] | order(order asc) {
+      "id": _id,
+      "nombre": name,
+      "subcategorias": *[_type == "subcategory" && category._ref == ^._id && active == true] | order(order asc) {
+        "id": _id,
+        "nombre": name,
+        "items": *[_type == "product" && subcategory._ref == ^._id && active == true] | order(order asc) {
+          "name": name,
+          "slug": slug.current,
+          "image": image
+        }
       }
     }
   }

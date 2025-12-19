@@ -8,7 +8,8 @@ import { Button } from "@/components/ui/button"
 import { Categoria } from "@/types/menu"
 
 interface SearchCommandProps {
-    categorias: Categoria[]
+    rubros?: any[]
+    categorias?: any[] // Kept for backward compatibility if any, but optional
     onSearch?: () => void
 }
 

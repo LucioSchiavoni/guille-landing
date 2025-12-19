@@ -9,11 +9,11 @@ import { Mail, MapPin, Phone, Send } from "lucide-react"
 export const revalidate = 60
 
 export default async function ContactPage() {
-    const categorias = await client.fetch(menuQuery)
+    const { rubros, miscellaneousCategories } = await client.fetch(menuQuery)
 
     return (
         <div className="min-h-screen bg-background flex flex-col">
-            <Header categorias={categorias} />
+            <Header rubros={rubros} miscellaneousCategories={miscellaneousCategories} />
 
             <main className="flex-1 flex flex-col lg:flex-row items-start lg:items-center justify-center py-6 lg:py-12 px-4 sm:px-6 lg:px-8">
                 <div className="w-full max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">

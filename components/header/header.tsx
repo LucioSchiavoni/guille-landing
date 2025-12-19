@@ -8,14 +8,15 @@ import { SearchCommand } from "./SearchCommand"
 import MenuDesktop from "../menu/MenuDesktop"
 import MenuMobile from "../menu/MenuMobile"
 import { Button } from "@/components/ui/button"
-import type { Categoria } from "@/types/menu"
+import type { Rubro } from "@/types/menu"
 import { cn } from "@/lib/utils"
 
 interface HeaderProps {
-  categorias: Categoria[]
+  rubros: Rubro[]
+  miscellaneousCategories: any[] // Using any temporarily or Categoria[] from types
 }
 
-export default function Header({ categorias }: HeaderProps) {
+export default function Header({ rubros, miscellaneousCategories }: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState(false)
 
   useEffect(() => {
@@ -42,7 +43,7 @@ export default function Header({ categorias }: HeaderProps) {
             </div>
           </Link>
 
-          <MenuMobile categorias={categorias} />
+          <MenuMobile rubros={rubros} miscellaneousCategories={miscellaneousCategories} />
         </div>
       </div>
 
@@ -59,7 +60,7 @@ export default function Header({ categorias }: HeaderProps) {
             {/* Search - Centered & Wide on Desktop */}
             <div className="flex flex-1 max-w-2xl mx-auto">
               <Suspense fallback={<div className="w-full h-10 bg-muted/50 rounded-md animate-pulse" />}>
-                <SearchCommand categorias={categorias} />
+                <SearchCommand categorias={[]} />
               </Suspense>
             </div>
 
@@ -79,7 +80,7 @@ export default function Header({ categorias }: HeaderProps) {
         <div className="border-t border-border/30 bg-muted/10">
           <div className="container mx-auto px-4">
             <div className="flex justify-center">
-              <MenuDesktop categorias={categorias} />
+              <MenuDesktop rubros={rubros} miscellaneousCategories={miscellaneousCategories} />
             </div>
           </div>
         </div>

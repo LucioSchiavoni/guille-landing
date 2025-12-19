@@ -33,24 +33,24 @@ export const metadata: Metadata = {
 }
 
 export default async function Home() {
-  const [categorias, products, featuredProducts, offerProducts] = await Promise.all([
+  const [menuData, products, featuredProducts, offerProducts] = await Promise.all([
     client.fetch(menuQuery),
     client.fetch(productsQuery),
     client.fetch(featuredProductsQuery),
     client.fetch(offerProductsQuery)
   ])
 
-
+  const { rubros, miscellaneousCategories } = menuData
 
   return (
     <>
       <StructuredData />
       <div className="min-h-screen bg-background">
-        <Header categorias={categorias} />
+        <Header rubros={rubros} miscellaneousCategories={miscellaneousCategories} />
 
         <div className="lg:hidden p-4 border-b bg-gray-50">
           <Suspense fallback={<div className="w-full h-10 bg-gray-200 rounded-md animate-pulse" />}>
-            <SearchCommand categorias={categorias} />
+            <SearchCommand rubros={rubros} />
           </Suspense>
         </div>
 
