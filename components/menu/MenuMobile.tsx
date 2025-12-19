@@ -7,6 +7,7 @@ import type { Categoria } from "@/types/menu"
 import { Button } from "@/components/ui/button"
 import { SearchCommand } from "../header/SearchCommand"
 import { cn } from "@/lib/utils"
+import Logo from "../header/logo"
 
 interface MenuMobileProps {
   categorias: Categoria[]
@@ -30,9 +31,9 @@ export default function MenuMobile({ categorias }: MenuMobileProps) {
         className="lg:hidden relative z-50 hover:bg-green-700/20"
       >
         {open ? (
-          <X className="h-6 w-6 text-white font-bold" />
+          <X className="h-6 w-6 text-green-900 font-bold" />
         ) : (
-          <Menu className="h-6 w-6 text-white font-bold" />
+          <Menu className="h-6 w-6 text-green-900 font-bold" />
         )}
       </Button>
 
@@ -52,10 +53,13 @@ export default function MenuMobile({ categorias }: MenuMobileProps) {
         )}
       >
         <div className="flex flex-col h-full">
-          {/* Header with gradient */}
-          <div className="bg-gradient-to-r from-green-600 to-emerald-600 p-6 text-white">
-            <h2 className="text-2xl font-bold mb-1">Menú</h2>
-            <p className="text-sm text-green-100">TodoEnPackaging</p>
+          {/* Header - Clean & Professional */}
+          <div className="flex items-center p-4 border-b bg-white">
+            <Link href="/" onClick={() => setOpen(false)} className="flex items-center">
+              <div className="scale-50 origin-left">
+                <Logo />
+              </div>
+            </Link>
           </div>
 
           {/* Search Bar */}
@@ -69,77 +73,60 @@ export default function MenuMobile({ categorias }: MenuMobileProps) {
           <div className="border-b bg-white">
             <div className="grid grid-cols-2 gap-2 p-4">
               <Link
-                href="/"
+                href="/productos"
                 onClick={() => setOpen(false)}
-                className="flex flex-col items-center justify-center p-4 rounded-xl bg-gradient-to-br from-green-50 to-emerald-50 hover:from-green-100 hover:to-emerald-100 transition-all group"
+                className="flex items-center justify-center p-2.5 rounded-lg bg-gray-50 border border-gray-100 text-sm font-medium text-gray-700 hover:bg-green-50 hover:text-green-700 hover:border-green-100 transition-all"
               >
-                <div className="bg-green-600 p-3 rounded-full mb-2 group-hover:scale-110 transition-transform">
-                  <Home className="h-5 w-5 text-white" />
-                </div>
-                <span className="text-sm font-medium text-gray-800">Inicio</span>
+                Productos
               </Link>
-
               <Link
                 href="/nosotros"
                 onClick={() => setOpen(false)}
-                className="flex flex-col items-center justify-center p-4 rounded-xl bg-gradient-to-br from-blue-50 to-cyan-50 hover:from-blue-100 hover:to-cyan-100 transition-all group"
+                className="flex items-center justify-center p-2.5 rounded-lg bg-gray-50 border border-gray-100 text-sm font-medium text-gray-700 hover:bg-green-50 hover:text-green-700 hover:border-green-100 transition-all"
               >
-                <div className="bg-blue-600 p-3 rounded-full mb-2 group-hover:scale-110 transition-transform">
-                  <Package className="h-5 w-5 text-white" />
-                </div>
-                <span className="text-sm font-medium text-gray-800">Nosotros</span>
+                Nosotros
               </Link>
-
               <Link
-                href="/#sostenibilidad"
+                href="/sostenibilidad"
                 onClick={() => setOpen(false)}
-                className="flex flex-col items-center justify-center p-4 rounded-xl bg-gradient-to-br from-emerald-50 to-teal-50 hover:from-emerald-100 hover:to-teal-100 transition-all group"
+                className="flex items-center justify-center p-2.5 rounded-lg bg-gray-50 border border-gray-100 text-sm font-medium text-gray-700 hover:bg-green-50 hover:text-green-700 hover:border-green-100 transition-all"
               >
-                <div className="bg-emerald-600 p-3 rounded-full mb-2 group-hover:scale-110 transition-transform">
-                  <svg className="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
-                  </svg>
-                </div>
-                <span className="text-sm font-medium text-gray-800">Sostenibilidad</span>
+                Sostenibilidad
               </Link>
-
               <Link
                 href="/contacto"
                 onClick={() => setOpen(false)}
-                className="flex flex-col items-center justify-center p-4 rounded-xl bg-gradient-to-br from-orange-50 to-amber-50 hover:from-orange-100 hover:to-amber-100 transition-all group"
+                className="flex items-center justify-center p-2.5 rounded-lg bg-gray-50 border border-gray-100 text-sm font-medium text-gray-700 hover:bg-green-50 hover:text-green-700 hover:border-green-100 transition-all"
               >
-                <div className="bg-orange-600 p-3 rounded-full mb-2 group-hover:scale-110 transition-transform">
-                  <Phone className="h-5 w-5 text-white" />
-                </div>
-                <span className="text-sm font-medium text-gray-800">Contacto</span>
+                Contacto
               </Link>
             </div>
           </div>
 
           {/* Categories List */}
           <div className="flex-1 overflow-y-auto">
-            <div className="p-4">
-              <h3 className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-3 px-2">
+            <div className="px-4 py-2">
+              <h3 className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2 px-2">
                 Explorar Categorías
               </h3>
-              <div className="space-y-2">
+              <div className="space-y-1">
                 {categorias
                   .filter(c => !c.nombre.trim().toLowerCase().includes("destacados"))
                   .sort((a, b) => a.nombre.localeCompare(b.nombre))
                   .map((categoria) => (
-                    <div key={categoria.id} className="rounded-lg overflow-hidden border border-gray-200">
+                    <div key={categoria.id} className="rounded-lg overflow-hidden border border-gray-100">
                       {/* Category Header */}
                       <button
                         onClick={() => toggleCategory(categoria.id)}
                         className={cn(
-                          "w-full flex items-center justify-between p-4 bg-white hover:bg-gray-50 transition-colors",
-                          expandedCategory === categoria.id && "bg-green-50"
+                          "w-full flex items-center justify-between px-4 py-3 bg-white hover:bg-gray-50 transition-colors",
+                          expandedCategory === categoria.id && "bg-green-50/50"
                         )}
                       >
-                        <span className="font-semibold text-gray-800">{categoria.nombre}</span>
+                        <span className="font-medium text-gray-800 text-sm">{categoria.nombre}</span>
                         <ChevronRight
                           className={cn(
-                            "h-5 w-5 text-gray-400 transition-transform",
+                            "h-4 w-4 text-gray-400 transition-transform",
                             expandedCategory === categoria.id && "rotate-90"
                           )}
                         />
@@ -147,16 +134,16 @@ export default function MenuMobile({ categorias }: MenuMobileProps) {
 
                       {/* Subcategories */}
                       {expandedCategory === categoria.id && (
-                        <div className="bg-gray-50 border-t border-gray-200">
+                        <div className="bg-gray-50/50 border-t border-gray-100">
                           {categoria.subcategorias.map((sub) => (
                             <Link
                               key={sub.id}
                               href={`/productos?categoria=${categoria.id}&subcategoria=${sub.id}`}
                               onClick={() => setOpen(false)}
-                              className="block px-6 py-3 text-sm text-gray-700 hover:bg-green-100 hover:text-green-800 transition-colors border-b border-gray-200 last:border-b-0"
+                              className="block px-8 py-2.5 text-sm text-gray-600 hover:text-green-700 hover:bg-green-50 transition-colors border-b border-gray-100/50 last:border-b-0"
                             >
                               <div className="flex items-center gap-2">
-                                <div className="w-1.5 h-1.5 rounded-full bg-green-600" />
+                                <div className="w-1 h-1 rounded-full bg-green-400" />
                                 {sub.nombre}
                               </div>
                             </Link>
@@ -169,12 +156,12 @@ export default function MenuMobile({ categorias }: MenuMobileProps) {
             </div>
           </div>
 
-          {/* Footer CTA */}
-          <div className="border-t bg-gradient-to-r from-green-600 to-emerald-600 p-4">
+          {/* Footer CTA - Clean without gradient */}
+          <div className="border-t bg-white p-4">
             <Link href="/contacto" onClick={() => setOpen(false)}>
-              <Button className="w-full bg-white text-green-600 hover:bg-green-50 font-semibold py-6 text-base">
+              <Button className="w-full bg-green-700 hover:bg-green-800 text-white font-semibold py-6 text-base shadow-lg">
                 <Phone className="h-5 w-5 mr-2" />
-                Contactanos Ahora
+                Contáctanos Ahora
               </Button>
             </Link>
           </div>

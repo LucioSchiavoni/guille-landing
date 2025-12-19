@@ -6,6 +6,8 @@ import Link from "next/link"
 import { ShoppingBag } from "lucide-react"
 import { Categoria } from "@/types/menu"
 import Header from "@/components/header/header"
+import { Suspense } from "react"
+import { SearchCommand } from "@/components/header/SearchCommand"
 
 export const revalidate = 0 // Dynamic page
 
@@ -63,7 +65,11 @@ export default async function ProductosPage({ searchParams }: ProductosPageProps
         <div className="">
             <Header categorias={categorias} />
 
-
+            <div className="lg:hidden p-4 border-b bg-gray-50">
+                <Suspense fallback={<div className="w-full h-10 bg-gray-200 rounded-md animate-pulse" />}>
+                    <SearchCommand categorias={categorias} />
+                </Suspense>
+            </div>
             {/* Filters Component
             <ProductFilters categorias={categorias} /> */}
 

@@ -96,7 +96,8 @@ export default function MenuDesktop({ categorias }: MenuDesktopProps) {
       <ul className="flex items-center justify-center gap-6">
         {/* Productos Dropdown */}
         <li className="relative" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-          <button
+          <Link
+            href="/productos"
             className={cn(
               "group flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-md transition-all duration-200",
               isProductsOpen
@@ -107,8 +108,7 @@ export default function MenuDesktop({ categorias }: MenuDesktopProps) {
             <Package className="w-4 h-4" />
             <span>Productos</span>
             <ChevronDown className={cn("w-4 h-4 transition-transform duration-200", isProductsOpen && "rotate-180")} />
-          </button>
-
+          </Link>
           <AnimatePresence>
             {isProductsOpen && (
               <motion.div
@@ -153,7 +153,6 @@ export default function MenuDesktop({ categorias }: MenuDesktopProps) {
                                   {groupName && (
                                     <span className={cn("w-2 h-2 rounded-full shrink-0", groupColor)} title={groupName} />
                                   )}
-                                  {getCategoryIcon(categoria.nombre)}
                                   <span className="font-medium text-sm text-left">{categoria.nombre}</span>
                                 </div>
                                 <ChevronRight className={cn("w-4 h-4 opacity-50", hoveredCategory === categoria.id && "opacity-100 text-primary")} />
@@ -197,7 +196,6 @@ export default function MenuDesktop({ categorias }: MenuDesktopProps) {
                                           : "text-muted-foreground hover:text-primary hover:bg-accent/50"
                                       )}
                                     >
-                                      {getCategoryIcon(sub.nombre)}
                                       <span className="break-words">{sub.nombre}</span>
                                       <ChevronRight className={cn("ml-auto w-3 h-3 opacity-0 transition-opacity", hoveredSubcategory === sub.id && "opacity-100")} />
                                     </Link>
@@ -290,7 +288,7 @@ export default function MenuDesktop({ categorias }: MenuDesktopProps) {
         </li>
         <li>
           <Link
-            href="/#sostenibilidad"
+            href="/sostenibilidad"
             className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
           >
             Sostenibilidad

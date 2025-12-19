@@ -16,7 +16,6 @@ export default defineType({
             title: 'Rubro',
             type: 'reference',
             to: [{ type: 'rubro' }],
-            validation: (Rule) => Rule.required(),
         }),
         defineField({
             name: 'slug',

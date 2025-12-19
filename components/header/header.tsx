@@ -35,10 +35,12 @@ export default function Header({ categorias }: HeaderProps) {
     >
       {/* Mobile Layout */}
       <div className="lg:hidden">
-        <div className="flex items-center justify-between gap-3 px-2 py-2 bg-gradient-to-l from-green-700 via-green-600/50 to-white ">
-          <div className="flex-shrink-0 scale-75 origin-left">
-            <Logo />
-          </div>
+        <div className="flex items-center justify-between px-4 py-3 bg-white border-b">
+          <Link href="/" className="flex-shrink-0">
+            <div className="scale-75 origin-left">
+              <Logo />
+            </div>
+          </Link>
 
           <MenuMobile categorias={categorias} />
         </div>

@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import Header from "@/components/header/header"
+import { SearchCommand } from "@/components/header/SearchCommand"
 import HeroCarousel from "@/components/carousel/hero-carousel"
 import FeaturedProducts from "@/components/product/featured-products"
 import ProductosOferta from "@/components/sections/ProductosOferta"
@@ -10,6 +11,7 @@ import Footer from "@/components/footer/footer"
 import StructuredData from "@/components/seo/structured-data"
 import { client } from "@/lib/sanity"
 import { menuQuery, productsQuery, featuredProductsQuery, offerProductsQuery } from "@/lib/queries"
+import { Suspense } from "react"
 
 export const revalidate = 60
 
@@ -38,16 +40,25 @@ export default async function Home() {
     client.fetch(offerProductsQuery)
   ])
 
+
+
   return (
     <>
       <StructuredData />
       <div className="min-h-screen bg-background">
         <Header categorias={categorias} />
+
+        <div className="lg:hidden p-4 border-b bg-gray-50">
+          <Suspense fallback={<div className="w-full h-10 bg-gray-200 rounded-md animate-pulse" />}>
+            <SearchCommand categorias={categorias} />
+          </Suspense>
+        </div>
+
         <HeroCarousel products={featuredProducts} />
-        <SustainabilitySection />
-        <FeaturedProducts products={featuredProducts} />
         <ProductosOferta products={offerProducts} />
-        <ProductList products={products} />
+
+        <FeaturedProducts products={featuredProducts} />
+        {/* <ProductList products={products} /> */}
         <FAQSection />
         <Footer />
       </div>

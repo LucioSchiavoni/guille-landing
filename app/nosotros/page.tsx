@@ -18,18 +18,18 @@ export const metadata: Metadata = {
 }
 
 export default async function Nosotros() {
-    const categorias = await client.fetch(menuQuery)
+  const categorias = await client.fetch(menuQuery)
 
-    return (
-        <div className="min-h-screen bg-background">
-            <Header categorias={categorias} />
+  return (
+    <div className="min-h-screen bg-background overflow-x-hidden">
+      <Header categorias={categorias} />
 
-            <main className="bg-background">
-                <AboutSection />
-                <EcoFeatures />
-            </main>
+      <main className="bg-background">
+        <AboutSection />
+        <EcoFeatures />
+      </main>
 
-            <Footer />
-        </div>
-    )
+      <Footer />
+    </div>
+  )
 }

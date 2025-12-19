@@ -76,9 +76,9 @@ export default function SustainabilitySection() {
               : "opacity-0 translate-y-10"
           )}
         >
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight tracking-tight">
             Compromiso con el
-            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-green-600 to-emerald-600">
+            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-green-600 to-emerald-600 pb-2">
               Futuro Sostenible
             </span>
           </h2>

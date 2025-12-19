@@ -1,9 +1,10 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { ChevronLeft, ChevronRight } from "lucide-react"
+import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { urlFor } from "@/lib/sanity"
+import Link from "next/link"
 
 interface Slide {
   id: number | string
@@ -262,6 +263,18 @@ export default function HeroCarousel({ products = [] }: HeroCarouselProps) {
         </div>
       </div>
 
+      {/* CTA Button - Ver más productos */}
+      <div className="absolute bottom-20 left-1/2 -translate-x-1/2 z-20">
+        <Link href="/productos">
+          <Button
+            size="lg"
+            className="bg-green-700 hover:bg-green-800 text-white font-semibold px-8 py-6 rounded-xl shadow-2xl shadow-green-700/30 hover:shadow-green-700/50 transition-all hover:scale-105 flex items-center gap-2"
+          >
+            Ver más productos
+            <ArrowRight className="w-5 h-5" />
+          </Button>
+        </Link>
+      </div>
 
     </div>
   )
