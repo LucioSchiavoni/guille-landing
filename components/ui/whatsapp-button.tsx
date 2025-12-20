@@ -1,6 +1,16 @@
+"use client"
+
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 
 export default function WhatsAppButton() {
+    const pathname = usePathname()
+
+    // Don't show on studio pages
+    if (pathname?.startsWith("/studio")) {
+        return null
+    }
+
     return (
         <Link
             href="https://wa.me/59899222608"

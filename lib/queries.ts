@@ -112,11 +112,10 @@ export const productBySlugQuery = groq`
 `
 
 export const advancedSearchQuery = groq`
-  *[_type == "product" && active == true && 
+  *[_type == "product" && active == true &&
     ($searchTerm == "" || name match $searchTerm + "*" || subcategory->name match $searchTerm + "*" || subcategory->category->name match $searchTerm + "*") &&
     ($filterType != "category" || subcategory->category._ref == $filterId) &&
-    ($filterType != "subcategory" || subcategory._ref == $filterId) &&
-    subcategory->category->name != "Destacados" && subcategory->category->name != "DESTACADOS"
+    ($filterType != "subcategory" || subcategory._ref == $filterId)
   ] | order(name asc) {
     _id,
     name,
@@ -133,18 +132,27 @@ export const advancedSearchQuery = groq`
   }
 `
 
-// Get products from "Destacados" category
+// Get featured products (products marked as "destacado")
 export const featuredProductsQuery = groq`
-  *[_type == "product" && active == true && subcategory->category->name == "Destacados"] | order(order asc) {
+  *[_type == "product" && active == true && destacado == true] | order(order asc) {
     _id,
     name,
     slug,
     description,
     image {
-      asset
+      asset->{
+        _id,
+        url
+      }
     },
     gallery,
-    price
+    price,
+    subcategory->{
+      name,
+      category->{
+        name
+      }
+    }
   }
 `
 
@@ -155,9 +163,7 @@ export const offerProductsQuery = groq`
     name,
     slug,
     description,
-    image {
-      asset
-    },
+    image,
     gallery,
     price,
     oferta,

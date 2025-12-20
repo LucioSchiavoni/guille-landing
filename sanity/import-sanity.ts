@@ -10,7 +10,7 @@ const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET;
 const token = process.env.SANITY_TOKEN;
 
 if (!projectId || !dataset || !token) {
-  console.error('❌ Error: Faltan variables de entorno');
+  console.error('ERROR: Faltan variables de entorno');
   console.error('Verifica que .env.local contenga:');
   console.error('- NEXT_PUBLIC_SANITY_PROJECT_ID');
   console.error('- NEXT_PUBLIC_SANITY_DATASET');
@@ -44,7 +44,7 @@ interface ProductoData {
 }
 
 async function importData() {
-  console.log('🚀 Iniciando importación a Sanity...\n');
+  console.log('Iniciando importación a Sanity...\n');
 
   const categoriasMap = new Map<string, string>();
   const subcategoriasMap = new Map<string, string>();
@@ -65,9 +65,9 @@ async function importData() {
           order: 0,
         });
         categoriasMap.set(item.categoria, catId);
-        console.log(`✅ Categoría: ${item.categoria}`);
+        console.log(`OK - Categoría: ${item.categoria}`);
       } catch (error: any) {
-        console.error(`❌ Error creando categoría ${item.categoria}:`, error.message);
+        console.error(`ERROR creando categoría ${item.categoria}:`, error.message);
       }
     }
 
@@ -88,9 +88,9 @@ async function importData() {
           order: 0,
         });
         subcategoriasMap.set(subKey, subId);
-        console.log(`  ✅ Subcategoría: ${item.material} - ${item.subcategoria}`);
+        console.log(`  OK - Subcategoría: ${item.material} - ${item.subcategoria}`);
       } catch (error: any) {
-        console.error(`  ❌ Error creando subcategoría:`, error.message);
+        console.error(`  ERROR creando subcategoría:`, error.message);
       }
     }
 
@@ -111,13 +111,13 @@ async function importData() {
         });
         productosCreados++;
       } catch (error: any) {
-        console.error(`    ❌ Error creando producto ${producto}:`, error.message);
+        console.error(`    ERROR creando producto ${producto}:`, error.message);
       }
     }
   }
 
-  console.log('\n✅ Importación completada');
-  console.log(`📊 Resumen:`);
+  console.log('\nImportación completada');
+  console.log(`Resumen:`);
   console.log(`   - ${categoriasMap.size} categorías`);
   console.log(`   - ${subcategoriasMap.size} subcategorías`);
   console.log(`   - ${productosCreados} productos`);

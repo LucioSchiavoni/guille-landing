@@ -325,6 +325,7 @@ function EmptyPlaceholder() {
 export default function ProductosOferta({ products }: ProductosOfertaProps) {
   const [isVisible, setIsVisible] = useState(false)
   const sectionRef = useRef<HTMLDivElement>(null)
+  const carouselRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -349,6 +350,17 @@ export default function ProductosOferta({ products }: ProductosOfertaProps) {
       }
     }
   }, [])
+
+  const scroll = (direction: 'left' | 'right') => {
+    if (carouselRef.current) {
+      const scrollAmount = carouselRef.current.offsetWidth * 0.8
+      const newScrollPosition = carouselRef.current.scrollLeft + (direction === 'right' ? scrollAmount : -scrollAmount)
+      carouselRef.current.scrollTo({
+        left: newScrollPosition,
+        behavior: 'smooth'
+      })
+    }
+  }
 
   if (!products || products.length === 0) {
     return (
@@ -401,10 +413,46 @@ export default function ProductosOferta({ products }: ProductosOfertaProps) {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
-          {products.map((product, index) => (
-            <ProductCard key={product._id} product={product} index={index} />
-          ))}
+        {/* Carousel Container */}
+        <div className="relative">
+          {/* Navigation Buttons */}
+          {products.length > 1 && (
+            <>
+              <button
+                onClick={() => scroll('left')}
+                className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white hover:bg-red-50 p-3 rounded-full shadow-lg transition-all hover:scale-110 border-2 border-red-200 hidden md:block"
+                aria-label="Anterior"
+              >
+                <ChevronLeft className="h-6 w-6 text-red-600" />
+              </button>
+              <button
+                onClick={() => scroll('right')}
+                className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white hover:bg-red-50 p-3 rounded-full shadow-lg transition-all hover:scale-110 border-2 border-red-200 hidden md:block"
+                aria-label="Siguiente"
+              >
+                <ChevronRight className="h-6 w-6 text-red-600" />
+              </button>
+            </>
+          )}
+
+          {/* Carousel Scroll Container */}
+          <div
+            ref={carouselRef}
+            className="flex gap-6 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-4 px-1"
+            style={{
+              scrollbarWidth: 'none',
+              msOverflowStyle: 'none',
+            }}
+          >
+            {products.map((product, index) => (
+              <div
+                key={product._id}
+                className="flex-none w-[calc(100%-2rem)] sm:w-[calc(50%-1.5rem)] lg:w-[calc(33.333%-1.5rem)] xl:w-[calc(25%-1.5rem)] snap-start"
+              >
+                <ProductCard product={product} index={index} />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

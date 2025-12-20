@@ -37,11 +37,9 @@ export default function Header({ rubros, miscellaneousCategories }: HeaderProps)
       {/* Mobile Layout */}
       <div className="lg:hidden">
         <div className="flex items-center justify-between px-4 py-3 bg-white border-b">
-          <Link href="/" className="flex-shrink-0">
-            <div className="scale-75 origin-left">
-              <Logo />
-            </div>
-          </Link>
+          <div className="scale-75 origin-left flex-shrink-0">
+            <Logo />
+          </div>
 
           <MenuMobile rubros={rubros} miscellaneousCategories={miscellaneousCategories} />
         </div>

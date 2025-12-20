@@ -65,11 +65,11 @@ export default function MenuMobile({ rubros, miscellaneousCategories }: MenuMobi
         <div className="flex flex-col h-full">
           {/* Header - Clean & Professional */}
           <div className="flex items-center p-4 border-b bg-white">
-            <Link href="/" onClick={() => setOpen(false)} className="flex items-center">
+            <div onClick={() => setOpen(false)} className="flex items-center cursor-pointer">
               <div className="scale-50 origin-left">
                 <Logo />
               </div>
-            </Link>
+            </div>
           </div>
 
           {/* Search Bar */}

@@ -6,6 +6,7 @@ import FeaturedProducts from "@/components/product/featured-products"
 import ProductosOferta from "@/components/sections/ProductosOferta"
 import ProductList from "@/components/product/product-list"
 import SustainabilitySection from "@/components/sustainability/sustainability-section"
+import DeliverySection from "@/components/sections/DeliverySection"
 import FAQSection from "@/components/faq/faq-section"
 import Footer from "@/components/footer/footer"
 import StructuredData from "@/components/seo/structured-data"
@@ -59,6 +60,7 @@ export default async function Home() {
 
         <FeaturedProducts products={featuredProducts} />
         {/* <ProductList products={products} /> */}
+        <DeliverySection />
         <FAQSection />
         <Footer />
       </div>

@@ -85,5 +85,12 @@ export default defineType({
             description: 'Porcentaje de descuento (ej: 20 para 20%)',
             validation: (Rule) => Rule.min(0).max(100),
         }),
+        defineField({
+            name: 'destacado',
+            title: 'Producto Destacado',
+            type: 'boolean',
+            initialValue: false,
+            description: 'Marcar para mostrar este producto en el carrusel de destacados de la página principal',
+        }),
     ],
 })
