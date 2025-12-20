@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { ChevronLeft, ChevronRight, Tag, Percent, Sparkles } from "lucide-react"
+import { ChevronLeft, ChevronRight, Percent } from "lucide-react"
 import { urlFor } from "@/lib/sanity"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
@@ -91,11 +91,6 @@ function ProductCard({ product, index }: { product: OfferProduct; index: number 
       }}
     >
       <div className="relative">
-        <div className="absolute top-3 left-3 z-10 bg-gradient-to-r from-red-500 to-red-600 text-white px-3 py-1.5 rounded-full text-xs font-bold flex items-center gap-1 shadow-lg">
-          <Tag className="h-3 w-3 fill-white" />
-          OFERTA
-        </div>
-
         {product.descuento && product.descuento > 0 && (
           <div className="absolute top-3 right-3 z-10">
             <div className="relative">
@@ -103,7 +98,7 @@ function ProductCard({ product, index }: { product: OfferProduct; index: number 
               <div className="relative bg-gradient-to-br from-yellow-400 to-orange-500 text-white px-3 py-2 rounded-lg shadow-lg">
                 <div className="flex items-center gap-1 font-black text-sm">
                   <Percent className="h-4 w-4" />
-                  <span>{product.descuento}% OFF</span>
+                  <span>{product.descuento} OFF</span>
                 </div>
               </div>
             </div>
@@ -182,7 +177,7 @@ function ProductCard({ product, index }: { product: OfferProduct; index: number 
                         className={cn(
                           "rounded-full transition-all duration-300",
                           idx === currentImageIndex
-                            ? "w-6 h-2 bg-red-500"
+                            ? "w-6 h-2 bg-green-500"
                             : "w-2 h-2 bg-white/70 hover:bg-white hover:w-3"
                         )}
                         aria-label={`Ir a imagen ${idx + 1}`}
@@ -201,7 +196,7 @@ function ProductCard({ product, index }: { product: OfferProduct; index: number 
       </div>
 
       <div className="p-5 flex flex-col flex-grow">
-        <h3 className="font-bold text-lg mb-2 line-clamp-2 text-gray-900 group-hover:text-red-600 transition-colors duration-300">
+        <h3 className="font-bold text-lg mb-2 line-clamp-2 text-gray-900 group-hover:text-gray-700 transition-colors duration-300">
           {product.name}
         </h3>
 
@@ -219,7 +214,7 @@ function ProductCard({ product, index }: { product: OfferProduct; index: number 
                   <span className="text-xs text-gray-400 line-through mb-1">
                     ${product.price.toLocaleString()}
                   </span>
-                  <span className="font-bold text-2xl text-red-600">
+                  <span className="font-bold text-2xl text-gray-900">
                     ${Math.round(discountPrice).toLocaleString()}
                   </span>
                   <span className="text-xs text-green-600 font-semibold mt-1">
@@ -227,7 +222,7 @@ function ProductCard({ product, index }: { product: OfferProduct; index: number 
                   </span>
                 </>
               ) : (
-                <span className="font-bold text-xl text-red-600">
+                <span className="font-bold text-xl text-gray-900">
                   ${product.price.toLocaleString()}
                 </span>
               )}
@@ -239,7 +234,7 @@ function ProductCard({ product, index }: { product: OfferProduct; index: number 
           <Button
             asChild
             className={cn(
-              "bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white shadow-md",
+              "bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white shadow-md",
               "transform hover:scale-105 active:scale-95 transition-all duration-300"
             )}
           >
@@ -369,18 +364,11 @@ export default function ProductosOferta({ products }: ProductosOfertaProps) {
           <div
             ref={sectionRef}
             className={cn(
-              "text-center mb-12 transition-all duration-700",
+              "text-center mb-8 transition-all duration-700",
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
             )}
           >
-            <div className="inline-flex items-center gap-2 bg-red-100 text-red-700 px-4 py-2 rounded-full text-sm font-semibold mb-4">
-              <Tag className="h-4 w-4" />
-              Ofertas Especiales
-            </div>
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-              Productos en Oferta
-            </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            <p className="text-base md:text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed">
               Aprovecha nuestras ofertas especiales en productos eco-friendly
             </p>
           </div>
@@ -395,20 +383,11 @@ export default function ProductosOferta({ products }: ProductosOfertaProps) {
       <div className="container mx-auto">
         <div
           className={cn(
-            "text-center mb-12 transition-all duration-700",
+            "text-center mb-8 transition-all duration-700",
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
           )}
         >
-          <div className="inline-flex items-center gap-2 bg-red-600 text-white px-5 py-2.5 rounded-full text-sm font-bold mb-4 shadow-lg">
-            <Sparkles className="h-5 w-5 fill-white" />
-            Ofertas Especiales
-          </div>
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-orange-600">
-              ¡Productos en Oferta!
-            </span>
-          </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <p className="text-base md:text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed">
             Aprovecha nuestros descuentos especiales en productos eco-friendly de alta calidad
           </p>
         </div>
@@ -420,17 +399,17 @@ export default function ProductosOferta({ products }: ProductosOfertaProps) {
             <>
               <button
                 onClick={() => scroll('left')}
-                className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white hover:bg-red-50 p-3 rounded-full shadow-lg transition-all hover:scale-110 border-2 border-red-200 hidden md:block"
+                className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white hover:bg-green-50 p-2 md:p-3 rounded-full shadow-lg transition-all hover:scale-110 border-2 border-green-200"
                 aria-label="Anterior"
               >
-                <ChevronLeft className="h-6 w-6 text-red-600" />
+                <ChevronLeft className="h-5 w-5 md:h-6 md:w-6 text-green-600" />
               </button>
               <button
                 onClick={() => scroll('right')}
-                className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white hover:bg-red-50 p-3 rounded-full shadow-lg transition-all hover:scale-110 border-2 border-red-200 hidden md:block"
+                className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white hover:bg-green-50 p-2 md:p-3 rounded-full shadow-lg transition-all hover:scale-110 border-2 border-green-200"
                 aria-label="Siguiente"
               >
-                <ChevronRight className="h-6 w-6 text-red-600" />
+                <ChevronRight className="h-5 w-5 md:h-6 md:w-6 text-green-600" />
               </button>
             </>
           )}

@@ -58,7 +58,7 @@ export default async function Home() {
         <HeroCarousel products={featuredProducts} />
         <ProductosOferta products={offerProducts} />
 
-        <FeaturedProducts products={featuredProducts} />
+
         {/* <ProductList products={products} /> */}
         <DeliverySection />
         <FAQSection />
