@@ -66,33 +66,41 @@ export default function HeroCarousel({ products = [] }: HeroCarouselProps) {
             className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${index === currentSlide ? "opacity-100 z-10" : "opacity-0 z-0"
               }`}
           >
-            <div className="relative w-full h-full">
+            <div className="relative w-full h-full bg-slate-950 overflow-hidden">
+              <div className="absolute inset-0 z-0">
+                <img
+                  src={slide.image}
+                  alt=""
+                  className="w-full h-full object-cover blur-lg opacity-40 scale-110"
+                />
+                <div className="absolute inset-0 bg-black/20" />
+              </div>
+
               <img
                 src={slide.image}
                 alt={slide.title}
-                className="w-full h-full object-cover"
+                className="relative w-full h-full object-contain z-10 drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
               />
-              <div className="absolute inset-0 bg-black/30" />
-              <div className="absolute inset-0 flex flex-col items-center justify-start text-center p-4 pt-12 md:pt-16 text-white">
-                <h2 className={`text-4xl md:text-5xl font-bold drop-shadow-lg mb-3 transition-all duration-700 hover:text-emerald-400 hover:scale-105 cursor-pointer ${
-                  index === currentSlide ? 'animate-fade-in-down' : ''
-                }`}>
-                  {slide.title}
-                </h2>
-                {slide.subtitle && (
-                  <p className={`text-xl md:text-2xl font-medium drop-shadow-md mb-2 transition-all duration-700 hover:text-emerald-300 hover:scale-105 cursor-pointer ${
-                    index === currentSlide ? 'animate-fade-in-up' : ''
-                  }`}>
-                    {slide.subtitle}
-                  </p>
-                )}
-                {slide.description && (
-                  <p className={`text-lg md:text-xl font-serif italic drop-shadow-md opacity-90 transition-all duration-700 hover:text-emerald-200 hover:scale-105 cursor-pointer ${
-                    index === currentSlide ? 'animate-fade-in' : ''
-                  }`}>
-                    {slide.description}
-                  </p>
-                )}
+
+              <div className="absolute inset-0 flex flex-col items-center justify-start text-center p-4 pt-12 md:pt-16 text-white z-20">
+                <div className="bg-black/40 backdrop-blur-sm px-6 py-4 rounded-xl">
+                  <h2 className={`text-4xl md:text-5xl font-bold mb-3 transition-all duration-700 hover:text-emerald-400 hover:scale-105 cursor-pointer [text-shadow:_2px_2px_8px_rgb(0_0_0_/_80%)] ${index === currentSlide ? 'animate-fade-in-down' : ''
+                    }`}>
+                    {slide.title}
+                  </h2>
+                  {slide.subtitle && (
+                    <p className={`text-xl md:text-2xl font-medium mb-2 transition-all duration-700 hover:text-emerald-300 hover:scale-105 cursor-pointer [text-shadow:_1px_1px_6px_rgb(0_0_0_/_70%)] ${index === currentSlide ? 'animate-fade-in-up' : ''
+                      }`}>
+                      {slide.subtitle}
+                    </p>
+                  )}
+                  {slide.description && (
+                    <p className={`text-lg md:text-xl font-serif italic opacity-90 transition-all duration-700 hover:text-emerald-200 hover:scale-105 cursor-pointer [text-shadow:_1px_1px_4px_rgb(0_0_0_/_60%)] ${index === currentSlide ? 'animate-fade-in' : ''
+                      }`}>
+                      {slide.description}
+                    </p>
+                  )}
+                </div>
               </div>
             </div>
           </div>
@@ -132,8 +140,8 @@ export default function HeroCarousel({ products = [] }: HeroCarouselProps) {
               key={`dot-${index}`}
               onClick={() => setCurrentSlide(index)}
               className={`transition-all ${index === currentSlide
-                  ? "w-12 h-3 bg-primary rounded-full"
-                  : "w-3 h-3 bg-white/60 hover:bg-white/80 rounded-full"
+                ? "w-12 h-3 bg-primary rounded-full"
+                : "w-3 h-3 bg-white/60 hover:bg-white/80 rounded-full"
                 }`}
               aria-label={`Ir a slide ${index + 1}`}
             />

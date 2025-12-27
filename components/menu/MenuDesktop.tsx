@@ -15,6 +15,7 @@ interface MenuDesktopProps {
 export default function MenuDesktop({ rubros, miscellaneousCategories }: MenuDesktopProps) {
   const [activeMenu, setActiveMenu] = useState<'rubros' | 'categorias' | null>(null)
   const [activeRubro, setActiveRubro] = useState<Rubro | null>(null)
+  const [activeCategoria, setActiveCategoria] = useState<Categoria | null>(null)
   const timeoutRef = useRef<NodeJS.Timeout | null>(null)
 
   // Set default active items
@@ -22,7 +23,10 @@ export default function MenuDesktop({ rubros, miscellaneousCategories }: MenuDes
     if (activeMenu === 'rubros' && rubros.length > 0 && !activeRubro) {
       setActiveRubro(rubros[0])
     }
-  }, [activeMenu, rubros])
+    if (activeMenu === 'categorias' && miscellaneousCategories.length > 0 && !activeCategoria) {
+      setActiveCategoria(miscellaneousCategories[0])
+    }
+  }, [activeMenu, rubros, miscellaneousCategories])
 
   const handleMouseEnter = (menu: 'rubros' | 'categorias') => {
     if (timeoutRef.current) clearTimeout(timeoutRef.current)
@@ -101,31 +105,43 @@ export default function MenuDesktop({ rubros, miscellaneousCategories }: MenuDes
                       Categorías y Subcategorías
                     </h3>
                     {activeRubro ? (
-                      <div className="space-y-3">
-                        {[...activeRubro.categorias].sort((a, b) => a.nombre.localeCompare(b.nombre)).map((categoria) => (
-                          <div key={categoria.id} className="rounded-lg p-2 hover:bg-gray-50 transition-all duration-300">
-                            <Link
-                              href={`/productos?categoria=${categoria.id}`}
-                              className="block text-sm font-bold text-gray-800 hover:text-green-700 mb-1 transition-all duration-300 hover:translate-x-1"
-                            >
-                              {categoria.nombre}
-                            </Link>
-                            {categoria.subcategorias && categoria.subcategorias.length > 0 && (
-                              <div className="grid grid-cols-2 gap-x-2 gap-y-1 pl-2 border-l-2 border-green-100 ml-1">
-                                {categoria.subcategorias.map((sub) => (
-                                  <Link
-                                    key={sub.id}
-                                    href={`/productos?categoria=${categoria.id}&subcategoria=${sub.id}`}
-                                    className="text-xs text-gray-500 hover:text-green-600 truncate py-0.5 transition-all duration-300 hover:translate-x-0.5"
-                                  >
-                                    {sub.nombre}
-                                  </Link>
-                                ))}
-                              </div>
-                            )}
-                          </div>
-                        ))}
-                      </div>
+                      activeRubro.categorias && activeRubro.categorias.length > 0 ? (
+                        <div className="space-y-3">
+                          {[...activeRubro.categorias].sort((a, b) => a.nombre.localeCompare(b.nombre)).map((categoria) => (
+                            <div key={categoria.id} className="rounded-lg p-2 hover:bg-gray-50 transition-all duration-300">
+                              <Link
+                                href={`/productos?categoria=${categoria.id}`}
+                                className="block text-sm font-bold text-gray-800 hover:text-green-700 mb-1 transition-all duration-300 hover:translate-x-1"
+                              >
+                                {categoria.nombre}
+                              </Link>
+                              {categoria.subcategorias?.length > 0 ? (
+                                <div className="grid grid-cols-2 gap-x-2 gap-y-1 pl-2 border-l-2 border-green-100 ml-1">
+                                  {categoria.subcategorias.map((sub) => (
+                                    <Link
+                                      key={sub.id}
+                                      href={`/productos?categoria=${categoria.id}&subcategoria=${sub.id}`}
+                                      className="text-xs text-gray-500 hover:text-green-600 truncate py-0.5 transition-all duration-300 hover:translate-x-0.5"
+                                    >
+                                      {sub.nombre}
+                                    </Link>
+                                  ))}
+                                </div>
+                              ) : (
+                                <p className="text-xs text-gray-400 pl-2 border-l-2 border-green-100 ml-1 py-1">
+                                  Consultanos por stock y disponibilidad
+                                </p>
+                              )}
+                            </div>
+                          ))}
+                        </div>
+                      ) : (
+                        <div className="flex flex-col items-center justify-center h-full text-center px-4">
+                          <span className="text-2xl mb-2">📦</span>
+                          <p className="text-sm font-medium text-gray-600 mb-1">¿Buscás algo específico?</p>
+                          <p className="text-xs text-gray-400">Consultanos por stock y disponibilidad</p>
+                        </div>
+                      )
                     ) : (
                       <div className="text-sm text-gray-400 px-3 italic">Selecciona un rubro</div>
                     )}
@@ -149,6 +165,7 @@ export default function MenuDesktop({ rubros, miscellaneousCategories }: MenuDes
                   : "text-white/90 hover:text-white hover:bg-white/10",
               )}
             >
+              <Package className={cn("w-4 h-4 transition-transform duration-300", activeMenu === 'categorias' && "scale-110")} />
               <span>Categorías</span>
               <ChevronDown className={cn("w-4 h-4 transition-transform duration-300", activeMenu === 'categorias' && "rotate-180")} />
             </Link>
@@ -160,33 +177,66 @@ export default function MenuDesktop({ rubros, miscellaneousCategories }: MenuDes
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: -10, scale: 0.95 }}
                   transition={{ duration: 0.25, ease: "easeOut" }}
-                  className="absolute top-full left-0 pt-2 z-50 w-[300px]"
+                  className="absolute top-full left-0 pt-2 z-50 w-[500px] -left-[50px]"
                 >
-                  <div className="bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden py-3 max-h-[400px] overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 [&::-webkit-scrollbar-thumb]:rounded-full hover:[&::-webkit-scrollbar-thumb]:bg-gray-400">
-                    <div className="px-2 space-y-2">
-                      {[...miscellaneousCategories].sort((a, b) => a.nombre.localeCompare(b.nombre)).map((cat) => (
-                        <div key={cat.id} className="rounded-lg p-2 hover:bg-gray-50 transition-all duration-300">
+                  <div className="bg-white rounded-xl shadow-2xl border border-gray-100 overflow-hidden flex h-[400px]">
+                    {/* Column 1: Categories List */}
+                    <div className="w-56 bg-gray-50 border-r border-gray-100 p-4 overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 [&::-webkit-scrollbar-thumb]:rounded-full hover:[&::-webkit-scrollbar-thumb]:bg-gray-400">
+                      <h3 className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3 px-3">
+                        Selecciona una Categoría
+                      </h3>
+                      <div className="space-y-1">
+                        {[...miscellaneousCategories].sort((a, b) => a.nombre.localeCompare(b.nombre)).map((categoria) => (
                           <Link
-                            href={`/productos?categoria=${cat.id}`}
-                            className="block text-sm font-bold text-gray-800 hover:text-green-700 mb-1 transition-all duration-300 hover:translate-x-1"
+                            key={categoria.id}
+                            href={`/productos?categoria=${categoria.id}`}
+                            onMouseEnter={() => setActiveCategoria(categoria)}
+                            className={cn(
+                              "w-full text-left px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-300 flex items-center justify-between group",
+                              "hover:translate-x-1",
+                              activeCategoria?.id === categoria.id
+                                ? "bg-white text-green-700 shadow-md scale-[1.02]"
+                                : "text-gray-600 hover:bg-white hover:text-green-700 hover:shadow-sm"
+                            )}
                           >
-                            {cat.nombre}
+                            {categoria.nombre}
+                            <ChevronRight className={cn(
+                              "w-4 h-4 text-gray-400 transition-all duration-300",
+                              activeCategoria?.id === categoria.id ? "opacity-100 text-green-500 translate-x-1" : "opacity-0 group-hover:opacity-100 group-hover:translate-x-1"
+                            )} />
                           </Link>
-                          {cat.subcategorias && cat.subcategorias.length > 0 && (
-                            <div className="flex flex-col gap-1 pl-2 border-l-2 border-green-100 ml-1">
-                              {cat.subcategorias.map((sub) => (
-                                <Link
-                                  key={sub.id}
-                                  href={`/productos?categoria=${cat.id}&subcategoria=${sub.id}`}
-                                  className="text-xs text-gray-500 hover:text-green-600 truncate py-0.5 transition-all duration-300 hover:translate-x-0.5"
-                                >
-                                  {sub.nombre}
-                                </Link>
-                              ))}
-                            </div>
-                          )}
-                        </div>
-                      ))}
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Column 2: Subcategories of selected Category */}
+                    <div className="flex-1 p-4 overflow-y-auto bg-white [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 [&::-webkit-scrollbar-thumb]:rounded-full hover:[&::-webkit-scrollbar-thumb]:bg-gray-400">
+                      <h3 className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3 px-3">
+                        Subcategorías
+                      </h3>
+                      {activeCategoria ? (
+                        activeCategoria.subcategorias && activeCategoria.subcategorias.length > 0 ? (
+                          <div className="grid grid-cols-1 gap-1">
+                            {activeCategoria.subcategorias.map((sub) => (
+                              <Link
+                                key={sub.id}
+                                href={`/productos?categoria=${activeCategoria.id}&subcategoria=${sub.id}`}
+                                className="px-3 py-2 text-sm text-gray-600 hover:text-green-700 hover:bg-gray-50 rounded-lg transition-all duration-300 hover:translate-x-1"
+                              >
+                                {sub.nombre}
+                              </Link>
+                            ))}
+                          </div>
+                        ) : (
+                          <div className="flex flex-col items-center justify-center h-full text-center px-4">
+                            <span className="text-2xl mb-2">📦</span>
+                            <p className="text-sm font-medium text-gray-600 mb-1">¿Buscás algo específico?</p>
+                            <p className="text-xs text-gray-400">Consultanos por stock y disponibilidad</p>
+                          </div>
+                        )
+                      ) : (
+                        <div className="text-sm text-gray-400 px-3 italic">Selecciona una categoría 👈</div>
+                      )}
                     </div>
                   </div>
                 </motion.div>
