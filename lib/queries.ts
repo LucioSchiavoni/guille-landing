@@ -75,7 +75,7 @@ export const menuQuery = groq`
         }
       }
     },
-    "miscellaneousCategories": *[_type == "category" && !defined(rubro) && active == true] | order(order asc) {
+    "miscellaneousCategories": *[_type == "category" && active == true] | order(order asc) {
       "id": _id,
       "nombre": name,
       "subcategorias": *[_type == "subcategory" && category._ref == ^._id && active == true] | order(order asc) {
@@ -124,8 +124,10 @@ export const advancedSearchQuery = groq`
     image,
     price,
     subcategory->{
+      _id,
       name,
       category->{
+        _id,
         name
       }
     }

@@ -19,6 +19,19 @@ interface HeaderProps {
 export default function Header({ rubros, miscellaneousCategories }: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState(false)
 
+  // Filtro para eliminar "Destacados" de rubros
+  const filteredRubros = rubros.filter((rubro) => {
+    const nombreNormalizado = rubro.nombre.trim().toLowerCase();
+    return !nombreNormalizado.includes("destacados");
+  });
+
+  // Filtro para eliminar "Ofertas" y "Novedades" del menú
+  // Estas categorías solo se muestran en el page principal
+  const filteredCategories = miscellaneousCategories.filter((cat) => {
+    const nombreNormalizado = cat.nombre.trim().toLowerCase();
+    return nombreNormalizado !== "ofertas" && nombreNormalizado !== "novedades";
+  });
+
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10)
@@ -30,23 +43,23 @@ export default function Header({ rubros, miscellaneousCategories }: HeaderProps)
   return (
     <header
       className={cn(
-        "w-full bg-background sticky top-0 z-40 transition-shadow duration-300 ",
+        "w-full bg-[#0b5c1c] text-white sticky top-0 z-40 transition-shadow duration-300",
         isScrolled ? "shadow-md" : "shadow-sm",
       )}
     >
       {/* Mobile Layout */}
       <div className="lg:hidden">
-        <div className="flex items-center justify-between px-4 py-3 bg-white border-b">
-          <div className="scale-75 origin-left flex-shrink-0">
-            <Logo />
+        <div className="flex items-center justify-between px-4 py-3 bg-[#0b5c1c] border-b border-white/10">
+          <div className="flex-shrink-0">
+            <Logo className="w-32 h-auto sm:w-40" />
           </div>
 
-          <MenuMobile rubros={rubros} miscellaneousCategories={miscellaneousCategories} />
+          <MenuMobile rubros={filteredRubros} miscellaneousCategories={filteredCategories} />
         </div>
       </div>
 
       {/* Desktop Layout - unchanged */}
-      <div className="hidden lg:block bg-background ">
+      <div className="hidden lg:block bg-[#0b5c1c]">
         {/* Top Row: Logo, Search, Actions */}
         <div className="container mx-auto px-4 py-2">
           <div className="flex items-center justify-between gap-4 lg:gap-8">
@@ -58,13 +71,13 @@ export default function Header({ rubros, miscellaneousCategories }: HeaderProps)
             {/* Search - Centered & Wide on Desktop */}
             <div className="flex flex-1 max-w-2xl mx-auto">
               <Suspense fallback={<div className="w-full h-10 bg-muted/50 rounded-md animate-pulse" />}>
-                <SearchCommand categorias={[]} />
+                <SearchCommand rubros={filteredRubros} />
               </Suspense>
             </div>
 
             {/* Actions */}
             <div className="flex items-center gap-3 flex-shrink-0">
-              <Button asChild variant="ghost" className="inline-flex gap-2">
+              <Button asChild variant="ghost" className="inline-flex gap-2 text-white hover:text-white hover:bg-white/10">
                 <Link href="/contacto">
                   <Phone className="h-4 w-4" />
                   <span>Contactanos</span>
@@ -78,7 +91,7 @@ export default function Header({ rubros, miscellaneousCategories }: HeaderProps)
         <div className="border-t border-border/30 bg-muted/10">
           <div className="container mx-auto px-4">
             <div className="flex justify-center">
-              <MenuDesktop rubros={rubros} miscellaneousCategories={miscellaneousCategories} />
+              <MenuDesktop rubros={filteredRubros} miscellaneousCategories={filteredCategories} />
             </div>
           </div>
         </div>

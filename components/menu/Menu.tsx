@@ -10,16 +10,22 @@ interface MenuProps {
 
 export default function Menu({ rubros, miscellaneousCategories }: MenuProps) {
   // Filtro de seguridad para eliminar "Destacados"
-  // Usamos trim() para quitar espacios y toLowerCase() para ignorar mayúsculas
   const filteredRubros = rubros.filter((c) => {
     const nombreNormalizado = c.nombre.trim().toLowerCase();
     return !nombreNormalizado.includes("destacados");
   });
 
+  // Filtro para eliminar "Ofertas" y "Novedades" del menú
+  // Estas categorías solo se muestran en el page principal
+  const filteredCategories = miscellaneousCategories.filter((c) => {
+    const nombreNormalizado = c.nombre.trim().toLowerCase();
+    return nombreNormalizado !== "ofertas" && nombreNormalizado !== "novedades";
+  });
+
   return (
     <div className="w-full flex items-center gap-2 justify-center">
-      <MenuDesktop rubros={filteredRubros} miscellaneousCategories={miscellaneousCategories} />
-      <MenuMobile rubros={filteredRubros} miscellaneousCategories={miscellaneousCategories} />
+      <MenuDesktop rubros={filteredRubros} miscellaneousCategories={filteredCategories} />
+      <MenuMobile rubros={filteredRubros} miscellaneousCategories={filteredCategories} />
     </div>
   )
 } 

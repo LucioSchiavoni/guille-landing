@@ -1,68 +1,82 @@
 "use client"
 
 import * as React from "react"
-import { useRouter, useSearchParams } from "next/navigation"
-import { Search } from "lucide-react"
+import { useRouter, useSearchParams, usePathname } from "next/navigation"
+import { Search, X } from "lucide-react"
 import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
-import { Categoria } from "@/types/menu"
+import { Rubro } from "@/types/menu"
 
 interface SearchCommandProps {
-    rubros?: any[]
-    categorias?: any[] // Kept for backward compatibility if any, but optional
+    rubros?: Rubro[]
+    categorias?: any[]
     onSearch?: () => void
 }
 
-export function SearchCommand({ categorias, onSearch }: SearchCommandProps) {
+export function SearchCommand({ rubros = [], onSearch }: SearchCommandProps) {
     const router = useRouter()
+    const pathname = usePathname()
     const searchParams = useSearchParams()
     const initialQuery = searchParams.get("q") || ""
     const [query, setQuery] = React.useState(initialQuery)
 
-    // Update internal state if URL changes
     React.useEffect(() => {
         setQuery(searchParams.get("q") || "")
     }, [searchParams])
 
     const handleSearch = (e: React.FormEvent) => {
         e.preventDefault()
-        // Always redirect to /productos with the query
-        const params = new URLSearchParams(searchParams.toString())
+
+        const params = new URLSearchParams()
+
         if (query.trim()) {
             params.set("q", query)
-        } else {
-            params.delete("q")
         }
 
-        router.push(`/productos?${params.toString()}`)
+        const queryString = params.toString()
+        const newUrl = queryString ? `/productos?${queryString}` : "/productos"
+
+        router.push(newUrl, { scroll: false })
 
         if (onSearch) {
             onSearch()
         }
     }
 
+    const handleClear = () => {
+        setQuery("")
+        router.push("/productos", { scroll: false })
+    }
+
     return (
-        <form onSubmit={handleSearch} className="relative w-full flex items-center gap-2">
-            <div className="relative w-full">
-                {/* Make icon clickable as a submit button for mobile */}
-                <button
-                    type="submit"
-                    className="absolute left-3 top-1/2 -translate-y-1/2 p-0 border-0 bg-transparent cursor-pointer z-10"
-                    aria-label="Buscar"
-                >
-                    <Search className="h-4 w-4 text-muted-foreground hover:text-foreground transition-colors" />
-                </button>
-                <Input
-                    type="search"
-                    placeholder="Buscar productos..."
-                    className="w-full pl-9 bg-muted/50 border-transparent focus:bg-background focus:border-border transition-colors h-10"
-                    value={query}
-                    onChange={(e) => setQuery(e.target.value)}
-                />
-            </div>
-            <Button type="submit" size="sm" variant="ghost" className="hidden sm:inline-flex">
-                Buscar
-            </Button>
-        </form>
+        <div className="relative w-full">
+            <form onSubmit={handleSearch} className="w-full flex items-center gap-2">
+                <div className="relative w-full">
+                    <button
+                        type="submit"
+                        className="absolute left-3 top-1/2 -translate-y-1/2 p-0 border-0 bg-transparent cursor-pointer z-10"
+                        aria-label="Buscar"
+                    >
+                        <Search className="h-4 w-4 text-gray-500" />
+                    </button>
+                    <Input
+                        type="text"
+                        placeholder="Buscar productos..."
+                        className="w-full pl-9 pr-9 bg-white text-black placeholder:text-gray-500 border-none rounded-full h-10 shadow-sm focus-visible:ring-2 focus-visible:ring-green-400"
+                        value={query}
+                        onChange={(e) => setQuery(e.target.value)}
+                    />
+                    {query && (
+                        <button
+                            type="button"
+                            onClick={handleClear}
+                            className="absolute right-3 top-1/2 -translate-y-1/2 p-0 border-0 bg-transparent cursor-pointer z-10 hover:bg-muted rounded-full p-1 transition-colors"
+                            aria-label="Limpiar búsqueda"
+                        >
+                            <X className="h-4 w-4 text-muted-foreground hover:text-foreground" />
+                        </button>
+                    )}
+                </div>
+            </form>
+        </div>
     )
 }

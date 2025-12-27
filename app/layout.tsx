@@ -20,52 +20,59 @@ const sourceCodePro = Source_Code_Pro({
 export const metadata: Metadata = {
   metadataBase: new URL('https://todoenpackaging.com'),
   title: {
-    default: "TodoEnPackaging - Soluciones Eco-Friendly para Packaging Alimenticio",
+    default: "TodoEnPackaging | Soluciones en Packaging Ecológico y Descartable",
     template: "%s | TodoEnPackaging",
   },
-  description: "Empresa dedicada a la distribución de envoltorios descartables eco-friendly y productos de higiene para la industria alimenticia. Productos a base de pulpa de papel, bagazo de caña y fibra de bambú. Envíos a todo Uruguay.",
+  description: "Líderes en packaging ecológico y descartable en Uruguay. Soluciones sostenibles para la industria alimenticia: delivery, take away y gastronomía. Envíos a todo el país.",
+  applicationName: "TodoEnPackaging",
+  authors: [{ name: "TodoEnPackaging", url: "https://todoenpackaging.com" }],
+  generator: "Next.js",
   keywords: [
-    "packaging eco-friendly",
-    "envoltorios descartables",
-    "packaging alimenticio Uruguay",
-    "productos biodegradables",
-    "packaging sostenible",
-    "envoltorios ecológicos",
-    "packaging caña de azúcar",
-    "packaging bambú",
-    "productos descartables",
-    "packaging restaurantes",
-    "packaging delivery",
+    "packaging uruguay",
+    "envases descartables",
+    "packaging ecologico",
+    "cajas para delivery",
+    "insumos gastronomicos",
+    "bolsas de papel",
+    "vasos biodegradables",
+    "bandejas comida",
+    "todo en packaging",
+    "proveedores gastronomia uruguay"
   ],
-  authors: [{ name: "TodoEnPackaging" }],
+  referrer: "origin-when-cross-origin",
   creator: "TodoEnPackaging",
   publisher: "TodoEnPackaging",
+  category: "Industrial",
   formatDetection: {
     email: false,
     address: false,
     telephone: false,
+  },
+  alternates: {
+    canonical: "/",
   },
   openGraph: {
     type: "website",
     locale: "es_UY",
     url: "https://todoenpackaging.com",
     siteName: "TodoEnPackaging",
-    title: "TodoEnPackaging - Soluciones Eco-Friendly para Packaging Alimenticio",
-    description: "Distribución de envoltorios descartables eco-friendly y productos de higiene para la industria alimenticia en Uruguay.",
+    title: "TodoEnPackaging | Soluciones en Packaging Ecológico y Descartable",
+    description: "Distribución de envoltorios descartables eco-friendly y productos de higiene para la industria alimenticia en Uruguay. Catálogo completo online.",
     images: [
       {
         url: "https://res.cloudinary.com/dbk2t0jy3/image/upload/v1764163493/LOGO_-_fondo_transparente_ioekip.png",
         width: 1200,
         height: 630,
-        alt: "TodoEnPackaging Logo",
+        alt: "TodoEnPackaging - Soluciones Sostenibles",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "TodoEnPackaging - Soluciones Eco-Friendly para Packaging Alimenticio",
-    description: "Distribución de envoltorios descartables eco-friendly y productos de higiene para la industria alimenticia en Uruguay.",
+    title: "TodoEnPackaging | Soluciones en Packaging Ecológico",
+    description: "Encuentra el mejor packaging para tu negocio. Soluciones sostenibles y económicas con envíos a todo Uruguay.",
     images: ["https://res.cloudinary.com/dbk2t0jy3/image/upload/v1764163493/LOGO_-_fondo_transparente_ioekip.png"],
+    creator: "@todoenpackaging",
   },
   robots: {
     index: true,
@@ -79,24 +86,23 @@ export const metadata: Metadata = {
     },
   },
   verification: {
-    google: 'google-site-verification-code',
+    google: 'verification_token',
+    // yandex: 'yandex_verification_token',
+    // other: {
+    //   me: ['my-email', 'my-link'],
+    // },
   },
   icons: {
     icon: [
-      {
-        url: "/icon-light-32x32.png",
-        media: "(prefers-color-scheme: light)",
-      },
-      {
-        url: "/icon-dark-32x32.png",
-        media: "(prefers-color-scheme: dark)",
-      },
-      {
-        url: "/icon.svg",
-        type: "image/svg+xml",
-      },
+      { url: "/logo_icon_green.png" },
+      { url: "/logo_icon_green.png", sizes: "32x32", type: "image/png" },
     ],
-    apple: "/apple-icon.png",
+    shortcut: "/logo_icon_green.png",
+    apple: "/logo_icon_green.png",
+    other: {
+      rel: "apple-touch-icon-precomposed",
+      url: "/logo_icon_green.png",
+    },
   },
 }
 

@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import { client, urlFor } from "@/lib/sanity"
 import { productBySlugQuery } from "@/lib/queries"
 import Image from "next/image"
@@ -13,6 +14,56 @@ interface ProductPageProps {
     params: Promise<{
         slug: string
     }>
+}
+
+export async function generateMetadata({ params }: ProductPageProps): Promise<Metadata> {
+    const { slug } = await params
+    const product = await client.fetch(productBySlugQuery, { slug })
+
+    if (!product) {
+        return {
+            title: "Producto no encontrado",
+            description: "El producto que buscas no está disponible",
+        }
+    }
+
+    const productName = product.name || "Producto"
+    const categoryName = product.subcategory?.category?.name || ""
+    const subcategoryName = product.subcategory?.name || ""
+    const description = product.description || `${productName} - ${subcategoryName} de ${categoryName}. Producto eco-friendly de TodoEnPackaging.`
+    const imageUrl = product.image ? urlFor(product.image).width(1200).height(630).url() : "https://res.cloudinary.com/dbk2t0jy3/image/upload/v1764163493/LOGO_-_fondo_transparente_ioekip.png"
+
+    return {
+        title: `${productName} - ${categoryName} Eco-Friendly`,
+        description: description.substring(0, 160),
+        keywords: [
+            productName,
+            categoryName,
+            subcategoryName,
+            "packaging eco-friendly",
+            "productos descartables",
+            "packaging sostenible Uruguay"
+        ],
+        openGraph: {
+            title: productName,
+            description: description.substring(0, 160),
+            images: [
+                {
+                    url: imageUrl,
+                    width: 1200,
+                    height: 630,
+                    alt: productName,
+                },
+            ],
+            type: "website",
+        },
+        twitter: {
+            card: "summary_large_image",
+            title: productName,
+            description: description.substring(0, 160),
+            images: [imageUrl],
+        },
+    }
 }
 
 export default async function ProductPage({ params }: ProductPageProps) {

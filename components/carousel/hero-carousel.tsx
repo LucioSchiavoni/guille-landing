@@ -63,9 +63,8 @@ export default function HeroCarousel({ products = [] }: HeroCarouselProps) {
         {activeSlides.map((slide, index) => (
           <div
             key={`slide-${slide.id}`}
-            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-              index === currentSlide ? "opacity-100 z-10" : "opacity-0 z-0"
-            }`}
+            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${index === currentSlide ? "opacity-100 z-10" : "opacity-0 z-0"
+              }`}
           >
             <div className="relative w-full h-full">
               <img
@@ -74,13 +73,25 @@ export default function HeroCarousel({ products = [] }: HeroCarouselProps) {
                 className="w-full h-full object-cover"
               />
               <div className="absolute inset-0 bg-black/30" />
-              <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-4 text-white">
-                <h2 className="text-4xl md:text-5xl font-bold drop-shadow-lg mb-3">{slide.title}</h2>
+              <div className="absolute inset-0 flex flex-col items-center justify-start text-center p-4 pt-12 md:pt-16 text-white">
+                <h2 className={`text-4xl md:text-5xl font-bold drop-shadow-lg mb-3 transition-all duration-700 hover:text-emerald-400 hover:scale-105 cursor-pointer ${
+                  index === currentSlide ? 'animate-fade-in-down' : ''
+                }`}>
+                  {slide.title}
+                </h2>
                 {slide.subtitle && (
-                  <p className="text-xl md:text-2xl font-medium drop-shadow-md mb-2">{slide.subtitle}</p>
+                  <p className={`text-xl md:text-2xl font-medium drop-shadow-md mb-2 transition-all duration-700 hover:text-emerald-300 hover:scale-105 cursor-pointer ${
+                    index === currentSlide ? 'animate-fade-in-up' : ''
+                  }`}>
+                    {slide.subtitle}
+                  </p>
                 )}
                 {slide.description && (
-                  <p className="text-lg md:text-xl font-serif italic drop-shadow-md opacity-90">{slide.description}</p>
+                  <p className={`text-lg md:text-xl font-serif italic drop-shadow-md opacity-90 transition-all duration-700 hover:text-emerald-200 hover:scale-105 cursor-pointer ${
+                    index === currentSlide ? 'animate-fade-in' : ''
+                  }`}>
+                    {slide.description}
+                  </p>
                 )}
               </div>
             </div>
@@ -120,29 +131,15 @@ export default function HeroCarousel({ products = [] }: HeroCarouselProps) {
             <button
               key={`dot-${index}`}
               onClick={() => setCurrentSlide(index)}
-              className={`transition-all ${
-                index === currentSlide
+              className={`transition-all ${index === currentSlide
                   ? "w-12 h-3 bg-primary rounded-full"
                   : "w-3 h-3 bg-white/60 hover:bg-white/80 rounded-full"
-              }`}
+                }`}
               aria-label={`Ir a slide ${index + 1}`}
             />
           ))}
         </div>
       )}
-
-      {/* CTA Button - Ver más productos */}
-      <div className="absolute bottom-20 left-1/2 -translate-x-1/2 z-20">
-        <Link href="/productos">
-          <Button
-            size="lg"
-            className="bg-green-700 hover:bg-green-800 text-white font-semibold px-8 py-6 rounded-xl shadow-2xl shadow-green-700/30 hover:shadow-green-700/50 transition-all hover:scale-105 flex items-center gap-2"
-          >
-            Ver más productos
-            <ArrowRight className="w-5 h-5" />
-          </Button>
-        </Link>
-      </div>
 
     </div>
   )

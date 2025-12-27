@@ -39,19 +39,16 @@ export default function ActionButtons() {
         icon={<GitCompare className="h-5 w-5" />}
         label="Comparar"
         count={0}
-        onClick={() => console.log("Compare clicked")}
       />
       <ActionButton
         icon={<Heart className="h-5 w-5" />}
         label="Favoritos"
         count={0}
-        onClick={() => console.log("Favorites clicked")}
       />
       <ActionButton
         icon={<ShoppingCart className="h-5 w-5" />}
         label="Pedido"
         count={0}
-        onClick={() => console.log("Cart clicked")}
       />
     </div>
   )

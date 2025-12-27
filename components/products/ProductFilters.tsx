@@ -2,17 +2,10 @@
 
 import { useRouter, useSearchParams } from "next/navigation"
 import { Button } from "@/components/ui/button"
-import { X } from "lucide-react"
+import { X, ChevronDown, ChevronRight } from "lucide-react"
 import { Rubro, Categoria } from "@/types/menu"
 import { cn } from "@/lib/utils"
 import { useState } from "react"
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "@/components/ui/select"
 
 interface ProductFiltersProps {
     rubros: Rubro[]
@@ -23,11 +16,32 @@ interface ProductFiltersProps {
 export default function ProductFilters({ rubros, miscellaneousCategories, onClose }: ProductFiltersProps) {
     const router = useRouter()
     const searchParams = useSearchParams()
-    const [selectedRubro, setSelectedRubro] = useState<string>("")
+    const [expandedRubros, setExpandedRubros] = useState<Set<string>>(new Set())
+    const [expandedCategories, setExpandedCategories] = useState<Set<string>>(new Set())
 
     const currentCategory = searchParams.get("categoria")
     const currentSubcategory = searchParams.get("subcategoria")
     const currentSearch = searchParams.get("q") || ""
+
+    const toggleRubro = (rubroId: string) => {
+        const newExpanded = new Set(expandedRubros)
+        if (newExpanded.has(rubroId)) {
+            newExpanded.delete(rubroId)
+        } else {
+            newExpanded.add(rubroId)
+        }
+        setExpandedRubros(newExpanded)
+    }
+
+    const toggleCategory = (categoryId: string) => {
+        const newExpanded = new Set(expandedCategories)
+        if (newExpanded.has(categoryId)) {
+            newExpanded.delete(categoryId)
+        } else {
+            newExpanded.add(categoryId)
+        }
+        setExpandedCategories(newExpanded)
+    }
 
     const handleCategoryClick = (categoryId: string) => {
         const params = new URLSearchParams(searchParams.toString())
@@ -57,20 +71,22 @@ export default function ProductFilters({ rubros, miscellaneousCategories, onClos
     }
 
     const clearFilters = () => {
-        router.push("/productos")
-        setSelectedRubro("")
+        const params = new URLSearchParams(searchParams.toString())
+        params.delete("categoria")
+        params.delete("subcategoria")
+
+        if (params.toString()) {
+            router.push(`/productos?${params.toString()}`)
+        } else {
+            router.push("/productos")
+        }
         onClose?.()
     }
 
-    const hasFilters = currentCategory || currentSearch
-
-    // Get categories from selected rubro
-    const selectedRubroCategories = selectedRubro
-        ? rubros.find(r => r.id === selectedRubro)?.categorias || []
-        : []
+    const hasFilters = currentCategory
 
     return (
-        <div className="space-y-6 px-4 py-6">
+        <div className="space-y-3 px-4 py-6">
             {/* Header */}
             <div className="flex justify-between items-center">
                 <h3 className="text-xl font-bold text-gray-900">Filtros</h3>
@@ -95,7 +111,6 @@ export default function ProductFilters({ rubros, miscellaneousCategories, onClos
                     params.delete("categoria")
                     params.delete("subcategoria")
                     router.push(`/productos?${params.toString()}`)
-                    setSelectedRubro("")
                     onClose?.()
                 }}
                 className="w-full rounded-full"
@@ -105,102 +120,82 @@ export default function ProductFilters({ rubros, miscellaneousCategories, onClos
 
             {/* Rubros Dropdown */}
             {rubros.length > 0 && (
-                <div className="space-y-3">
-                    <h4 className="text-sm font-medium text-gray-700 uppercase tracking-wide">Por Rubro</h4>
-                    <Select value={selectedRubro} onValueChange={setSelectedRubro}>
-                        <SelectTrigger className="w-full">
-                            <SelectValue placeholder="Selecciona un rubro" />
-                        </SelectTrigger>
-                        <SelectContent>
-                            {rubros.map((rubro) => (
-                                <SelectItem key={rubro.id} value={rubro.id}>
+                <div className="space-y-2">
+                    {rubros.map((rubro) => (
+                        <div key={rubro.id} className="border rounded-lg overflow-hidden">
+                            {/* Rubro Header */}
+                            <button
+                                onClick={() => toggleRubro(rubro.id)}
+                                className="w-full flex items-center justify-between p-3 bg-gray-50 hover:bg-gray-100 transition-colors"
+                            >
+                                <span className="text-sm font-semibold text-gray-900 uppercase tracking-wide">
                                     {rubro.nombre}
-                                </SelectItem>
-                            ))}
-                        </SelectContent>
-                    </Select>
-
-                    {/* Categories from selected rubro */}
-                    {selectedRubro && selectedRubroCategories.length > 0 && (
-                        <div className="space-y-2 animate-in fade-in slide-in-from-top-2">
-                            <h5 className="text-xs font-medium text-gray-600 uppercase tracking-wide">Categorías</h5>
-                            <div className="space-y-2">
-                                {selectedRubroCategories.map((categoria) => (
-                                    <div key={categoria.id} className="space-y-2">
-                                        <Button
-                                            variant={currentCategory === categoria.id ? "default" : "outline"}
-                                            size="sm"
-                                            onClick={() => handleCategoryClick(categoria.id)}
-                                            className="w-full justify-start"
-                                        >
-                                            {categoria.nombre}
-                                        </Button>
-
-                                        {/* Subcategories */}
-                                        {currentCategory === categoria.id && categoria.subcategorias.length > 0 && (
-                                            <div className="pl-4 space-y-1 animate-in fade-in slide-in-from-top-2">
-                                                {categoria.subcategorias.map((sub) => (
-                                                    <Button
-                                                        key={sub.id}
-                                                        variant={currentSubcategory === sub.id ? "secondary" : "ghost"}
-                                                        size="sm"
-                                                        onClick={() => handleSubcategoryClick(sub.id, categoria.id)}
-                                                        className={cn(
-                                                            "w-full justify-start text-xs",
-                                                            currentSubcategory === sub.id && "bg-green-100 text-green-800 font-medium hover:bg-green-200"
-                                                        )}
-                                                    >
-                                                        {sub.nombre}
-                                                    </Button>
-                                                ))}
-                                            </div>
-                                        )}
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                    )}
-                </div>
-            )}
-
-            {/* Miscellaneous Categories */}
-            {miscellaneousCategories.length > 0 && (
-                <div className="space-y-3">
-                    <h4 className="text-sm font-medium text-gray-700 uppercase tracking-wide">Otras Categorías</h4>
-                    <div className="space-y-2">
-                        {miscellaneousCategories.map((categoria) => (
-                            <div key={categoria.id} className="space-y-2">
-                                <Button
-                                    variant={currentCategory === categoria.id ? "default" : "outline"}
-                                    size="sm"
-                                    onClick={() => handleCategoryClick(categoria.id)}
-                                    className="w-full justify-start"
-                                >
-                                    {categoria.nombre}
-                                </Button>
-
-                                {/* Subcategories */}
-                                {currentCategory === categoria.id && categoria.subcategorias.length > 0 && (
-                                    <div className="pl-4 space-y-1 animate-in fade-in slide-in-from-top-2">
-                                        {categoria.subcategorias.map((sub) => (
-                                            <Button
-                                                key={sub.id}
-                                                variant={currentSubcategory === sub.id ? "secondary" : "ghost"}
-                                                size="sm"
-                                                onClick={() => handleSubcategoryClick(sub.id, categoria.id)}
-                                                className={cn(
-                                                    "w-full justify-start text-xs",
-                                                    currentSubcategory === sub.id && "bg-green-100 text-green-800 font-medium hover:bg-green-200"
-                                                )}
-                                            >
-                                                {sub.nombre}
-                                            </Button>
-                                        ))}
-                                    </div>
+                                </span>
+                                {expandedRubros.has(rubro.id) ? (
+                                    <ChevronDown className="h-5 w-5 text-gray-600" />
+                                ) : (
+                                    <ChevronRight className="h-5 w-5 text-gray-600" />
                                 )}
-                            </div>
-                        ))}
-                    </div>
+                            </button>
+
+                            {/* Categorias del Rubro */}
+                            {expandedRubros.has(rubro.id) && (
+                                <div className="p-2 space-y-1 bg-white">
+                                    {rubro.categorias.map((categoria) => (
+                                        <div key={categoria.id} className="space-y-1">
+                                            {/* Categoria Dropdown */}
+                                            <div className="flex items-center gap-1">
+                                                {categoria.subcategorias.length > 0 && (
+                                                    <button
+                                                        onClick={() => toggleCategory(categoria.id)}
+                                                        className="p-1 hover:bg-gray-100 rounded transition-colors"
+                                                        aria-label="Toggle subcategories"
+                                                    >
+                                                        {expandedCategories.has(categoria.id) ? (
+                                                            <ChevronDown className="h-4 w-4 text-gray-600" />
+                                                        ) : (
+                                                            <ChevronRight className="h-4 w-4 text-gray-600" />
+                                                        )}
+                                                    </button>
+                                                )}
+                                                <Button
+                                                    variant={currentCategory === categoria.id && !currentSubcategory ? "default" : "ghost"}
+                                                    size="sm"
+                                                    onClick={() => handleCategoryClick(categoria.id)}
+                                                    className={cn(
+                                                        "flex-1 justify-start text-sm font-medium",
+                                                        !categoria.subcategorias.length && "ml-6"
+                                                    )}
+                                                >
+                                                    {categoria.nombre}
+                                                </Button>
+                                            </div>
+
+                                            {/* Subcategorias */}
+                                            {expandedCategories.has(categoria.id) && categoria.subcategorias.length > 0 && (
+                                                <div className="ml-6 pl-4 border-l-2 border-gray-200 space-y-1">
+                                                    {categoria.subcategorias.map((sub) => (
+                                                        <Button
+                                                            key={sub.id}
+                                                            variant={currentSubcategory === sub.id ? "secondary" : "ghost"}
+                                                            size="sm"
+                                                            onClick={() => handleSubcategoryClick(sub.id, categoria.id)}
+                                                            className={cn(
+                                                                "w-full justify-start text-xs",
+                                                                currentSubcategory === sub.id && "bg-green-100 text-green-800 font-medium hover:bg-green-200"
+                                                            )}
+                                                        >
+                                                            {sub.nombre}
+                                                        </Button>
+                                                    ))}
+                                                </div>
+                                            )}
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+                    ))}
                 </div>
             )}
         </div>

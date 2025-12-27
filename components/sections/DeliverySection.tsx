@@ -179,7 +179,7 @@ export default function DeliverySection() {
               <div>
                 <h4 className="font-bold text-lg mb-1">Horarios</h4>
                 <p className="text-green-100 text-sm">
-                  Lunes a Viernes de 08:00 a 19:00 hs
+                  Lunes a Viernes de 08:00 a 18:00 hs
                 </p>
               </div>
             </div>

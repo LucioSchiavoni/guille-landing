@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import Header from "@/components/header/header"
 import { client } from "@/lib/sanity"
 import { menuQuery } from "@/lib/queries"
@@ -7,6 +8,21 @@ import { Textarea } from "@/components/ui/textarea"
 import { Mail, MapPin, Phone, Send } from "lucide-react"
 
 export const revalidate = 60
+
+export const metadata: Metadata = {
+    title: "Contacto - TodoEnPackaging Uruguay",
+    description: "Contáctanos para consultas sobre packaging eco-friendly y productos descartables. Atención de Lunes a Viernes 08:00-19:00 hs. Email: todoenpackaging@gmail.com, Tel: +598 99222608. Montevideo, Uruguay.",
+    keywords: [
+        "contacto packaging Uruguay",
+        "todoenpackaging contacto",
+        "packaging eco-friendly Uruguay contacto",
+        "proveedor packaging Montevideo"
+    ],
+    openGraph: {
+        title: "Contacto - TodoEnPackaging",
+        description: "Ponte en contacto con nosotros para soluciones de packaging eco-friendly",
+    },
+}
 
 export default async function ContactPage() {
     const { rubros, miscellaneousCategories } = await client.fetch(menuQuery)
