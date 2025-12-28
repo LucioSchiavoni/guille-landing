@@ -1,11 +1,11 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
-import Image from "next/image"
 import Link from "next/link"
 import { ChevronLeft, ChevronRight, Percent, Package } from "lucide-react"
 import { urlFor } from "@/lib/sanity"
 import { Button } from "@/components/ui/button"
+import { LazyImage } from "@/components/ui/lazy-image"
 import { cn } from "@/lib/utils"
 
 interface OfferProduct {
@@ -131,7 +131,7 @@ function ProductCard({ product, index }: { product: OfferProduct; index: number 
                       idx === currentImageIndex ? "opacity-100 scale-100" : "opacity-0 scale-105"
                     )}
                   >
-                    <Image
+                    <LazyImage
                       src={urlFor(img).url()}
                       alt={`${product.name} - Imagen ${idx + 1}`}
                       fill
@@ -139,7 +139,7 @@ function ProductCard({ product, index }: { product: OfferProduct; index: number 
                         "object-cover transition-transform duration-700",
                         isHovered ? "scale-110" : "scale-100"
                       )}
-                      priority={index < 4}
+                      containerClassName="w-full h-full"
                     />
                   </div>
                 ))}
@@ -314,11 +314,12 @@ function EmptyPlaceholder() {
       <div className="relative w-full max-w-md aspect-square mb-8">
         <div className="absolute inset-0 bg-gradient-to-br from-red-100 to-orange-100 rounded-2xl blur-2xl opacity-50" />
         <div className="relative w-full h-full">
-          <Image
+          <LazyImage
             src="https://res.cloudinary.com/dbk2t0jy3/image/upload/v1764163500/Generated_Image_October_15_2025_-_3_08PM_sskozd.png"
             alt="No hay ofertas disponibles"
             fill
             className="object-contain opacity-60 drop-shadow-2xl"
+            containerClassName="w-full h-full"
           />
         </div>
       </div>

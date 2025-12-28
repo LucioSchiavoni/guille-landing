@@ -1,11 +1,11 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
-import Image from "next/image"
 import Link from "next/link"
 import { ChevronLeft, ChevronRight, Star, MessageCircle, Sparkles } from "lucide-react"
 import { urlFor } from "@/lib/sanity"
 import { Button } from "@/components/ui/button"
+import { LazyImage } from "@/components/ui/lazy-image"
 import { cn } from "@/lib/utils"
 
 interface FeaturedProduct {
@@ -121,11 +121,12 @@ function ProductCard({ product, index }: { product: FeaturedProduct; index: numb
                     idx === currentImageIndex ? "opacity-100 scale-100" : "opacity-0 scale-105",
                   )}
                 >
-                  <Image
+                  <LazyImage
                     src={urlFor(img).url() || "/placeholder.svg"}
                     alt={`${product.name} - Imagen ${idx + 1}`}
                     fill
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    containerClassName="w-full h-full"
                   />
                 </div>
               ))}

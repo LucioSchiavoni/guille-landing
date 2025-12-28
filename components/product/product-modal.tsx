@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { X, Leaf, Recycle, TreeDeciduous, MessageCircle, ArrowRight, Share2 } from "lucide-react"
-import Image from "next/image"
+import { LazyImage } from "@/components/ui/lazy-image"
 import { urlFor } from "@/lib/sanity"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
@@ -34,13 +34,11 @@ function getWhatsAppLink(productName: string) {
 }
 
 export default function ProductModal({ product, isOpen, onClose }: ProductModalProps) {
-    const [imageLoaded, setImageLoaded] = useState(false)
     const [isCopied, setIsCopied] = useState(false)
 
-    // reset image header state when product changes or modal opens
+    // reset state when product changes or modal opens
     useEffect(() => {
         if (isOpen) {
-            setImageLoaded(false)
             setIsCopied(false)
             document.body.style.overflow = "hidden"
         } else {
@@ -90,25 +88,15 @@ export default function ProductModal({ product, isOpen, onClose }: ProductModalP
 
                             {/* Image Section - Compact & Impactful */}
                             <div className="w-full md:w-[45%] bg-stone-100 relative min-h-[250px] md:min-h-full overflow-hidden">
-                                {!imageLoaded && (
-                                    <div className="absolute inset-0 flex items-center justify-center bg-stone-100 z-10">
-                                        <Leaf className="w-10 h-10 text-green-300 animate-pulse" />
-                                    </div>
-                                )}
                                 {product.image ? (
-                                    <div className="relative w-full h-full">
-                                        <Image
-                                            src={urlFor(product.image).url()}
-                                            alt={product.name}
-                                            fill
-                                            className={cn(
-                                                "object-cover transition-all duration-700",
-                                                imageLoaded ? "opacity-100 scale-100" : "opacity-0 scale-110"
-                                            )}
-                                            onLoad={() => setImageLoaded(true)}
-                                            priority
-                                        />
-                                    </div>
+                                    <LazyImage
+                                        src={urlFor(product.image).url()}
+                                        alt={product.name}
+                                        fill
+                                        className="object-cover"
+                                        containerClassName="w-full h-full"
+                                        skeletonClassName="bg-stone-100"
+                                    />
                                 ) : (
                                     <div className="flex items-center justify-center h-full text-stone-300">
                                         <div className="text-center">

@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react"
 import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { LazyImg } from "@/components/ui/lazy-image"
 import { urlFor } from "@/lib/sanity"
 import Link from "next/link"
 
@@ -68,18 +69,21 @@ export default function HeroCarousel({ products = [] }: HeroCarouselProps) {
           >
             <div className="relative w-full h-full bg-slate-950 overflow-hidden">
               <div className="absolute inset-0 z-0">
-                <img
+                <LazyImg
                   src={slide.image}
                   alt=""
                   className="w-full h-full object-cover blur-lg opacity-40 scale-110"
+                  showLogo={false}
+                  skeletonClassName="bg-slate-900"
                 />
                 <div className="absolute inset-0 bg-black/20" />
               </div>
 
-              <img
+              <LazyImg
                 src={slide.image}
                 alt={slide.title}
                 className="relative w-full h-full object-contain z-10 drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
+                skeletonClassName="bg-slate-900/50"
               />
 
               <div className="absolute inset-0 flex flex-col items-center justify-start text-center p-4 pt-12 md:pt-16 text-white z-20">

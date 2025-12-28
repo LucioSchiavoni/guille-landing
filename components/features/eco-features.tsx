@@ -1,4 +1,7 @@
+"use client"
+
 import { Leaf, Recycle, Shield, Package, Heart, Star } from "lucide-react"
+import { LazyImg } from "@/components/ui/lazy-image"
 
 const features = [
   {

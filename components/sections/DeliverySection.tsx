@@ -1,8 +1,8 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
-import Image from "next/image"
 import { Clock, MapPin, CheckCircle2, Package } from "lucide-react"
+import { LazyImage } from "@/components/ui/lazy-image"
 import { cn } from "@/lib/utils"
 
 const deliveryOptions = [
@@ -109,11 +109,12 @@ export default function DeliverySection() {
                 }}
               >
                 <div className="relative h-48 overflow-hidden">
-                  <Image
+                  <LazyImage
                     src={option.image}
                     alt={option.type}
                     fill
                     className="object-cover"
+                    containerClassName="w-full h-full"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                   <div className="absolute bottom-4 left-6">

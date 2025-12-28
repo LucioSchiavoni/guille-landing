@@ -116,22 +116,17 @@ export default function MenuMobile({ rubros, miscellaneousCategories }: MenuMobi
                 {/* Categorías (Standalone) - Now First */}
                 {miscellaneousCategories && miscellaneousCategories.length > 0 && (
                   <div className="rounded-lg overflow-hidden border border-green-600 mb-2">
-                    <div className={cn(
-                      "w-full flex items-center justify-between pl-4 pr-1 py-1 bg-green-700 hover:bg-green-600 transition-colors",
-                      expandedRubro === "general-categories" && "bg-green-600"
-                    )}>
-                      <Link
-                        href="/productos"
-                        onClick={() => setOpen(false)}
-                        className="font-bold text-white text-sm flex-1 py-2"
-                      >
+                    <div
+                      className={cn(
+                        "w-full flex items-center justify-between pl-4 pr-1 py-1 bg-green-700 hover:bg-green-600 transition-colors cursor-pointer",
+                        expandedRubro === "general-categories" && "bg-green-600"
+                      )}
+                      onClick={() => toggleRubro("general-categories")}
+                    >
+                      <span className="font-bold text-white text-sm flex-1 py-2">
                         Categorías
-                      </Link>
+                      </span>
                       <button
-                        onClick={(e) => {
-                          e.stopPropagation()
-                          toggleRubro("general-categories")
-                        }}
                         className="p-3 text-white hover:bg-green-500/20 rounded-full"
                       >
                         <ChevronRight
@@ -148,13 +143,22 @@ export default function MenuMobile({ rubros, miscellaneousCategories }: MenuMobi
                         {[...miscellaneousCategories].sort((a, b) => a.nombre.localeCompare(b.nombre)).map((categoria) => (
                           <div key={categoria.id}>
                             <div className="flex items-center justify-between border-l border-green-600 px-4 py-2">
-                              <Link
-                                href={`/productos?categoria=${categoria.id}`}
-                                onClick={() => setOpen(false)}
-                                className="text-sm text-white hover:text-green-100 font-medium flex-1 truncate mr-2"
-                              >
-                                {categoria.nombre}
-                              </Link>
+                              {categoria.subcategorias && categoria.subcategorias.length > 0 ? (
+                                <button
+                                  onClick={() => toggleCategory(`cat-${categoria.id}`)}
+                                  className="text-sm text-white hover:text-green-100 font-medium flex-1 truncate mr-2 text-left"
+                                >
+                                  {categoria.nombre}
+                                </button>
+                              ) : (
+                                <Link
+                                  href={`/productos?categoria=${categoria.id}`}
+                                  onClick={() => setOpen(false)}
+                                  className="text-sm text-white hover:text-green-100 font-medium flex-1 truncate mr-2"
+                                >
+                                  {categoria.nombre}
+                                </Link>
+                              )}
 
                               {categoria.subcategorias && categoria.subcategorias.length > 0 && (
                                 <button
@@ -253,13 +257,22 @@ export default function MenuMobile({ rubros, miscellaneousCategories }: MenuMobi
                               {[...rubro.categorias].sort((a, b) => a.nombre.localeCompare(b.nombre)).map((categoria) => (
                                 <div key={categoria.id}>
                                   <div className="flex items-center justify-between border-l border-green-600 px-4 py-2">
-                                    <Link
-                                      href={`/productos?categoria=${categoria.id}`}
-                                      onClick={() => setOpen(false)}
-                                      className="text-sm text-white hover:text-green-100 font-medium flex-1 truncate mr-2"
-                                    >
-                                      {categoria.nombre}
-                                    </Link>
+                                    {categoria.subcategorias && categoria.subcategorias.length > 0 ? (
+                                      <button
+                                        onClick={() => toggleCategory(`rubro-${categoria.id}`)}
+                                        className="text-sm text-white hover:text-green-100 font-medium flex-1 truncate mr-2 text-left"
+                                      >
+                                        {categoria.nombre}
+                                      </button>
+                                    ) : (
+                                      <Link
+                                        href={`/productos?categoria=${categoria.id}`}
+                                        onClick={() => setOpen(false)}
+                                        className="text-sm text-white hover:text-green-100 font-medium flex-1 truncate mr-2"
+                                      >
+                                        {categoria.nombre}
+                                      </Link>
+                                    )}
 
                                     {categoria.subcategorias && categoria.subcategorias.length > 0 && (
                                       <button
