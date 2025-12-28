@@ -43,13 +43,15 @@ export default function Header({ rubros, miscellaneousCategories }: HeaderProps)
   return (
     <header
       className={cn(
-        "w-full bg-[#0b5c1c] text-white sticky top-0 z-40 transition-shadow duration-300",
-        isScrolled ? "shadow-md" : "shadow-sm",
+        "w-full sticky top-0 z-[100] transition-all duration-300",
+        // Glassmorphism Base Styles
+        "bg-[#0b5c1c]/75 backdrop-blur-md border-b border-white/10",
+        isScrolled ? "shadow-md bg-[#0b5c1c]/90" : "shadow-sm",
       )}
     >
       {/* Mobile Layout */}
       <div className="lg:hidden">
-        <div className="flex items-center justify-between px-4 py-3 bg-[#0b5c1c] border-b border-white/10">
+        <div className="flex items-center justify-between px-4 py-3 border-b border-white/10">
           <div className="flex-shrink-0">
             <Logo className="w-32 h-auto sm:w-40" />
           </div>
@@ -59,7 +61,7 @@ export default function Header({ rubros, miscellaneousCategories }: HeaderProps)
       </div>
 
       {/* Desktop Layout - unchanged */}
-      <div className="hidden lg:block bg-[#0b5c1c]">
+      <div className="hidden lg:block">
         {/* Top Row: Logo, Search, Actions */}
         <div className="container mx-auto px-4 py-2">
           <div className="flex items-center justify-between gap-4 lg:gap-8">
@@ -88,7 +90,7 @@ export default function Header({ rubros, miscellaneousCategories }: HeaderProps)
         </div>
 
         {/* Bottom Row: Desktop Menu */}
-        <div className="border-t border-border/30 bg-muted/10">
+        <div className="border-t border-white/10 bg-black/10">
           <div className="container mx-auto px-4">
             <div className="flex justify-center">
               <MenuDesktop rubros={filteredRubros} miscellaneousCategories={filteredCategories} />

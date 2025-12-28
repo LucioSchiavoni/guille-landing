@@ -43,11 +43,11 @@ export default async function SustainabilityPage() {
 
     return (
         <>
-            <div className="min-h-screen bg-background">
+            <div className="min-h-screen bg-background/10">
                 <Header rubros={rubros} miscellaneousCategories={miscellaneousCategories} />
 
-                <div className="lg:hidden p-4 border-b bg-gray-50">
-                    <Suspense fallback={<div className="w-full h-10 bg-gray-200 rounded-md animate-pulse" />}>
+                <div className="lg:hidden p-4 border-b bg-white/10 backdrop-blur-md border-white/10">
+                    <Suspense fallback={<div className="w-full h-10 bg-gray-200/50 rounded-md animate-pulse" />}>
                         <SearchCommand rubros={rubros} />
                     </Suspense>
                 </div>

@@ -21,10 +21,10 @@ export default async function Nosotros() {
   const { rubros, miscellaneousCategories } = await client.fetch(menuQuery)
 
   return (
-    <div className="min-h-screen bg-background overflow-x-hidden">
+    <div className="min-h-screen bg-background/10 overflow-x-hidden">
       <Header rubros={rubros} miscellaneousCategories={miscellaneousCategories} />
 
-      <main className="bg-background">
+      <main className="bg-transparent">
         <AboutSection />
         <EcoFeatures />
       </main>

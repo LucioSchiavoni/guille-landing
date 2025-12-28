@@ -22,7 +22,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           <div className="space-y-4">
             <div className="inline-block">
-              <Logo className="h-14 w-40" />
+              <Logo className="h-12 w-auto" />
             </div>
             <p className="text-green-100 text-sm leading-relaxed">
               Soluciones de packaging para la industria alimenticia y servicios en general.
