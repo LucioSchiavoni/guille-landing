@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { LazyImg } from "@/components/ui/lazy-image"
-import { urlFor } from "@/lib/sanity"
+import { getOptimizedImageUrl } from "@/lib/sanity"
 import Link from "next/link"
 
 interface Slide {
@@ -23,10 +23,10 @@ export default function HeroCarousel({ products = [] }: HeroCarouselProps) {
   const [currentSlide, setCurrentSlide] = useState(0)
   const [isAutoPlaying, setIsAutoPlaying] = useState(true)
 
-  // Map products from Sanity to slides
+  // Map products from Sanity to slides - con imágenes optimizadas 🖼️
   const activeSlides: Slide[] = products.map((product) => ({
     id: product._id,
-    image: product.image?.asset?.url || (product.image ? urlFor(product.image).url() : "/placeholder.svg"),
+    image: getOptimizedImageUrl(product.image, { width: 1200 }) || "/placeholder.svg",
     title: product.name,
     subtitle: product.price ? `$${product.price}` : undefined,
     description: product.description
@@ -75,6 +75,7 @@ export default function HeroCarousel({ products = [] }: HeroCarouselProps) {
                   className="w-full h-full object-cover blur-lg opacity-40 scale-110"
                   showLogo={false}
                   skeletonClassName="bg-slate-900"
+                  sizes="100vw"
                 />
                 <div className="absolute inset-0 bg-black/20" />
               </div>
@@ -84,6 +85,8 @@ export default function HeroCarousel({ products = [] }: HeroCarouselProps) {
                 alt={slide.title}
                 className="relative w-full h-full object-contain z-10 drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
                 skeletonClassName="bg-slate-900/50"
+                sizes="100vw"
+                priority={index === 0}
               />
 
               <div className="absolute inset-0 flex flex-col items-center justify-start text-center p-4 pt-12 md:pt-16 text-white z-20">

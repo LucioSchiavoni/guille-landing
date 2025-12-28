@@ -1,6 +1,6 @@
 "use client"
 
-import { urlFor } from "@/lib/sanity"
+import { getOptimizedImageUrl } from "@/lib/sanity"
 import { LazyImage } from "@/components/ui/lazy-image"
 import { motion } from "framer-motion"
 import { Leaf, X } from "lucide-react"
@@ -22,7 +22,7 @@ export default function ProductDetails({ product, onClose }: ProductDetailsProps
     }, [whatsappLink])
 
     const imageUrl = useMemo(() =>
-        product.image ? urlFor(product.image).url() : null
+        product.image ? getOptimizedImageUrl(product.image, { width: 800 }) : null
         , [product.image])
 
     return (

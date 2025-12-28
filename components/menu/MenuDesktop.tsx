@@ -2,10 +2,12 @@
 
 import Link from "next/link"
 import { useState, useRef, useEffect } from "react"
-import { motion, AnimatePresence } from "framer-motion"
 import { ChevronDown, Package, ChevronRight } from "lucide-react"
 import { Rubro, Categoria } from "@/types/menu"
 import { cn } from "@/lib/utils"
+
+// 🚀 Reemplazamos framer-motion con CSS puro para mejor rendimiento
+// Las animaciones se manejan con clases de Tailwind
 
 interface MenuDesktopProps {
   rubros: Rubro[]
@@ -60,15 +62,16 @@ export default function MenuDesktop({ rubros, miscellaneousCategories }: MenuDes
             <ChevronDown className={cn("w-4 h-4 transition-transform duration-300", activeMenu === 'rubros' && "rotate-180")} />
           </Link>
 
-          <AnimatePresence>
-            {activeMenu === 'rubros' && (
-              <motion.div
-                initial={{ opacity: 0, y: -10, scale: 0.95 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: -10, scale: 0.95 }}
-                transition={{ duration: 0.25, ease: "easeOut" }}
-                className="absolute top-full left-0 pt-2 z-50 w-[600px] -left-[100px]"
-              >
+          {/* 🎨 Dropdown con CSS animations - sin framer-motion */}
+          <div
+            className={cn(
+              "absolute top-full left-0 pt-2 z-50 w-[600px] -left-[100px]",
+              "transition-all duration-200 ease-out origin-top",
+              activeMenu === 'rubros'
+                ? "opacity-100 scale-100 translate-y-0 pointer-events-auto"
+                : "opacity-0 scale-95 -translate-y-2 pointer-events-none"
+            )}
+          >
                 <div className="bg-white rounded-xl shadow-2xl border border-gray-100 overflow-hidden flex h-[400px]">
                   {/* Column 1: Rubros List */}
                   <div className="w-64 bg-gray-50 border-r border-gray-100 p-4 overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 [&::-webkit-scrollbar-thumb]:rounded-full hover:[&::-webkit-scrollbar-thumb]:bg-gray-400">
@@ -147,9 +150,7 @@ export default function MenuDesktop({ rubros, miscellaneousCategories }: MenuDes
                     )}
                   </div>
                 </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
+          </div>
         </li>
 
         {/* Categories Dropdown (Independent) */}
@@ -170,15 +171,16 @@ export default function MenuDesktop({ rubros, miscellaneousCategories }: MenuDes
               <ChevronDown className={cn("w-4 h-4 transition-transform duration-300", activeMenu === 'categorias' && "rotate-180")} />
             </Link>
 
-            <AnimatePresence>
-              {activeMenu === 'categorias' && (
-                <motion.div
-                  initial={{ opacity: 0, y: -10, scale: 0.95 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: -10, scale: 0.95 }}
-                  transition={{ duration: 0.25, ease: "easeOut" }}
-                  className="absolute top-full left-0 pt-2 z-50 w-[500px] -left-[50px]"
-                >
+            {/* 🎨 Dropdown con CSS animations - sin framer-motion */}
+            <div
+              className={cn(
+                "absolute top-full left-0 pt-2 z-50 w-[500px] -left-[50px]",
+                "transition-all duration-200 ease-out origin-top",
+                activeMenu === 'categorias'
+                  ? "opacity-100 scale-100 translate-y-0 pointer-events-auto"
+                  : "opacity-0 scale-95 -translate-y-2 pointer-events-none"
+              )}
+            >
                   <div className="bg-white rounded-xl shadow-2xl border border-gray-100 overflow-hidden flex h-[400px]">
                     {/* Column 1: Categories List */}
                     <div className="w-56 bg-gray-50 border-r border-gray-100 p-4 overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 [&::-webkit-scrollbar-thumb]:rounded-full hover:[&::-webkit-scrollbar-thumb]:bg-gray-400">
@@ -239,12 +241,9 @@ export default function MenuDesktop({ rubros, miscellaneousCategories }: MenuDes
                       )}
                     </div>
                   </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
+            </div>
           </li>
         )}
-
 
         <li>
           <Link

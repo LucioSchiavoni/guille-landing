@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react"
 import Image from "next/image"
 import { ChevronLeft, ChevronRight } from "lucide-react"
-import { urlFor } from "@/lib/sanity"
+import { getOptimizedImageUrl, PRODUCT_SIZES_ATTR } from "@/lib/sanity"
 import { Button } from "@/components/ui/button"
 import ProductModal from "./product-modal"
 import { cn } from "@/lib/utils"
@@ -106,9 +106,10 @@ function ProductCard({ product, onOpenModal, index }: { product: Product; onOpen
                                     )}
                                 >
                                     <Image
-                                        src={urlFor(img).url()}
+                                        src={getOptimizedImageUrl(img, { width: 500 }) || ""}
                                         alt={`${product.name} - Imagen ${idx + 1}`}
                                         fill
+                                        sizes={PRODUCT_SIZES_ATTR}
                                         className="object-cover group-hover:scale-105 transition-transform duration-500"
                                     />
                                 </div>

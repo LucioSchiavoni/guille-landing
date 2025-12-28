@@ -1,20 +1,45 @@
 import type React from "react"
 import type { Metadata } from "next"
+import dynamic from "next/dynamic"
 import { Montserrat, Merriweather, Source_Code_Pro } from "next/font/google"
-import "./globals.css"
-import WhatsAppButton from "@/components/ui/whatsapp-button"
+import "./critical.css" // 🚀 Estilos críticos - carga síncrona
+import BackgroundImage from "@/components/ui/background-image"
+import DeferredStyles from "@/components/ui/deferred-styles"
 
-// <CHANGE> Updated fonts to match the design system
-const montserrat = Montserrat({ subsets: ["latin"], variable: "--font-sans" })
+// 🎯 Dynamic imports para componentes no críticos para LCP
+const WhatsAppButton = dynamic(() => import("@/components/ui/whatsapp-button"), {
+  loading: () => null, // Sin placeholder - aparece después del LCP
+})
+
+// 🚀 Prefetch de rutas críticas (client component - se ejecuta después de hidratación)
+import RoutePrefetch from "@/components/ui/route-prefetch"
+
+// 🎨 Configuración optimizada de fuentes Google
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  variable: "--font-sans",
+  display: "swap",
+  preload: true,
+  fallback: ["system-ui", "Arial", "sans-serif"],
+  adjustFontFallback: true,
+})
+
 const merriweather = Merriweather({
   subsets: ["latin"],
   weight: ["300", "400", "700"],
   style: ["normal", "italic"],
   variable: "--font-serif",
+  display: "swap",
+  fallback: ["Georgia", "Times New Roman", "serif"],
+  adjustFontFallback: true,
 })
+
 const sourceCodePro = Source_Code_Pro({
   subsets: ["latin"],
   variable: "--font-mono",
+  display: "swap",
+  fallback: ["Consolas", "Monaco", "monospace"],
+  adjustFontFallback: true,
 })
 
 export const metadata: Metadata = {
@@ -120,7 +145,10 @@ export default function RootLayout({
       >
         {children}
         {modal}
+        <BackgroundImage />
+        <DeferredStyles />
         <WhatsAppButton />
+        <RoutePrefetch />
       </body>
     </html>
   )

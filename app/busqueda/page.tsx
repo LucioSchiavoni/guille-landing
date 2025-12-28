@@ -1,4 +1,4 @@
-import { client, urlFor } from "@/lib/sanity"
+import { client, getOptimizedImageUrl, PRODUCT_SIZES_ATTR } from "@/lib/sanity"
 import { advancedSearchQuery } from "@/lib/queries"
 import { normalizeText } from "@/lib/utils"
 import Image from "next/image"
@@ -64,9 +64,10 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
                             <div className="aspect-square relative bg-muted overflow-hidden">
                                 {product.image ? (
                                     <Image
-                                        src={urlFor(product.image).url()}
+                                        src={getOptimizedImageUrl(product.image, { width: 500 }) || ""}
                                         alt={product.name}
                                         fill
+                                        sizes={PRODUCT_SIZES_ATTR}
                                         className="object-cover group-hover:scale-105 transition-transform duration-500"
                                     />
                                 ) : (

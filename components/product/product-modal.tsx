@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { X, Leaf, Recycle, TreeDeciduous, MessageCircle, ArrowRight, Share2 } from "lucide-react"
 import { LazyImage } from "@/components/ui/lazy-image"
-import { urlFor } from "@/lib/sanity"
+import { getOptimizedImageUrl } from "@/lib/sanity"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 
@@ -90,9 +90,10 @@ export default function ProductModal({ product, isOpen, onClose }: ProductModalP
                             <div className="w-full md:w-[45%] bg-stone-100 relative min-h-[250px] md:min-h-full overflow-hidden">
                                 {product.image ? (
                                     <LazyImage
-                                        src={urlFor(product.image).url()}
+                                        src={getOptimizedImageUrl(product.image, { width: 800 }) || ""}
                                         alt={product.name}
                                         fill
+                                        sizes="(max-width: 768px) 100vw, 45vw"
                                         className="object-cover"
                                         containerClassName="w-full h-full"
                                         skeletonClassName="bg-stone-100"

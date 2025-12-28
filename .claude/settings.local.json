@@ -6,7 +6,9 @@
       "Bash(node -e:*)",
       "Bash(cat:*)",
       "Bash(npm install:*)",
-      "Bash(git checkout:*)"
+      "Bash(git checkout:*)",
+      "Bash(find:*)",
+      "Bash(ls:*)"
     ]
   }
 }

@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react"
 import Link from "next/link"
 import { ChevronLeft, ChevronRight, Star, MessageCircle, Sparkles } from "lucide-react"
-import { urlFor } from "@/lib/sanity"
+import { getOptimizedImageUrl, PRODUCT_SIZES_ATTR } from "@/lib/sanity"
 import { Button } from "@/components/ui/button"
 import { LazyImage } from "@/components/ui/lazy-image"
 import { cn } from "@/lib/utils"
@@ -122,9 +122,10 @@ function ProductCard({ product, index }: { product: FeaturedProduct; index: numb
                   )}
                 >
                   <LazyImage
-                    src={urlFor(img).url() || "/placeholder.svg"}
+                    src={getOptimizedImageUrl(img, { width: 500 }) || "/placeholder.svg"}
                     alt={`${product.name} - Imagen ${idx + 1}`}
                     fill
+                    sizes={PRODUCT_SIZES_ATTR}
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
                     containerClassName="w-full h-full"
                   />

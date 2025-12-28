@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react"
 import Image, { ImageProps } from "next/image"
 import { cn } from "@/lib/utils"
+import { PRODUCT_SIZES_ATTR } from "@/lib/sanity"
 
 interface LazyImageProps extends Omit<ImageProps, 'onLoad'> {
   fallbackSrc?: string
@@ -111,7 +112,7 @@ export function LazyImage({
         <div className="absolute inset-0 -translate-x-full animate-shimmer bg-gradient-to-r from-transparent via-white/40 to-transparent" />
       </div>
 
-      {/* 🖼️ Imagen real */}
+      {/* 🖼️ Imagen real - Optimizada con sizes responsivos */}
       {isInView && !hasError && (
         <Image
           src={src}
@@ -119,6 +120,7 @@ export function LazyImage({
           fill={fill}
           width={!fill ? width : undefined}
           height={!fill ? height : undefined}
+          sizes={props.sizes || PRODUCT_SIZES_ATTR}
           className={cn(
             "transition-all duration-700 ease-out",
             isLoaded ? "opacity-100 scale-100 blur-0" : "opacity-0 scale-105 blur-sm",
@@ -151,12 +153,19 @@ export function LazyImage({
 }
 
 /**
- * 🖼️ LazyImg - Versión para etiquetas img nativas (carousels, etc.)
+ * 🖼️ LazyImg - Versión optimizada para carousels usando Image de Next.js
+ * Soporta fill mode y sizes responsivos automáticamente
  */
-interface LazyImgProps extends React.ImgHTMLAttributes<HTMLImageElement> {
+interface LazyImgProps {
+  src: string
+  alt?: string
+  className?: string
   skeletonClassName?: string
   containerClassName?: string
   showLogo?: boolean
+  sizes?: string
+  priority?: boolean
+  fill?: boolean
 }
 
 export function LazyImg({
@@ -166,7 +175,9 @@ export function LazyImg({
   skeletonClassName,
   containerClassName,
   showLogo = true,
-  ...props
+  sizes = PRODUCT_SIZES_ATTR,
+  priority = false,
+  fill = true,
 }: LazyImgProps) {
   const [isLoaded, setIsLoaded] = useState(false)
   const [isInView, setIsInView] = useState(false)
@@ -175,6 +186,12 @@ export function LazyImg({
 
   // 👁️ Intersection Observer para lazy loading
   useEffect(() => {
+    // Si es priority, cargar inmediatamente
+    if (priority) {
+      setIsInView(true)
+      return
+    }
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -199,7 +216,7 @@ export function LazyImg({
         observer.unobserve(containerRef.current)
       }
     }
-  }, [])
+  }, [priority])
 
   const handleLoad = () => {
     setIsLoaded(true)
@@ -230,10 +247,12 @@ export function LazyImg({
         {showLogo && (
           <div className="relative flex flex-col items-center gap-3">
             <div className="relative w-16 h-16 animate-pulse">
-              <img
+              <Image
                 src="/logo-a.jpeg"
                 alt="Cargando..."
-                className="w-full h-full object-contain rounded-lg opacity-60"
+                fill
+                className="object-contain rounded-lg opacity-60"
+                sizes="64px"
               />
             </div>
 
@@ -246,11 +265,14 @@ export function LazyImg({
         <div className="absolute inset-0 -translate-x-full animate-shimmer bg-gradient-to-r from-transparent via-white/40 to-transparent" />
       </div>
 
-      {/* 🖼️ Imagen real */}
+      {/* 🖼️ Imagen real - Optimizada con Next.js Image */}
       {isInView && !hasError && (
-        <img
+        <Image
           src={src}
           alt={alt || ""}
+          fill={fill}
+          sizes={sizes}
+          priority={priority}
           className={cn(
             "transition-all duration-700 ease-out",
             isLoaded ? "opacity-100 scale-100 blur-0" : "opacity-0 scale-105 blur-sm",
@@ -258,8 +280,6 @@ export function LazyImg({
           )}
           onLoad={handleLoad}
           onError={handleError}
-          loading="lazy"
-          {...props}
         />
       )}
 
@@ -267,11 +287,15 @@ export function LazyImg({
       {hasError && (
         <div className="absolute inset-0 flex items-center justify-center bg-gray-100">
           <div className="text-center text-gray-400">
-            <img
-              src="/logo-a.jpeg"
-              alt="Error"
-              className="w-12 h-12 mx-auto mb-2 object-contain rounded-lg grayscale opacity-50"
-            />
+            <div className="relative w-12 h-12 mx-auto mb-2">
+              <Image
+                src="/logo-a.jpeg"
+                alt="Error"
+                fill
+                className="object-contain rounded-lg grayscale opacity-50"
+                sizes="48px"
+              />
+            </div>
             <span className="text-xs">Sin imagen</span>
           </div>
         </div>

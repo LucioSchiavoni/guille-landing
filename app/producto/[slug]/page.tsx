@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import { client, urlFor } from "@/lib/sanity"
+import { client, getOptimizedImageUrl } from "@/lib/sanity"
 import { productBySlugQuery } from "@/lib/queries"
 import Image from "next/image"
 import Link from "next/link"
@@ -31,7 +31,7 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
     const categoryName = product.subcategory?.category?.name || ""
     const subcategoryName = product.subcategory?.name || ""
     const description = product.description || `${productName} - ${subcategoryName} de ${categoryName}. Producto eco-friendly de TodoEnPackaging.`
-    const imageUrl = product.image ? urlFor(product.image).width(1200).height(630).url() : "https://res.cloudinary.com/dbk2t0jy3/image/upload/v1764163493/LOGO_-_fondo_transparente_ioekip.png"
+    const imageUrl = (product.image ? getOptimizedImageUrl(product.image, { width: 1200, height: 630 }) : null) || "https://res.cloudinary.com/dbk2t0jy3/image/upload/v1764163493/LOGO_-_fondo_transparente_ioekip.png"
 
     return {
         title: `${productName} - ${categoryName} Eco-Friendly`,

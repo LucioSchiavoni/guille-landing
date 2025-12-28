@@ -84,7 +84,7 @@ export default function DeliverySection() {
             Servicio de Entregas
           </div>
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Recibí tu pedido cuando lo necesites
+            Recibe tu pedido cuando lo necesites
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
             Dos modalidades de entrega pensadas para adaptarse a tus necesidades

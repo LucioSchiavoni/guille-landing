@@ -1,8 +1,9 @@
 import type { Metadata } from "next"
-import { client, urlFor } from "@/lib/sanity"
+import { client, urlFor, getOptimizedImageUrl, PRODUCT_SIZES_ATTR } from "@/lib/sanity"
 import { advancedSearchQuery, menuQuery } from "@/lib/queries"
 import { normalizeText } from "@/lib/utils"
 import Link from "next/link"
+import Image from "next/image"
 import { ShoppingBag } from "lucide-react"
 import { Categoria } from "@/types/menu"
 import Header from "@/components/header/header"
@@ -128,10 +129,12 @@ export default async function ProductosPage({ searchParams }: ProductosPageProps
                             >
                                 <div className="aspect-square relative bg-stone-50 overflow-hidden">
                                     {product.image ? (
-                                        <img
-                                            src={urlFor(product.image).width(500).height(500).url()}
+                                        <Image
+                                            src={getOptimizedImageUrl(product.image, { width: 500, height: 500 }) || ""}
                                             alt={product.name}
-                                            className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-700 ease-out"
+                                            fill
+                                            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                                            className="object-cover group-hover:scale-[1.02] transition-transform duration-700 ease-out"
                                         />
                                     ) : (
                                         <div className="flex items-center justify-center h-full text-stone-400 bg-stone-100">

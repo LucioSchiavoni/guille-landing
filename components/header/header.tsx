@@ -1,15 +1,32 @@
 "use client"
 
 import { useState, useEffect, Suspense } from "react"
+import dynamic from "next/dynamic"
 import Link from "next/link"
-import { Phone } from "lucide-react"
+import { Phone, Menu } from "lucide-react"
 import Logo from "./logo"
 import { SearchCommand } from "./SearchCommand"
 import MenuDesktop from "../menu/MenuDesktop"
-import MenuMobile from "../menu/MenuMobile"
 import { Button } from "@/components/ui/button"
 import type { Rubro } from "@/types/menu"
 import { cn } from "@/lib/utils"
+
+// 🚀 MenuMobile: carga diferida con ssr: false
+// Solo muestra el botón hamburger inicialmente, el sidebar completo
+// se carga después de la primera interacción del usuario
+const MenuMobile = dynamic(() => import("../menu/MenuMobile"), {
+  ssr: false,
+  loading: () => (
+    <Button
+      variant="ghost"
+      size="icon"
+      className="lg:hidden relative z-[100] hover:bg-white/10 text-white transition-colors"
+      aria-label="Menú"
+    >
+      <Menu className="h-7 w-7 drop-shadow-md" />
+    </Button>
+  ),
+})
 
 interface HeaderProps {
   rubros: Rubro[]
