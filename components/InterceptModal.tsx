@@ -15,7 +15,7 @@ export default function InterceptModal({ children, title }: { children: ReactNod
 
     return (
         <Dialog defaultOpen={true} open={true} onOpenChange={handleOpenChange}>
-            <DialogContent className="max-w-4xl w-full p-0 overflow-hidden bg-background border-none sm:rounded-xl max-h-[90vh] overflow-y-auto">
+            <DialogContent className="max-w-4xl w-[95vw] sm:w-full p-0 overflow-hidden bg-background border-none rounded-xl sm:rounded-xl max-h-[85vh] sm:max-h-[90vh] overflow-y-auto my-2 sm:my-4">
                 <DialogTitle className="sr-only">{title || "Detalle del producto"}</DialogTitle>
                 {children}
             </DialogContent>

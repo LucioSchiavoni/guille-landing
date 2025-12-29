@@ -3,7 +3,7 @@
 import { useState, useEffect, Suspense } from "react"
 import dynamic from "next/dynamic"
 import Link from "next/link"
-import { Phone, Menu } from "lucide-react"
+import { Phone, Menu, Instagram, Facebook, Linkedin } from "lucide-react"
 import Logo from "./logo"
 import { SearchCommand } from "./SearchCommand"
 import MenuDesktop from "../menu/MenuDesktop"
@@ -62,15 +62,18 @@ export default function Header({ rubros, miscellaneousCategories }: HeaderProps)
       className={cn(
         "w-full sticky top-0 z-[100] transition-all duration-300",
         // Glassmorphism Base Styles
-        "bg-[#0b5c1c]/75 backdrop-blur-md border-b border-white/10",
-        isScrolled ? "shadow-md bg-[#0b5c1c]/90" : "shadow-sm",
+        "bg-green-600/90 backdrop-blur-md border-b border-white/10",
+        isScrolled ? "shadow-md bg-green-700/95" : "shadow-sm",
       )}
     >
       {/* Mobile Layout */}
       <div className="lg:hidden">
         <div className="flex items-center justify-between px-4 py-3 border-b border-white/10">
-          <div className="flex-shrink-0">
-            <Logo className="w-32 h-auto sm:w-40" />
+          <div className="flex items-center gap-2 flex-shrink-0">
+            <Logo className="w-10 h-10 sm:w-12 sm:h-12" />
+            <span className="text-white font-bold text-sm sm:text-base tracking-tight">
+              TODO EN PACKAGING
+            </span>
           </div>
 
           <MenuMobile rubros={filteredRubros} miscellaneousCategories={filteredCategories} />
@@ -102,6 +105,37 @@ export default function Header({ rubros, miscellaneousCategories }: HeaderProps)
                   <span>Contactanos</span>
                 </Link>
               </Button>
+
+              {/* Social Media Icons */}
+              <div className="flex items-center gap-2 ml-2 border-l border-white/20 pl-3">
+                <a
+                  href="https://www.instagram.com/todoenpackaging.uy?utm_source=qr&igsh=dGpmeGc4MXl2ZnB6"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white/70 hover:text-white hover:bg-white/10 p-2 rounded-md transition-all"
+                  aria-label="Instagram"
+                >
+                  <Instagram className="h-4 w-4" />
+                </a>
+                <a
+                  href="https://www.facebook.com/share/1EiUDf5JHj/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white/70 hover:text-white hover:bg-white/10 p-2 rounded-md transition-all"
+                  aria-label="Facebook"
+                >
+                  <Facebook className="h-4 w-4" />
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/todo-en-packaging-tep-9346a832b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white/70 hover:text-white hover:bg-white/10 p-2 rounded-md transition-all"
+                  aria-label="LinkedIn"
+                >
+                  <Linkedin className="h-4 w-4" />
+                </a>
+              </div>
             </div>
           </div>
         </div>

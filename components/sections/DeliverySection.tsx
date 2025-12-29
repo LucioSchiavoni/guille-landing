@@ -11,9 +11,9 @@ const deliveryOptions = [
     type: "Express",
     title: "Entrega el mismo día",
     description: "Para pedidos menores a $10.000",
-    bgColor: "bg-orange-50",
-    borderColor: "border-orange-200",
-    accentColor: "text-orange-600",
+    bgColor: "bg-green-50",
+    borderColor: "border-green-200",
+    accentColor: "text-green-600",
     features: [
       "Confirmación inmediata",
       "Entrega en el día",

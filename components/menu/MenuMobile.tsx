@@ -3,7 +3,8 @@
 import { useState, useEffect } from "react"
 import { createPortal } from "react-dom"
 import Link from "next/link"
-import { Menu, X, Phone, ChevronRight, ChevronDown, Facebook, Instagram, Twitter } from "lucide-react"
+import Image from "next/image"
+import { Menu, X, Phone, ChevronRight, ChevronDown, Facebook, Instagram, Linkedin } from "lucide-react"
 import type { Rubro, Categoria } from "@/types/menu"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
@@ -70,20 +71,30 @@ export default function MenuMobile({ rubros, miscellaneousCategories }: MenuMobi
           <div
             className={cn(
               "fixed top-0 right-0 h-full w-full sm:w-[400px] z-[9999] transform transition-transform duration-500 cubic-bezier(0.32, 0.72, 0, 1) lg:hidden",
-              "bg-[#0b5c1c]/95 backdrop-blur-3xl border-l border-white/10 shadow-2xl",
+              "bg-green-600/95 backdrop-blur-3xl border-l border-white/10 shadow-2xl",
               open ? "translate-x-0" : "translate-x-full"
             )}
           >
             {/* Ambient Glow Effects */}
-            <div className="absolute top-0 right-0 w-64 h-64 bg-green-500/20 rounded-full blur-[100px] pointer-events-none -z-10" />
-            <div className="absolute bottom-0 left-0 w-64 h-64 bg-emerald-500/10 rounded-full blur-[100px] pointer-events-none -z-10" />
+            <div className="absolute top-0 right-0 w-64 h-64 bg-green-400/20 rounded-full blur-[100px] pointer-events-none -z-10" />
+            <div className="absolute bottom-0 left-0 w-64 h-64 bg-green-300/10 rounded-full blur-[100px] pointer-events-none -z-10" />
 
             <div className="flex flex-col h-full overflow-hidden">
               {/* Close Button Header for Mobile Menu */}
               <div className="flex items-center justify-between p-4 border-b border-white/10">
-                <span className="text-xl font-bold tracking-tight text-white pl-2">
-                  TodoEnPackaging
-                </span>
+                <div className="flex items-center gap-3">
+                  <div className="relative w-10 h-10 shrink-0">
+                    <Image
+                      src="/logo-a.jpeg"
+                      alt="Logo"
+                      fill
+                      className="rounded-md object-cover"
+                    />
+                  </div>
+                  <span className="text-lg font-bold tracking-tight text-white">
+                    TODO EN PACKAGING
+                  </span>
+                </div>
                 <Button
                   variant="ghost"
                   size="icon"
@@ -107,7 +118,7 @@ export default function MenuMobile({ rubros, miscellaneousCategories }: MenuMobi
                       key={link.name}
                       href={link.href}
                       onClick={() => setOpen(false)}
-                      className="flex items-center justify-center p-3 rounded-xl bg-white/5 border border-white/5 text-sm font-semibold text-white/90 hover:bg-white/10 hover:border-white/20 hover:text-white transition-all duration-200 active:scale-95 hover:shadow-lg hover:shadow-green-900/20"
+                      className="flex items-center justify-center p-3 rounded-xl bg-green-800/60 border border-green-700/30 text-sm font-semibold text-white hover:bg-green-700/70 hover:border-green-600/40 transition-all duration-200 active:scale-95 hover:shadow-lg hover:shadow-green-900/30"
                     >
                       {link.name}
                     </Link>
@@ -129,7 +140,7 @@ export default function MenuMobile({ rubros, miscellaneousCategories }: MenuMobi
                       <div
                         className={cn(
                           "w-full flex items-center justify-between pl-4 pr-1 py-1 transition-all cursor-pointer select-none",
-                          expandedRubro === "general-categories" ? "bg-green-600/30 border-b border-white/5" : "hover:bg-white/5"
+                          expandedRubro === "general-categories" ? "bg-green-700/40 border-b border-white/5" : "hover:bg-white/5"
                         )}
                         onClick={() => toggleRubro("general-categories")}
                       >
@@ -213,7 +224,7 @@ export default function MenuMobile({ rubros, miscellaneousCategories }: MenuMobi
                       onClick={() => setExpandedRubro(expandedRubro === "main-rubros" ? null : "main-rubros")}
                       className={cn(
                         "w-full flex items-center justify-between px-4 py-1 transition-all select-none",
-                        expandedRubro === "main-rubros" ? "bg-green-600/30 border-b border-white/5" : "hover:bg-white/5"
+                        expandedRubro === "main-rubros" ? "bg-green-700/40 border-b border-white/5" : "hover:bg-white/5"
                       )}
                     >
                       <span className="font-bold text-white text-base py-3">Rubros Especializados</span>
@@ -231,7 +242,7 @@ export default function MenuMobile({ rubros, miscellaneousCategories }: MenuMobi
                           <div key={rubro.id} className="rounded-lg overflow-hidden border border-white/5 bg-white/5 group-rubro">
                             <div className={cn(
                               "w-full flex items-center justify-between pl-4 pr-1 py-1 hover:bg-white/5 transition-colors cursor-pointer",
-                              activeRubroId === rubro.id && "bg-green-600/20"
+                              activeRubroId === rubro.id && "bg-green-700/30"
                             )}>
                               <Link
                                 href={`/productos?q=${encodeURIComponent(rubro.nombre)}`}
@@ -328,16 +339,37 @@ export default function MenuMobile({ rubros, miscellaneousCategories }: MenuMobi
               {/* Footer CTA & Socials */}
               <div className="border-t border-white/10 p-5 bg-black/20 backdrop-blur-md">
                 <Link href="/contacto" onClick={() => setOpen(false)}>
-                  <Button className="w-full bg-green-600 hover:bg-green-500 text-white font-bold py-6 text-base shadow-lg shadow-green-900/20 border border-green-400/20 transition-all hover:scale-[1.02]">
+                  <Button className="w-full bg-green-700 hover:bg-green-800 text-white font-bold py-6 text-base shadow-lg shadow-green-900/20 border border-green-500/20 transition-all hover:scale-[1.02]">
                     <Phone className="h-5 w-5 mr-2" />
                     Contáctanos Ahora
                   </Button>
                 </Link>
 
                 <div className="mt-6 flex justify-center gap-6">
-                  <a href="#" className="text-white/60 hover:text-white transition-colors hover:scale-110 transform"><Instagram className="h-6 w-6" /></a>
-                  <a href="#" className="text-white/60 hover:text-white transition-colors hover:scale-110 transform"><Facebook className="h-6 w-6" /></a>
-                  <a href="#" className="text-white/60 hover:text-white transition-colors hover:scale-110 transform"><Twitter className="h-6 w-6" /></a>
+                  <a
+                    href="https://www.instagram.com/todoenpackaging.uy?utm_source=qr&igsh=dGpmeGc4MXl2ZnB6"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-white/60 hover:text-white transition-colors hover:scale-110 transform"
+                  >
+                    <Instagram className="h-6 w-6" />
+                  </a>
+                  <a
+                    href="https://www.facebook.com/share/1EiUDf5JHj/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-white/60 hover:text-white transition-colors hover:scale-110 transform"
+                  >
+                    <Facebook className="h-6 w-6" />
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/in/todo-en-packaging-tep-9346a832b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-white/60 hover:text-white transition-colors hover:scale-110 transform"
+                  >
+                    <Linkedin className="h-6 w-6" />
+                  </a>
                 </div>
               </div>
             </div>

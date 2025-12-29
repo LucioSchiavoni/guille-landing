@@ -83,12 +83,12 @@ function ProductCard({ product, index }: { product: OfferProduct; index: number 
     : null
 
   return (
-    <div className="relative">
+    <div className="relative ">
       {product.descuento && product.descuento > 0 && (
         <div className="absolute top-2 right-2 z-20">
           <div className="relative">
-            <div className="absolute inset-0 bg-gradient-to-br from-yellow-400 to-orange-500 rounded blur-sm opacity-75" />
-            <div className="relative bg-gradient-to-br from-yellow-400 to-orange-500 text-white px-2 py-0.5 rounded shadow-md">
+            <div className="absolute inset-0 bg-gradient-to-br from-green-400 to-green-600 rounded blur-sm opacity-75" />
+            <div className="relative bg-gradient-to-br from-green-400 to-green-600 text-white px-2 py-0.5 rounded shadow-md">
               <div className="flex items-center gap-0.5 font-bold text-[10px]">
                 <span>{product.descuento}% OFF</span>
               </div>
@@ -104,7 +104,7 @@ function ProductCard({ product, index }: { product: OfferProduct; index: number 
         className={cn(
           "group bg-white rounded-xl overflow-hidden border-2 border-green-100 hover:border-green-500 transition-all duration-500 flex flex-col",
           "hover:shadow-2xl hover:-translate-y-2",
-          "h-[420px] sm:h-[560px] lg:h-[600px]",
+          "h-auto sm:h-[560px] lg:h-[600px]",
           isVisible
             ? "opacity-100 translate-y-0"
             : "opacity-0 translate-y-10"
@@ -213,32 +213,30 @@ function ProductCard({ product, index }: { product: OfferProduct; index: number 
 
         <div className="p-2.5 sm:p-4 lg:p-5 flex flex-col flex-grow">
           <Link href={`/producto/${product.slug.current}`}>
-            <h3 className="font-bold text-sm sm:text-base lg:text-lg mb-1 sm:mb-2 line-clamp-2 text-gray-900 group-hover:text-green-700 transition-colors duration-300 h-[2.25rem] sm:h-[3rem]">
+            <h3 className="font-bold text-xs sm:text-base lg:text-lg mb-0.5 sm:mb-2 line-clamp-1 sm:line-clamp-2 text-gray-900 group-hover:text-green-700 transition-colors duration-300">
               {product.name}
             </h3>
           </Link>
 
-          <div className="h-[1.75rem] sm:h-[2.5rem] lg:h-[3rem] mb-1.5 sm:mb-3">
-            {product.description && (
-              <p className="text-[11px] sm:text-sm text-gray-500 line-clamp-2 leading-tight sm:leading-relaxed">
-                {product.description}
-              </p>
-            )}
-          </div>
+          {product.description && (
+            <p className="text-[10px] sm:text-sm text-gray-500 line-clamp-1 sm:line-clamp-2 leading-tight mb-1 sm:mb-2">
+              {product.description}
+            </p>
+          )}
 
-          <div className="mt-auto pt-1.5 sm:pt-3 lg:pt-4 border-t border-gray-100 w-full">
-            <div className="flex flex-col mb-1.5 sm:mb-3 lg:mb-4">
+          <div className="mt-auto pt-1.5 sm:pt-3 border-t border-gray-100 w-full">
+            <div className="flex flex-col mb-1 sm:mb-3">
               {product.price ? (
-                <div className="flex flex-wrap items-baseline gap-2">
+                <div className="flex flex-wrap items-baseline gap-1 sm:gap-2">
                   {discountPrice ? (
                     <>
-                      <span className="font-bold text-base sm:text-xl lg:text-2xl text-gray-900">
+                      <span className="font-bold text-sm sm:text-xl lg:text-2xl text-gray-900">
                         ${Math.round(discountPrice).toLocaleString()}
                       </span>
-                      <span className="text-[10px] sm:text-xs text-gray-400 line-through">
+                      <span className="text-[9px] sm:text-xs text-gray-400 line-through">
                         ${product.price.toLocaleString()}
                       </span>
-                      <span className="text-[10px] sm:text-xs text-green-600 font-semibold w-full sm:w-auto">
+                      <span className="text-[9px] sm:text-xs text-green-600 font-semibold">
                         Ahorrás ${Math.round(product.price - discountPrice).toLocaleString()}
                       </span>
                     </>
@@ -249,11 +247,11 @@ function ProductCard({ product, index }: { product: OfferProduct; index: number 
                   )}
                 </div>
               ) : (
-                <span className="text-xs sm:text-sm text-gray-500 font-medium italic">Consultar precio</span>
+                <span className="text-[10px] sm:text-sm text-gray-500 font-medium italic">Consultar precio</span>
               )}
             </div>
 
-            <div className="flex flex-col gap-1 sm:gap-2 w-full pb-0.5 sm:pb-2">
+            <div className="flex flex-col w-full">
               <Button
                 asChild
                 variant="outline"
@@ -420,7 +418,7 @@ export default function ProductosOferta({ products }: ProductosOfertaProps) {
           )}
         >
           <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-3">
-            OFERTAS <span className="text-green-600">POR MAYOR</span>
+            <span className="text-green-600">OFERTAS</span> <span className="text-orange-500">POR MAYOR</span>
           </h2>
 
         </div>
@@ -432,14 +430,14 @@ export default function ProductosOferta({ products }: ProductosOfertaProps) {
             <>
               <button
                 onClick={() => scroll('left')}
-                className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white hover:bg-green-50 p-2 md:p-3 rounded-full shadow-lg transition-all hover:scale-110 border-2 border-green-200"
+                className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/80 hover:bg-green-50 p-2 md:p-3 rounded-full transition-all hover:scale-110"
                 aria-label="Anterior"
               >
                 <ChevronLeft className="h-5 w-5 md:h-6 md:w-6 text-green-600" />
               </button>
               <button
                 onClick={() => scroll('right')}
-                className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white hover:bg-green-50 p-2 md:p-3 rounded-full shadow-lg transition-all hover:scale-110 border-2 border-green-200"
+                className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white/80 hover:bg-green-50 p-2 md:p-3 rounded-full transition-all hover:scale-110"
                 aria-label="Siguiente"
               >
                 <ChevronRight className="h-5 w-5 md:h-6 md:w-6 text-green-600" />

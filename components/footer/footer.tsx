@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { Phone, Mail, Clock, Check } from "lucide-react"
+import { Phone, Mail, Clock, Check, Instagram, Facebook, Linkedin } from "lucide-react"
 import Logo from "@/components/header/logo"
 import { useState } from "react"
 import { cn } from "@/lib/utils"
@@ -19,7 +19,7 @@ export default function Footer() {
   return (
     <footer className="bg-gradient-to-br from-green-900 via-green-800 to-green-700 text-white mt-16">
       <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           <div className="space-y-4">
             <div className="inline-block">
               <Logo className="h-12 w-auto" />
@@ -93,6 +93,41 @@ export default function Footer() {
                 Productos
               </Link>
             </nav>
+          </div>
+
+          <div className="space-y-4">
+            <h3 className="text-lg font-bold text-white border-b-2 border-green-500 pb-2 inline-block">
+              Síguenos
+            </h3>
+            <div className="flex flex-col space-y-3">
+              <a
+                href="https://www.instagram.com/todoenpackaging.uy?utm_source=qr&igsh=dGpmeGc4MXl2ZnB6"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 text-sm text-green-100 hover:text-white hover:translate-x-1 transition-all group"
+              >
+                <Instagram className="h-5 w-5 text-green-300" />
+                <span>Instagram</span>
+              </a>
+              <a
+                href="https://www.facebook.com/share/1EiUDf5JHj/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 text-sm text-green-100 hover:text-white hover:translate-x-1 transition-all group"
+              >
+                <Facebook className="h-5 w-5 text-green-300" />
+                <span>Facebook</span>
+              </a>
+              <a
+                href="https://www.linkedin.com/in/todo-en-packaging-tep-9346a832b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 text-sm text-green-100 hover:text-white hover:translate-x-1 transition-all group"
+              >
+                <Linkedin className="h-5 w-5 text-green-300" />
+                <span>LinkedIn</span>
+              </a>
+            </div>
           </div>
 
         </div>

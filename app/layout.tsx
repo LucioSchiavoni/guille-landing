@@ -1,7 +1,7 @@
 import type React from "react"
 import type { Metadata } from "next"
 import dynamic from "next/dynamic"
-import { Montserrat, Merriweather, Source_Code_Pro } from "next/font/google"
+import { Lato, Merriweather, Source_Code_Pro } from "next/font/google"
 import "./critical.css" // 🚀 Estilos críticos - carga síncrona
 import BackgroundImage from "@/components/ui/background-image"
 import DeferredStyles from "@/components/ui/deferred-styles"
@@ -15,8 +15,10 @@ const WhatsAppButton = dynamic(() => import("@/components/ui/whatsapp-button"), 
 import RoutePrefetch from "@/components/ui/route-prefetch"
 
 // 🎨 Configuración optimizada de fuentes Google
-const montserrat = Montserrat({
+const lato = Lato({
   subsets: ["latin"],
+  weight: ["100", "300", "400", "700", "900"],
+  style: ["normal", "italic"],
   variable: "--font-sans",
   display: "swap",
   preload: true,
@@ -141,7 +143,7 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body
-        className={`${montserrat.variable} ${merriweather.variable} ${sourceCodePro.variable} font-sans antialiased`}
+        className={`${lato.variable} ${merriweather.variable} ${sourceCodePro.variable} font-sans antialiased`}
       >
         {children}
         {modal}
