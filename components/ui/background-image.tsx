@@ -14,7 +14,7 @@ export default function BackgroundImage() {
       aria-hidden="true"
     >
       <Image
-        src="/background.png"
+        src="/fondo-descartables-ecologicos-biodegradables.png"
         alt=""
         fill
         loading="lazy"
