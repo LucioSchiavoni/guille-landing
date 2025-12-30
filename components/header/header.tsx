@@ -69,29 +69,44 @@ export default function Header({ rubros, miscellaneousCategories }: HeaderProps)
       }}
     >
       {/* Mobile Layout */}
-      <div className="lg:hidden">
+      <div
+        className="lg:hidden relative"
+        style={{
+          backgroundImage: `linear-gradient(rgba(63, 121, 72, 0.85), rgba(63, 121, 72, 0.85)), url('/header-mobile.png')`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+        }}
+      >
         <div className="flex items-center justify-between px-4 py-3 border-b border-white/10 relative">
           <Link href="/" className="flex items-center gap-2 flex-shrink-0 relative z-10">
             <div
               className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg shadow-lg"
               style={{
-                backgroundImage: `linear-gradient(rgba(63, 121, 72, 0.6), rgba(63, 121, 72, 0.6)), url('/logo.png')`,
+                backgroundImage: `url('/logo.png')`,
                 backgroundSize: 'contain',
                 backgroundPosition: 'center',
                 backgroundRepeat: 'no-repeat',
-                backgroundBlendMode: 'overlay',
+                filter: 'brightness(1.5) saturate(1.3) drop-shadow(0 0 8px rgba(255,255,255,0.5))',
               }}
             />
-            <span className="text-white font-bold text-sm sm:text-base tracking-tight drop-shadow-md">
+            <span
+              className="text-white font-bold text-sm sm:text-base tracking-tight"
+              style={{
+                filter: 'brightness(1.3) drop-shadow(0 2px 4px rgba(0,0,0,0.3)) drop-shadow(0 0 10px rgba(255,255,255,0.4))',
+              }}
+            >
               TODO EN PACKAGING
             </span>
           </Link>
 
-          <MenuMobile rubros={filteredRubros} miscellaneousCategories={filteredCategories} />
+          <div className="relative z-10">
+            <MenuMobile rubros={filteredRubros} miscellaneousCategories={filteredCategories} />
+          </div>
         </div>
       </div>
 
-      {/* Desktop Layout - unchanged */}
+      {/* Desktop Layout */}
       <div className="hidden lg:block">
         {/* Top Row: Logo, Search, Actions */}
         <div className="container mx-auto px-4 py-2">

@@ -82,27 +82,20 @@ export default function MenuMobile({ rubros, miscellaneousCategories }: MenuMobi
 
             <div className="flex flex-col h-full overflow-hidden">
               {/* Close Button Header for Mobile Menu */}
-              <div className="flex items-center justify-between p-4 border-b border-white/10">
-                <Link href="/" onClick={() => setOpen(false)} className="flex items-center gap-3">
-                  <div
-                    className="w-10 h-10 rounded-lg shadow-lg shrink-0"
-                    style={{
-                      backgroundImage: `url('/logo.png')`,
-                      backgroundSize: 'contain',
-                      backgroundPosition: 'center',
-                      backgroundRepeat: 'no-repeat',
-                      filter: 'brightness(1.3) saturate(1.1)',
-                    }}
-                  />
-                  <span className="text-lg font-bold tracking-tight text-white drop-shadow-md">
-                    TODO EN PACKAGING
-                  </span>
-                </Link>
+              <div
+                className="flex items-center justify-end p-4 border-b border-white/10 relative"
+                style={{
+                  backgroundImage: `linear-gradient(rgba(63, 121, 72, 0.85), rgba(63, 121, 72, 0.85)), url('/header-mobile.png')`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                  backgroundRepeat: 'no-repeat',
+                }}
+              >
                 <Button
                   variant="ghost"
                   size="icon"
                   onClick={() => setOpen(false)}
-                  className="text-white hover:bg-white/10"
+                  className="text-white hover:bg-white/10 relative z-10"
                 >
                   <X className="h-6 w-6" />
                 </Button>
