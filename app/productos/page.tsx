@@ -141,21 +141,8 @@ export default async function ProductosPage({ searchParams }: ProductosPageProps
                                             <ShoppingBag className="w-16 h-16 opacity-10 stroke-1" />
                                         </div>
                                     )}
-                                    {/* Badge for Category - Natural Style */}
-                                    {product.subcategory?.category?.name && (
-                                        <div className="absolute top-3 left-3">
-                                            <span className="bg-white/95 backdrop-blur-sm text-[10px] px-3 py-1.5 rounded-full border border-stone-200/80 shadow-sm font-medium text-stone-700 tracking-wide">
-                                                {product.subcategory.category.name}
-                                            </span>
-                                        </div>
-                                    )}
                                 </div>
                                 <div className="p-5 flex-1 flex flex-col bg-gradient-to-b from-white to-stone-50/30">
-                                    {product.subcategory?.name && (
-                                        <div className="text-[11px] text-stone-500 mb-2 uppercase tracking-wider font-medium">
-                                            {product.subcategory.name}
-                                        </div>
-                                    )}
                                     <h3 className="font-semibold text-stone-800 group-hover:text-green-800 transition-colors duration-300 line-clamp-2 mb-3 flex-1 text-base leading-snug">
                                         {product.name}
                                     </h3>

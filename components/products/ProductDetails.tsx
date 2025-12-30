@@ -74,19 +74,6 @@ export default function ProductDetails({ product, onClose }: ProductDetailsProps
                         )}
                     </motion.div>
 
-                    {/* Badges Flotantes 🏷️ */}
-                    <div className="absolute top-3 left-3 sm:top-6 sm:left-6 flex flex-wrap gap-1.5 sm:gap-2 z-10 max-w-[70%]">
-                        {product.subcategory?.category?.name && (
-                            <span className="bg-emerald-600/90 backdrop-blur-md text-white text-[10px] sm:text-xs px-2 sm:px-3 py-0.5 sm:py-1 rounded-full font-bold uppercase tracking-wider shadow-sm">
-                                {product.subcategory.category.name}
-                            </span>
-                        )}
-                        {product.subcategory?.name && (
-                            <span className="bg-white/80 backdrop-blur-md text-slate-700 text-[10px] sm:text-xs px-2 sm:px-3 py-0.5 sm:py-1 rounded-full font-bold uppercase tracking-wider shadow-sm border border-white/50">
-                                {product.subcategory.name}
-                            </span>
-                        )}
-                    </div>
                 </div>
 
                 {/* Columna Contenido 📝 */}
