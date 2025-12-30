@@ -85,10 +85,10 @@ export default function MenuMobile({ rubros, miscellaneousCategories }: MenuMobi
                 <div className="flex items-center gap-3">
                   <div className="relative w-10 h-10 shrink-0">
                     <Image
-                      src="/logo-a.jpeg"
+                      src="/logo.png"
                       alt="Logo"
                       fill
-                      className="rounded-md object-cover"
+                      className="object-contain"
                     />
                   </div>
                   <span className="text-lg font-bold tracking-tight text-white">

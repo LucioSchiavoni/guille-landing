@@ -7,7 +7,7 @@ import HeroCarousel from "@/components/carousel/hero-carousel"
 import DeliverySection from "@/components/sections/DeliverySection"
 import StructuredData from "@/components/seo/structured-data"
 import { client, getOptimizedImageUrl } from "@/lib/sanity"
-import { menuQuery, featuredProductsQuery } from "@/lib/queries"
+import { menuQuery, carouselQuery } from "@/lib/queries"
 
 // 🚀 Server Components con fetch interno para carga diferida
 import ProductosOfertaServer from "@/components/sections/ProductosOfertaServer"
@@ -72,16 +72,16 @@ export const metadata: Metadata = {
 export default async function Home() {
   // 🎯 Solo queries CRÍTICAS para above-the-fold (Header + Hero)
   // productsQuery y offerProductsQuery se cargan en sus Server Components con Suspense
-  const [menuData, featuredProducts] = await Promise.all([
+  const [menuData, carouselData] = await Promise.all([
     client.fetch(menuQuery, {}, { next: { revalidate: 60 } }),
-    client.fetch(featuredProductsQuery, {}, { next: { revalidate: 60 } })
+    client.fetch(carouselQuery, {}, { next: { revalidate: 60 } })
   ])
 
   const { rubros, miscellaneousCategories } = menuData
 
   // 🚀 URL de la primera imagen del carousel para preload (LCP)
-  const lcpImageUrl = featuredProducts?.[0]?.image
-    ? getOptimizedImageUrl(featuredProducts[0].image, { width: 1200 })
+  const lcpImageUrl = carouselData?.slides?.[0]?.imagenDesktop
+    ? getOptimizedImageUrl(carouselData.slides[0].imagenDesktop, { width: 1920 })
     : null
 
   return (
@@ -106,7 +106,7 @@ export default async function Home() {
         </div>
 
         {/* ⚡ Above-the-fold: Carga inmediata */}
-        <HeroCarousel products={featuredProducts} />
+        <HeroCarousel carousel={carouselData} />
 
         {/* 🔄 Below-the-fold: Carga diferida con Suspense */}
         <Suspense fallback={<ProductosOfertaSkeleton />}>

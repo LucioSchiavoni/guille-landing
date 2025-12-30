@@ -1,8 +1,7 @@
 import type { Metadata } from "next"
 import Header from "@/components/header/header"
 import Footer from "@/components/footer/footer"
-import AboutSection from "@/components/about/about-section"
-import EcoFeatures from "@/components/features/eco-features"
+import AboutPage from "@/components/about/about-page"
 import { client } from "@/lib/sanity"
 import { menuQuery } from "@/lib/queries"
 
@@ -21,12 +20,11 @@ export default async function Nosotros() {
   const { rubros, miscellaneousCategories } = await client.fetch(menuQuery)
 
   return (
-    <div className="min-h-screen bg-background/10 overflow-x-hidden">
+    <div className="min-h-screen bg-white overflow-x-hidden">
       <Header rubros={rubros} miscellaneousCategories={miscellaneousCategories} />
 
-      <main className="bg-transparent">
-        <AboutSection />
-        <EcoFeatures />
+      <main>
+        <AboutPage />
       </main>
 
       <Footer />

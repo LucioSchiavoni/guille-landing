@@ -121,14 +121,14 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: "/logo_icon_green.png" },
-      { url: "/logo_icon_green.png", sizes: "32x32", type: "image/png" },
+      { url: "/logo.png" },
+      { url: "/logo.png", sizes: "32x32", type: "image/png" },
     ],
-    shortcut: "/logo_icon_green.png",
-    apple: "/logo_icon_green.png",
+    shortcut: "/logo.png",
+    apple: "/logo.png",
     other: {
       rel: "apple-touch-icon-precomposed",
-      url: "/logo_icon_green.png",
+      url: "/logo.png",
     },
   },
 }

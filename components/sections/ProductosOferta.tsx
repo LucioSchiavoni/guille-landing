@@ -418,7 +418,7 @@ export default function ProductosOferta({ products }: ProductosOfertaProps) {
           )}
         >
           <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-3">
-            <span className="text-green-600">OFERTAS</span> <span className="text-orange-500">POR MAYOR</span>
+            <span className="text-orange-600">OFERTAS</span> <span className="text-orange-600">POR MAYOR</span>
           </h2>
 
         </div>

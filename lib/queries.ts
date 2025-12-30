@@ -172,3 +172,30 @@ export const offerProductsQuery = groq`
     descuento
   }
 `
+
+// Get carousel data
+export const carouselQuery = groq`
+  *[_type == "carousel" && activo == true][0] {
+    _id,
+    nombre,
+    slides[] {
+      _key,
+      imagenDesktop {
+        asset->{
+          _id,
+          url
+        }
+      },
+      imagenMobile {
+        asset->{
+          _id,
+          url
+        }
+      },
+      titulo,
+      subtitulo,
+      link
+    },
+    activo
+  }
+`

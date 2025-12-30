@@ -78,11 +78,11 @@ export default async function ProductPage({ params }: ProductPageProps) {
         <div className="container mx-auto px-4 py-8 min-h-screen">
 
             <Link
-                href="/"
+                href="/productos"
                 className="inline-flex items-center text-sm text-muted-foreground hover:text-primary mb-6 transition-colors"
             >
                 <ArrowLeft className="w-4 h-4 mr-2" />
-                Volver al inicio
+                Volver al catálogo
             </Link>
 
             <ProductDetails product={product} />
