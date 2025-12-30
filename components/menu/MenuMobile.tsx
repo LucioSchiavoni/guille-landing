@@ -76,16 +76,14 @@ export default function MenuMobile({ rubros, miscellaneousCategories }: MenuMobi
               backgroundColor: 'rgba(63, 121, 72, 0.98)'
             }}
           >
-            {/* Ambient Glow Effects */}
-            <div className="absolute top-0 right-0 w-64 h-64 rounded-full blur-[100px] pointer-events-none -z-10" style={{ backgroundColor: 'rgba(63, 121, 72, 0.3)' }} />
-            <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full blur-[100px] pointer-events-none -z-10" style={{ backgroundColor: 'rgba(63, 121, 72, 0.2)' }} />
+
 
             <div className="flex flex-col h-full overflow-hidden">
               {/* Close Button Header for Mobile Menu */}
               <div
                 className="flex items-center justify-end p-4 border-b border-white/10 relative"
                 style={{
-                  backgroundImage: `linear-gradient(rgba(63, 121, 72, 0.85), rgba(63, 121, 72, 0.85)), url('/header-mobile.png')`,
+                  backgroundImage: ` url('/header-mobile.png')`,
                   backgroundSize: 'cover',
                   backgroundPosition: 'center',
                   backgroundRepeat: 'no-repeat',
