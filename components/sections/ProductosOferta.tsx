@@ -87,8 +87,8 @@ function ProductCard({ product, index }: { product: OfferProduct; index: number 
       {product.descuento && product.descuento > 0 && (
         <div className="absolute top-2 right-2 z-20">
           <div className="relative">
-            <div className="absolute inset-0 bg-gradient-to-br from-green-400 to-green-600 rounded blur-sm opacity-75" />
-            <div className="relative bg-gradient-to-br from-green-400 to-green-600 text-white px-2 py-0.5 rounded shadow-md">
+            <div className="absolute inset-0 rounded blur-sm opacity-75" style={{ backgroundColor: 'rgb(255, 102, 0)' }} />
+            <div className="relative text-white px-2 py-0.5 rounded shadow-md" style={{ background: 'linear-gradient(to bottom right, rgb(255, 102, 0), rgb(230, 92, 0))' }}>
               <div className="flex items-center gap-0.5 font-bold text-[10px]">
                 <span>{product.descuento}% OFF</span>
               </div>
@@ -213,13 +213,13 @@ function ProductCard({ product, index }: { product: OfferProduct; index: number 
 
         <div className="p-2.5 sm:p-4 lg:p-5 flex flex-col flex-grow">
           <Link href={`/producto/${product.slug.current}`}>
-            <h3 className="font-bold text-xs sm:text-base lg:text-lg mb-0.5 sm:mb-2 line-clamp-1 sm:line-clamp-2 text-gray-900 group-hover:text-green-700 transition-colors duration-300">
+            <h3 className="font-bold text-xs sm:text-base lg:text-lg mb-0.5 sm:mb-2 line-clamp-1 sm:line-clamp-2 text-gray-900 group-hover:text-green-700 transition-colors duration-300" style={{ fontFamily: 'Lato, sans-serif' }}>
               {product.name}
             </h3>
           </Link>
 
           {product.description && (
-            <p className="text-[10px] sm:text-sm text-gray-500 line-clamp-1 sm:line-clamp-2 leading-tight mb-1 sm:mb-2">
+            <p className="text-[10px] sm:text-sm text-gray-500 line-clamp-1 sm:line-clamp-2 leading-tight mb-1 sm:mb-2" style={{ fontFamily: 'Archivo Narrow, sans-serif' }}>
               {product.description}
             </p>
           )}
@@ -328,10 +328,10 @@ function EmptyPlaceholder() {
         </div>
       </div>
       <div className="text-center space-y-4">
-        <h3 className="text-3xl font-bold text-gray-800">
+        <h3 className="text-3xl font-bold text-gray-800" style={{ fontFamily: 'Lato, sans-serif' }}>
           No hay ofertas disponibles
         </h3>
-        <p className="text-gray-600 max-w-md leading-relaxed">
+        <p className="text-gray-600 max-w-md leading-relaxed" style={{ fontFamily: 'Archivo Narrow, sans-serif' }}>
           Estamos preparando increíbles ofertas para ti. Vuelve pronto para descubrir nuestras promociones especiales en productos eco-friendly.
         </p>
         <Button
@@ -398,7 +398,7 @@ export default function ProductosOferta({ products }: ProductosOfertaProps) {
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
             )}
           >
-            <p className="text-base md:text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-base md:text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed" style={{ fontFamily: 'Archivo Narrow, sans-serif' }}>
               Aprovecha nuestras ofertas especiales en productos eco-friendly
             </p>
           </div>
@@ -417,8 +417,8 @@ export default function ProductosOferta({ products }: ProductosOfertaProps) {
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
           )}
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-3">
-            <span className="text-orange-600">OFERTAS</span> <span className="text-orange-600">POR MAYOR</span>
+          <h2 className="text-3xl md:text-4xl text-gray-800 mb-3" style={{ fontFamily: 'Lato Black, sans-serif', fontWeight: 900 }}>
+            <span style={{ color: 'rgb(255, 102, 0)' }}>OFERTAS</span> <span style={{ color: 'rgb(255, 102, 0)' }}>POR MAYOR</span>
           </h2>
 
         </div>

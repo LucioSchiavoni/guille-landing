@@ -3,7 +3,6 @@ import type { Metadata } from "next"
 import dynamic from "next/dynamic"
 import { Lato, Merriweather, Source_Code_Pro } from "next/font/google"
 import "./critical.css" // 🚀 Estilos críticos - carga síncrona
-import BackgroundImage from "@/components/ui/background-image"
 import DeferredStyles from "@/components/ui/deferred-styles"
 
 // 🎯 Dynamic imports para componentes no críticos para LCP
@@ -143,11 +142,10 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body
-        className={`${lato.variable} ${merriweather.variable} ${sourceCodePro.variable} font-sans antialiased`}
+        className={`${lato.variable} ${merriweather.variable} ${sourceCodePro.variable} font-sans antialiased bg-stone-100`}
       >
         {children}
         {modal}
-        <BackgroundImage />
         <DeferredStyles />
         <WhatsAppButton />
         <RoutePrefetch />

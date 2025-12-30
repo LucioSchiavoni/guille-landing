@@ -4,7 +4,6 @@ import { useState, useEffect, Suspense } from "react"
 import dynamic from "next/dynamic"
 import Link from "next/link"
 import { Phone, Menu, Instagram, Facebook, Linkedin } from "lucide-react"
-import Logo from "./logo"
 import { SearchCommand } from "./SearchCommand"
 import MenuDesktop from "../menu/MenuDesktop"
 import { Button } from "@/components/ui/button"
@@ -61,20 +60,32 @@ export default function Header({ rubros, miscellaneousCategories }: HeaderProps)
     <header
       className={cn(
         "w-full sticky top-0 z-[100] transition-all duration-300",
-        // Glassmorphism Base Styles
-        "bg-green-600/90 backdrop-blur-md border-b border-white/10",
-        isScrolled ? "shadow-md bg-green-700/95" : "shadow-sm",
+        "backdrop-blur-md border-b border-white/10",
+        isScrolled ? "shadow-md" : "shadow-sm",
       )}
+      style={{
+        backgroundColor: 'rgb(63, 121, 72)',
+        backgroundImage: `linear-gradient(rgba(63, 121, 72, 0.95), rgba(63, 121, 72, 0.98))`
+      }}
     >
       {/* Mobile Layout */}
       <div className="lg:hidden">
-        <div className="flex items-center justify-between px-4 py-3 border-b border-white/10">
-          <div className="flex items-center gap-2 flex-shrink-0">
-            <Logo className="w-10 h-10 sm:w-12 sm:h-12" />
-            <span className="text-white font-bold text-sm sm:text-base tracking-tight">
+        <div className="flex items-center justify-between px-4 py-3 border-b border-white/10 relative">
+          <Link href="/" className="flex items-center gap-2 flex-shrink-0 relative z-10">
+            <div
+              className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg shadow-lg"
+              style={{
+                backgroundImage: `linear-gradient(rgba(63, 121, 72, 0.6), rgba(63, 121, 72, 0.6)), url('/logo.png')`,
+                backgroundSize: 'contain',
+                backgroundPosition: 'center',
+                backgroundRepeat: 'no-repeat',
+                backgroundBlendMode: 'overlay',
+              }}
+            />
+            <span className="text-white font-bold text-sm sm:text-base tracking-tight drop-shadow-md">
               TODO EN PACKAGING
             </span>
-          </div>
+          </Link>
 
           <MenuMobile rubros={filteredRubros} miscellaneousCategories={filteredCategories} />
         </div>
@@ -85,10 +96,22 @@ export default function Header({ rubros, miscellaneousCategories }: HeaderProps)
         {/* Top Row: Logo, Search, Actions */}
         <div className="container mx-auto px-4 py-2">
           <div className="flex items-center justify-between gap-4 lg:gap-8">
-            {/* Logo */}
-            <div className="flex-shrink-0">
-              <Logo />
-            </div>
+            {/* Logo integrado con fondo */}
+            <Link href="/" className="flex-shrink-0 flex items-center gap-3 transition-opacity hover:opacity-90 relative">
+              <div
+                className="h-12 w-12 rounded-lg relative shadow-lg"
+                style={{
+                  backgroundImage: `linear-gradient(rgba(63, 121, 72, 0.6), rgba(63, 121, 72, 0.6)), url('/logo.png')`,
+                  backgroundSize: 'contain',
+                  backgroundPosition: 'center',
+                  backgroundRepeat: 'no-repeat',
+                  backgroundBlendMode: 'overlay',
+                }}
+              />
+              <span className="text-xl font-bold tracking-tight text-white">
+                TodoEnPackaging
+              </span>
+            </Link>
 
             {/* Search - Centered & Wide on Desktop */}
             <div className="flex flex-1 max-w-2xl mx-auto">

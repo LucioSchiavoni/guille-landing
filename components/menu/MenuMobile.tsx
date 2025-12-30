@@ -3,12 +3,10 @@
 import { useState, useEffect } from "react"
 import { createPortal } from "react-dom"
 import Link from "next/link"
-import Image from "next/image"
 import { Menu, X, Phone, ChevronRight, ChevronDown, Facebook, Instagram, Linkedin } from "lucide-react"
 import type { Rubro, Categoria } from "@/types/menu"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
-import Logo from "../header/logo"
 
 interface MenuMobileProps {
   rubros: Rubro[]
@@ -71,30 +69,35 @@ export default function MenuMobile({ rubros, miscellaneousCategories }: MenuMobi
           <div
             className={cn(
               "fixed top-0 right-0 h-full w-full sm:w-[400px] z-[9999] transform transition-transform duration-500 cubic-bezier(0.32, 0.72, 0, 1) lg:hidden",
-              "bg-green-600/95 backdrop-blur-3xl border-l border-white/10 shadow-2xl",
+              "backdrop-blur-3xl border-l border-white/10 shadow-2xl",
               open ? "translate-x-0" : "translate-x-full"
             )}
+            style={{
+              backgroundColor: 'rgba(63, 121, 72, 0.98)'
+            }}
           >
             {/* Ambient Glow Effects */}
-            <div className="absolute top-0 right-0 w-64 h-64 bg-green-400/20 rounded-full blur-[100px] pointer-events-none -z-10" />
-            <div className="absolute bottom-0 left-0 w-64 h-64 bg-green-300/10 rounded-full blur-[100px] pointer-events-none -z-10" />
+            <div className="absolute top-0 right-0 w-64 h-64 rounded-full blur-[100px] pointer-events-none -z-10" style={{ backgroundColor: 'rgba(63, 121, 72, 0.3)' }} />
+            <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full blur-[100px] pointer-events-none -z-10" style={{ backgroundColor: 'rgba(63, 121, 72, 0.2)' }} />
 
             <div className="flex flex-col h-full overflow-hidden">
               {/* Close Button Header for Mobile Menu */}
               <div className="flex items-center justify-between p-4 border-b border-white/10">
-                <div className="flex items-center gap-3">
-                  <div className="relative w-10 h-10 shrink-0">
-                    <Image
-                      src="/logo.png"
-                      alt="Logo"
-                      fill
-                      className="object-contain"
-                    />
-                  </div>
-                  <span className="text-lg font-bold tracking-tight text-white">
+                <Link href="/" onClick={() => setOpen(false)} className="flex items-center gap-3">
+                  <div
+                    className="w-10 h-10 rounded-lg shadow-lg shrink-0"
+                    style={{
+                      backgroundImage: `url('/logo.png')`,
+                      backgroundSize: 'contain',
+                      backgroundPosition: 'center',
+                      backgroundRepeat: 'no-repeat',
+                      filter: 'brightness(1.3) saturate(1.1)',
+                    }}
+                  />
+                  <span className="text-lg font-bold tracking-tight text-white drop-shadow-md">
                     TODO EN PACKAGING
                   </span>
-                </div>
+                </Link>
                 <Button
                   variant="ghost"
                   size="icon"
@@ -118,7 +121,11 @@ export default function MenuMobile({ rubros, miscellaneousCategories }: MenuMobi
                       key={link.name}
                       href={link.href}
                       onClick={() => setOpen(false)}
-                      className="flex items-center justify-center p-3 rounded-xl bg-green-800/60 border border-green-700/30 text-sm font-semibold text-white hover:bg-green-700/70 hover:border-green-600/40 transition-all duration-200 active:scale-95 hover:shadow-lg hover:shadow-green-900/30"
+                      className="flex items-center justify-center p-3 rounded-xl border text-sm font-semibold text-white transition-all duration-200 active:scale-95 hover:shadow-lg"
+                      style={{
+                        backgroundColor: 'rgba(45, 95, 55, 0.7)',
+                        borderColor: 'rgba(63, 121, 72, 0.4)'
+                      }}
                     >
                       {link.name}
                     </Link>
@@ -339,7 +346,13 @@ export default function MenuMobile({ rubros, miscellaneousCategories }: MenuMobi
               {/* Footer CTA & Socials */}
               <div className="border-t border-white/10 p-5 bg-black/20 backdrop-blur-md">
                 <Link href="/contacto" onClick={() => setOpen(false)}>
-                  <Button className="w-full bg-green-700 hover:bg-green-800 text-white font-bold py-6 text-base shadow-lg shadow-green-900/20 border border-green-500/20 transition-all hover:scale-[1.02]">
+                  <Button
+                    className="w-full text-white font-bold py-6 text-base shadow-lg border transition-all hover:scale-[1.02]"
+                    style={{
+                      backgroundColor: 'rgb(53, 111, 62)',
+                      borderColor: 'rgba(63, 121, 72, 0.3)'
+                    }}
+                  >
                     <Phone className="h-5 w-5 mr-2" />
                     Contáctanos Ahora
                   </Button>

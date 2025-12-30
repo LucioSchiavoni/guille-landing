@@ -98,11 +98,11 @@ export default async function ProductosPage({ searchParams }: ProductosPageProps
         : allProducts
 
     return (
-        <div className="min-h-screen bg-background/10">
+        <div className="min-h-screen bg-stone-100">
             <Header rubros={rubros} miscellaneousCategories={miscellaneousCategories} />
 
             {/* Mobile: Search */}
-            <div className="lg:hidden p-4 border-b bg-white/10 backdrop-blur-md border-white/10">
+            <div className="lg:hidden p-4 border-b bg-white border-stone-200">
                 <Suspense fallback={<div className="w-full h-10 bg-gray-200/50 rounded-md animate-pulse" />}>
                     <SearchCommand rubros={rubros} />
                 </Suspense>

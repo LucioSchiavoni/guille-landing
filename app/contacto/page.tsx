@@ -47,7 +47,7 @@ export default async function ContactPage() {
     ]
 
     return (
-        <div className="min-h-screen bg-background/10 flex flex-col">
+        <div className="min-h-screen bg-stone-100 flex flex-col">
             <Header rubros={rubros} miscellaneousCategories={miscellaneousCategories} />
             <ContactForm contactInfo={contactInfo} />
         </div>

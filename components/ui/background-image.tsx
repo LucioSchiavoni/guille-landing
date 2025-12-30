@@ -18,9 +18,10 @@ export default function BackgroundImage() {
         alt=""
         fill
         loading="lazy"
-        quality={50}
-        className="object-cover object-center"
+        quality={60}
+        className="object-cover object-center opacity-90"
         sizes="100vw"
+        unoptimized
       />
     </div>
   )
