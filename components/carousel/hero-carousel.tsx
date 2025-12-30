@@ -178,7 +178,7 @@ export default function HeroCarousel({ carousel }: HeroCarouselProps) {
       </div>
 
       {/* Título y Subtítulo - Arriba a la izquierda con animaciones creativas */}
-      <div className="absolute top-6 md:top-12 lg:top-16 left-4 md:left-8 lg:left-12 z-30 w-[90%] md:w-[80%] lg:w-[75%] xl:w-[70%]">
+      <div className="absolute  left-4 md:left-8 lg:left-12 z-30 w-[90%] md:w-[80%] lg:w-[75%] xl:w-[70%]">
         {activeSlides.map((slide, index) => (
           <div
             key={`text-${slide.id}`}
@@ -202,7 +202,7 @@ export default function HeroCarousel({ carousel }: HeroCarouselProps) {
             {slide.titulo && (
               <h2
                 className={cn(
-                  "text-2xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-2 md:mb-3 lg:mb-4 transition-all duration-700 ease-out leading-tight",
+                  "text-2xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-2 md:mb-3 lg:mb-4 transition-all duration-700 ease-out leading-tight font-['Lato']",
                   "drop-shadow-[0_4px_20px_rgba(0,0,0,0.5)]",
                   index === currentSlide && showContent
                     ? "opacity-100 translate-x-0 blur-0"
@@ -234,7 +234,7 @@ export default function HeroCarousel({ carousel }: HeroCarouselProps) {
             {slide.subtitulo && (
               <p
                 className={cn(
-                  "text-base md:text-xl lg:text-2xl xl:text-3xl text-white/90 font-light tracking-wide transition-all duration-700 ease-out leading-relaxed",
+                  "text-base md:text-xl lg:text-2xl xl:text-3xl text-white/90 font-medium tracking-wide transition-all duration-700 ease-out leading-relaxed font-['Lato']",
                   "drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)]",
                   index === currentSlide && showContent
                     ? "opacity-100 translate-x-0 blur-0"
