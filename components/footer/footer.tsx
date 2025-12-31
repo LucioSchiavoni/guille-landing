@@ -4,10 +4,18 @@ import Link from "next/link"
 import { Phone, Mail, Clock, Check, Instagram, Facebook, Linkedin } from "lucide-react"
 import Logo from "@/components/header/logo"
 import { useState } from "react"
+import { useRouter, usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
 
 export default function Footer() {
   const [emailCopied, setEmailCopied] = useState(false)
+  const router = useRouter()
+  const pathname = usePathname()
+
+  const handleLogoClick = (e: React.MouseEvent) => {
+    e.preventDefault()
+    window.scrollTo({ top: 0, behavior: "smooth" })
+  }
 
   const handleCopyEmail = (e: React.MouseEvent) => {
     e.preventDefault()
@@ -17,12 +25,25 @@ export default function Footer() {
   }
 
   return (
-    <footer className="bg-gradient-to-br from-green-900 via-green-800 to-green-700 text-white mt-16">
+    <footer className="text-white mt-16" style={{ backgroundColor: 'rgb(63, 121, 72)' }}>
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           <div className="space-y-4">
-            <div className="inline-block">
-              <Logo className="h-12 w-auto" />
+            <div
+              className="flex items-center gap-3 relative h-18 px-6 rounded-lg overflow-hidden group cursor-pointer"
+              style={{
+                backgroundImage: `url('/header-mobile.png')`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                backgroundRepeat: 'no-repeat',
+              }}
+            >
+              <Link
+                href="/"
+                onClick={handleLogoClick}
+                className="absolute inset-0 z-10"
+                aria-label="Ir al inicio"
+              />
             </div>
             <p className="text-green-100 text-sm leading-relaxed">
               Soluciones de packaging para la industria alimenticia y servicios en general.
@@ -81,7 +102,7 @@ export default function Footer() {
                 Contacto
               </Link>
               <Link
-                href="/preguntas-frecuentes"
+                href="/#preguntas-frecuentes"
                 className="text-sm text-green-100 hover:text-white hover:translate-x-1 transition-all"
               >
                 Preguntas Frecuentes
@@ -91,6 +112,12 @@ export default function Footer() {
                 className="text-sm text-green-100 hover:text-white hover:translate-x-1 transition-all"
               >
                 Productos
+              </Link>
+              <Link
+                href="/sostenibilidad"
+                className="text-sm text-green-100 hover:text-white hover:translate-x-1 transition-all"
+              >
+                Sostenibilidad
               </Link>
             </nav>
           </div>

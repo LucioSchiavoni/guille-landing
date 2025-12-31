@@ -81,7 +81,7 @@ export default function MenuMobile({ rubros, miscellaneousCategories }: MenuMobi
             <div className="flex flex-col h-full overflow-hidden">
               {/* Close Button Header for Mobile Menu */}
               <div
-                className="flex items-center justify-end p-4 border-b border-white/10 relative"
+                className="flex items-center justify-end px-4 py-4 relative h-20"
                 style={{
                   backgroundImage: ` url('/header-mobile.png')`,
                   backgroundSize: 'cover',
@@ -89,6 +89,12 @@ export default function MenuMobile({ rubros, miscellaneousCategories }: MenuMobi
                   backgroundRepeat: 'no-repeat',
                 }}
               >
+                <Link
+                  href="/"
+                  onClick={() => setOpen(false)}
+                  className="absolute inset-0 z-0"
+                  aria-label="Ir al inicio"
+                />
                 <Button
                   variant="ghost"
                   size="icon"
