@@ -35,7 +35,7 @@ function AnimatedSection({
 const industries = [
   {
     icon: ChefHat,
-    title: "GASTRONOMIA",
+    title: "GASTRONOMÍA",
     subtitle: "Panaderías · Rotiserías · Restaurantes · Bares · Pizzerías",
     description:
       "Bandejas, bolsas, estuches térmicos, papel, cajas y todo tipo de envoltorios y productos de higiene descartables para el trabajo diario.",
@@ -56,13 +56,13 @@ const industries = [
   },
   {
     icon: Store,
-    title: "PAPELERIAS & COMERCIOS",
+    title: "PAPELERÍAS & COMERCIOS",
     subtitle: "",
     description: "Cintas adhesivas, bolsas de papel kraft con asa e insumos de embalaje.",
   },
   {
     icon: Building2,
-    title: "ADMINISTRACION DE EDIFICIOS & EMPRESAS",
+    title: "ADMINISTRACIÓN DE EDIFICIOS & EMPRESAS",
     subtitle: "",
     description: "Bolsas de residuos profesionales de alta resistencia para uso intensivo. Desarrollo de productos a medida.",
   },
@@ -76,11 +76,11 @@ const industries = [
 
 const benefits = [
   {
-    title: "Atencion personalizada",
+    title: "Atención personalizada",
     description: "Nos involucramos en tu negocio para brindarte soluciones eficaces.",
   },
   {
-    title: "Catalogo amplio y versatil",
+    title: "Catálogo amplio y versátil",
     description: "Productos descartables para cada necesidad de tu comercio.",
   },
   {
@@ -92,7 +92,7 @@ const benefits = [
     description: "Disponibilidad constante para que nunca te falten productos clave.",
   },
   {
-    title: "Envios sin costo",
+    title: "Envíos sin costo",
     description: "Recibe tu pedido de forma rápida y sin gastos adicionales.",
   },
   {
@@ -208,9 +208,9 @@ export default function AboutPage() {
         <div className="max-w-6xl mx-auto">
           <AnimatedSection className="mb-12 md:mb-16 text-center">
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 md:mb-4">
-              Por que elegir Todo en Packaging?
+              ¿Por qué elegir Todo en Packaging?
             </h2>
-            <p className="text-gray-600 text-base md:text-lg">Descubri las ventajas de trabajar con nosotros</p>
+            <p className="text-gray-600 text-base md:text-lg">Descubrí las ventajas de trabajar con nosotros</p>
           </AnimatedSection>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 md:gap-x-12 gap-y-6 md:gap-y-8">
@@ -271,10 +271,10 @@ export default function AboutPage() {
         <div className="max-w-3xl mx-auto text-center">
           <AnimatedSection>
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 md:mb-4">
-              Listo para comenzar?
+              ¿Listo para comenzar?
             </h2>
             <p className="text-base md:text-lg text-gray-600 mb-6 md:mb-8">
-              Contactanos y descubri como podemos ayudarte
+              Contactanos y descubrí cómo podemos ayudarte
             </p>
             <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center">
               <Button
@@ -283,7 +283,7 @@ export default function AboutPage() {
                 asChild
               >
                 <Link href="/productos">
-                  Ver Catalogo
+                  Ver Catálogo
                   <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </Button>

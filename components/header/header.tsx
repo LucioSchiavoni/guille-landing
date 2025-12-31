@@ -102,7 +102,7 @@ export default function Header({ rubros, miscellaneousCategories }: HeaderProps)
               style={{
                 backgroundImage: `url('/header-mobile.png')`,
                 backgroundSize: 'contain',
-                backgroundPosition: 'left center',
+                backgroundPosition: '16px center',
                 backgroundRepeat: 'no-repeat',
               }}
             >
