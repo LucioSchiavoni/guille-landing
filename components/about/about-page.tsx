@@ -3,7 +3,7 @@
 import type React from "react"
 import { motion, useInView } from "framer-motion"
 import { useRef } from "react"
-import { ChefHat, PartyPopper, ShoppingCart, Store, Building2, SprayCan, Check, Leaf, ArrowRight } from "lucide-react"
+import { ChefHat, PartyPopper, ShoppingCart, Store, Building2, SprayCan, Check, Leaf, ArrowRight, Heart } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 
@@ -35,53 +35,53 @@ function AnimatedSection({
 const industries = [
   {
     icon: ChefHat,
-    title: "GASTRONOMIA",
-    subtitle: "Panaderias - Rotiserias - Restaurantes - Buffets",
+    title: "GASTRONOMÍA",
+    subtitle: "Panaderías · Rotiserías · Restaurantes · Bares · Pizzerías",
     description:
-      "Bandejas, estuches termicos, papel, cajas y todo tipo de envoltorios descartables para el trabajo diario.",
+      "Bandejas, bolsas, estuches térmicos, papel, cajas y todo tipo de envoltorios y productos de higiene descartables para el trabajo diario.",
   },
   {
     icon: PartyPopper,
     title: "CATERING Y EVENTOS",
     subtitle: "",
     description:
-      "Vasos, copas, cubiertos, platos, degustadores y soluciones practicas para todo tipo de celebraciones y servicios gastronomicos.",
+      "Vasos, copas, cubiertos, platos, degustadores y soluciones prácticas para todo tipo de celebraciones y servicios gastronómicos.",
   },
   {
     icon: ShoppingCart,
     title: "SUPERMERCADOS",
     subtitle: "",
     description:
-      "Envoltorios para punto de venta, rollos de aluminio y film, bolsas y soluciones practicas para exhibicion y uso domestico.",
+      "Envoltorios para punto de venta, rollos de aluminio y film, bolsas descartables y reutilizables, bolsas de residuos y otros productos de uso doméstico.",
   },
   {
     icon: Store,
-    title: "PAPELERIAS & COMERCIOS",
+    title: "PAPELERÍAS & COMERCIOS",
     subtitle: "",
     description: "Cintas adhesivas, bolsas de papel kraft con asa e insumos de embalaje.",
   },
   {
     icon: Building2,
-    title: "ADMINISTRACION DE EDIFICIOS & EMPRESAS",
+    title: "ADMINISTRACIÓN DE EDIFICIOS & EMPRESAS",
     subtitle: "",
-    description: "Bolsas de residuos profesionales de alta resistencia para uso intensivo.",
+    description: "Bolsas de residuos profesionales de alta resistencia para uso intensivo. Desarrollo de productos a medida.",
   },
   {
     icon: SprayCan,
     title: "HIGIENE & LIMPIEZA PROFESIONAL",
     subtitle: "",
-    description: "Linea completa de productos para mantener cada espacio limpio, seguro y operativo.",
+    description: "Bolsas de residuos, servilletas, rollos en formato industrial de papel higiénico, toallas descartables y otros.",
   },
 ]
 
 const benefits = [
   {
-    title: "Atencion personalizada",
+    title: "Atención personalizada",
     description: "Nos involucramos en tu negocio para brindarte soluciones eficaces.",
   },
   {
-    title: "Catalogo amplio y versatil",
-    description: "Disenos adaptables a cada necesidad de tu comercio.",
+    title: "Catálogo amplio y versátil",
+    description: "Productos descartables para cada necesidad de tu comercio.",
   },
   {
     title: "Sustentabilidad real",
@@ -92,16 +92,16 @@ const benefits = [
     description: "Disponibilidad constante para que nunca te falten productos clave.",
   },
   {
-    title: "Envios sin costo",
-    description: "Recibi tu pedido de forma rapida y sin gastos adicionales.",
+    title: "Envíos sin costo",
+    description: "Recibe tu pedido de forma rápida y sin gastos adicionales.",
   },
   {
     title: "Mejores precios por mayor",
-    description: "Optimizamos costos para que tu negocio sea mas rentable.",
+    description: "Optimizamos costos para que tu negocio sea más rentable",
   },
   {
     title: "Compromiso en cada entrega",
-    description: "Cumplimos plazos y condiciones. Tu pedido llega como lo esperas.",
+    description: "Cumplimos plazos y condiciones. Tu pedido llega a tiempo.",
   },
 ]
 
@@ -134,10 +134,8 @@ export default function AboutPage() {
             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
             className="text-base md:text-lg lg:text-xl text-white/90 leading-relaxed max-w-3xl mx-auto"
           >
-            En Todo en Packaging somos especialistas en soluciones de envoltorios descartables para la industria
-            alimenticia, con distribucion a todo el pais. Acompanamos a cada comercio con un catalogo completo de
-            productos convencionales, la gama mas amplia de productos eco friendly y una linea integral de productos de
-            higiene y limpieza, brindando una solucion total en un solo proveedor.
+            En Todo en Packaging somos especialistas en envases y soluciones descartables para el comercio y la industria alimenticia, con distribución a todo el país.
+            <br />Acompañamos a cada comercio con un catálogo completo de productos convencionales, la gama más amplia de productos eco friendly y una línea de productos de higiene, brindando una solución integral en un solo proveedor.
           </motion.p>
         </div>
         <motion.div
@@ -199,9 +197,7 @@ export default function AboutPage() {
               TODO EN UN SOLO PROVEEDOR
             </h2>
             <p className="text-base md:text-lg lg:text-xl text-white/90 leading-relaxed max-w-2xl mx-auto">
-              Somos tu aliado en packaging, garantizando la mejor relacion precio-calidad del mercado. Porque creemos
-              que cada entrega no es solo un pedido: es parte de la experiencia que tu comercio le brinda a sus
-              clientes.
+              Somos tu aliado en packaging, garantizando la mejor relación calidad-precio del mercado, para que puedas brindar la mejor experiencia a tus clientes.
             </p>
           </AnimatedSection>
         </div>
@@ -212,9 +208,9 @@ export default function AboutPage() {
         <div className="max-w-6xl mx-auto">
           <AnimatedSection className="mb-12 md:mb-16 text-center">
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 md:mb-4">
-              Por que elegir Todo en Packaging?
+              ¿Por qué elegir Todo en Packaging?
             </h2>
-            <p className="text-gray-600 text-base md:text-lg">Descubri las ventajas de trabajar con nosotros</p>
+            <p className="text-gray-600 text-base md:text-lg">Descubrí las ventajas de trabajar con nosotros</p>
           </AnimatedSection>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 md:gap-x-12 gap-y-6 md:gap-y-8">
@@ -238,93 +234,47 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
+      {/* Service Vocation Section */}
+      <section className="py-20 md:py-28 px-4 sm:px-6 overflow-hidden relative" style={{ backgroundColor: 'rgb(63, 121, 72)' }}>
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-6xl h-full pointer-events-none opacity-10">
+          <div className="absolute top-10 left-10 w-64 h-64 rounded-full bg-white blur-3xl" />
+          <div className="absolute bottom-10 right-10 w-64 h-64 rounded-full bg-green-300 blur-3xl" />
+        </div>
 
-      {/* Sustainability Section */}
-      <section className="py-16 md:py-24 px-4 sm:px-6">
-        <div className="max-w-6xl mx-auto">
-          <AnimatedSection className="mb-12 md:mb-16 text-center">
-            <div className="inline-block">
-              <div className="flex items-center gap-3 mb-3 md:mb-4">
-                <div className="h-px w-8 md:w-12 bg-gradient-to-r from-transparent to-green-600" />
-                <span className="text-xs md:text-sm font-bold text-green-600 uppercase tracking-widest">
-                  Sostenibilidad
-                </span>
-                <div className="h-px w-8 md:w-12 bg-gradient-to-l from-transparent to-green-600" />
-              </div>
-            </div>
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4 md:mb-6">
-              Compromiso Eco-Friendly
+        <div className="max-w-4xl mx-auto relative z-10">
+          <AnimatedSection className="text-center">
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-white/10 text-white mb-8 shadow-sm border border-white/20 backdrop-blur-sm"
+            >
+              <Heart className="w-10 h-10 fill-white/10" />
+            </motion.div>
+
+            <h2 className="text-sm md:text-base font-bold tracking-[0.2em] text-green-100 uppercase mb-4">
+              Nuestro Compromiso
             </h2>
-            <p className="text-base md:text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              Somos una empresa que mantiene el compromiso de ofrecer soluciones de packaging eco-friendly para la
-              industria alimenticia. Nos enfocamos en promover productos amigables con el medio ambiente, que
-              contribuyen a minimizar la huella ambiental, cuidando los recursos naturales y reduciendo desperdicios.
-            </p>
+
+            <h3 className="text-3xl md:text-5xl lg:text-6xl font-black text-white mb-10 leading-tight">
+              VOCACIÓN DE SERVICIO
+            </h3>
+
+            <div className="relative px-4 md:px-0">
+              <p className="text-xl md:text-2xl lg:text-3xl text-white/90 leading-relaxed font-medium">
+                "Nos comprometemos a encontrar la <span className="text-white font-bold underline decoration-green-300 underline-offset-4">mejor solución</span> y estamos siempre abiertos a escuchar tus requerimientos en packaging y descartables para que tus productos <span className="text-white font-bold">luzcan mejor</span> y lleguen a tus clientes con la <span className="text-green-50 font-bold">misma calidad</span> siempre."
+              </p>
+            </div>
           </AnimatedSection>
-
-          <div className="grid md:grid-cols-2 gap-6 md:gap-8 items-center">
-            <AnimatedSection delay={0.1}>
-              <div className="bg-gradient-to-br from-green-600 to-emerald-700 p-6 md:p-10 rounded-2xl shadow-xl text-white">
-                <h3 className="text-xl md:text-2xl font-bold mb-4 md:mb-6">Nuestros Productos</h3>
-                <p className="text-sm md:text-base leading-relaxed opacity-95 mb-4 md:mb-6">
-                  Ofrecemos un catalogo amplio con disenos que permiten adaptarse a cada necesidad. Son productos a base
-                  de pulpa de papel, bagazo de cana, fibra de bambu o carton; resistentes a la grasa y la humedad ademas
-                  de los ya tradicionales.
-                </p>
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="bg-white/10 rounded-lg p-3 md:p-4 text-center">
-                    <div className="text-2xl md:text-3xl font-bold mb-1">100%</div>
-                    <div className="text-xs md:text-sm opacity-80">Eco-Friendly</div>
-                  </div>
-                  <div className="bg-white/10 rounded-lg p-3 md:p-4 text-center">
-                    <div className="text-2xl md:text-3xl font-bold mb-1">+500</div>
-                    <div className="text-xs md:text-sm opacity-80">Productos</div>
-                  </div>
-                </div>
-              </div>
-            </AnimatedSection>
-
-            <AnimatedSection delay={0.2}>
-              <div className="space-y-4 md:space-y-6">
-                <div className="bg-white p-5 md:p-6 rounded-xl shadow-lg border border-gray-100">
-                  <h4 className="font-bold text-gray-900 mb-2 text-sm md:text-base">Vision de Futuro</h4>
-                  <p className="text-gray-600 text-sm md:text-base leading-relaxed">
-                    Este compromiso refleja la vision de un futuro mas verde y consciente, destacando la importancia de
-                    crear un impacto positivo sostenible en la cadena de valor del packaging.
-                  </p>
-                </div>
-                <div className="bg-green-50 p-5 md:p-6 rounded-xl border border-green-100">
-                  <h4 className="font-bold text-green-900 mb-2 text-sm md:text-base">Materiales Sustentables</h4>
-                  <ul className="text-green-700 text-sm md:text-base space-y-1 md:space-y-2">
-                    <li className="flex items-center gap-2">
-                      <Check className="w-4 h-4 flex-shrink-0" /> Pulpa de papel
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <Check className="w-4 h-4 flex-shrink-0" /> Bagazo de cana
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <Check className="w-4 h-4 flex-shrink-0" /> Fibra de bambu
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <Check className="w-4 h-4 flex-shrink-0" /> Carton reciclable
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </AnimatedSection>
-          </div>
         </div>
       </section>
-
       {/* CTA Section */}
       <section className="py-16 md:py-24 px-4 sm:px-6 bg-gray-50">
         <div className="max-w-3xl mx-auto text-center">
           <AnimatedSection>
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 md:mb-4">
-              Listo para comenzar?
+              ¿Listo para comenzar?
             </h2>
             <p className="text-base md:text-lg text-gray-600 mb-6 md:mb-8">
-              Contactanos y descubri como podemos ayudarte
+              Contactanos y descubrí cómo podemos ayudarte
             </p>
             <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center">
               <Button
@@ -333,7 +283,7 @@ export default function AboutPage() {
                 asChild
               >
                 <Link href="/productos">
-                  Ver Catalogo
+                  Ver Catálogo
                   <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </Button>
