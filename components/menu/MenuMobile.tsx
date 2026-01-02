@@ -167,7 +167,7 @@ export default function MenuMobile({ rubros, miscellaneousCategories }: MenuMobi
                                   </button>
                                 ) : (
                                   <Link
-                                    href={`/productos?categoria=${categoria.id}`}
+                                    href={categoria.slug ? `/categoria/${categoria.slug}` : `/productos?categoria=${categoria.id}`}
                                     onClick={() => setOpen(false)}
                                     className="text-sm text-white/90 group-hover:text-white font-medium flex-1 py-1 transition-colors"
                                   >
@@ -199,7 +199,7 @@ export default function MenuMobile({ rubros, miscellaneousCategories }: MenuMobi
                                     {categoria.subcategorias.map((sub) => (
                                       <Link
                                         key={sub.id}
-                                        href={`/productos?categoria=${categoria.id}&subcategoria=${sub.id}`}
+                                        href={sub.slug ? `/subcategoria/${sub.slug}` : `/productos?categoria=${categoria.id}&subcategoria=${sub.id}`}
                                         onClick={() => setOpen(false)}
                                         className="text-xs text-gray-400 hover:text-green-300 py-1.5 px-2 rounded hover:bg-white/5 transition-colors block"
                                       >
@@ -280,7 +280,7 @@ export default function MenuMobile({ rubros, miscellaneousCategories }: MenuMobi
                                         </button>
                                       ) : (
                                         <Link
-                                          href={`/productos?categoria=${categoria.id}`}
+                                          href={categoria.slug ? `/categoria/${categoria.slug}` : `/productos?categoria=${categoria.id}`}
                                           onClick={() => setOpen(false)}
                                           className="text-sm text-white font-medium flex-1 transition-colors"
                                         >
@@ -312,7 +312,7 @@ export default function MenuMobile({ rubros, miscellaneousCategories }: MenuMobi
                                           {categoria.subcategorias.map((sub) => (
                                             <Link
                                               key={sub.id}
-                                              href={`/productos?categoria=${categoria.id}&subcategoria=${sub.id}`}
+                                              href={sub.slug ? `/subcategoria/${sub.slug}` : `/productos?categoria=${categoria.id}&subcategoria=${sub.id}`}
                                               onClick={() => setOpen(false)}
                                               className="text-xs text-gray-500 hover:text-green-300 py-1 block transition-colors"
                                             >

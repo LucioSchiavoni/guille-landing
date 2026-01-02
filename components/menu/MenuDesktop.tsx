@@ -113,7 +113,7 @@ export default function MenuDesktop({ rubros, miscellaneousCategories }: MenuDes
                       {[...activeRubro.categorias].sort((a, b) => a.nombre.localeCompare(b.nombre)).map((categoria) => (
                         <div key={categoria.id} className="rounded-lg p-2 hover:bg-gray-50 transition-all duration-300">
                           <Link
-                            href={`/productos?categoria=${categoria.id}`}
+                            href={categoria.slug ? `/categoria/${categoria.slug}` : `/productos?categoria=${categoria.id}`}
                             className="block text-sm font-bold text-gray-800 hover:text-green-700 mb-1 transition-all duration-300 hover:translate-x-1"
                           >
                             {categoria.nombre}
@@ -123,7 +123,7 @@ export default function MenuDesktop({ rubros, miscellaneousCategories }: MenuDes
                               {categoria.subcategorias.map((sub) => (
                                 <Link
                                   key={sub.id}
-                                  href={`/productos?categoria=${categoria.id}&subcategoria=${sub.id}`}
+                                  href={sub.slug ? `/subcategoria/${sub.slug}` : `/productos?categoria=${categoria.id}&subcategoria=${sub.id}`}
                                   className="text-xs text-gray-500 hover:text-green-600 truncate py-0.5 transition-all duration-300 hover:translate-x-0.5"
                                 >
                                   {sub.nombre}
@@ -191,7 +191,7 @@ export default function MenuDesktop({ rubros, miscellaneousCategories }: MenuDes
                     {[...miscellaneousCategories].sort((a, b) => a.nombre.localeCompare(b.nombre)).map((categoria) => (
                       <Link
                         key={categoria.id}
-                        href={`/productos?categoria=${categoria.id}`}
+                        href={categoria.slug ? `/categoria/${categoria.slug}` : `/productos?categoria=${categoria.id}`}
                         onMouseEnter={() => setActiveCategoria(categoria)}
                         className={cn(
                           "w-full text-left px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-300 flex items-center justify-between group",
@@ -222,7 +222,7 @@ export default function MenuDesktop({ rubros, miscellaneousCategories }: MenuDes
                         {activeCategoria.subcategorias.map((sub) => (
                           <Link
                             key={sub.id}
-                            href={`/productos?categoria=${activeCategoria.id}&subcategoria=${sub.id}`}
+                            href={sub.slug ? `/subcategoria/${sub.slug}` : `/productos?categoria=${activeCategoria.id}&subcategoria=${sub.id}`}
                             className="px-3 py-2 text-sm text-gray-600 hover:text-green-700 hover:bg-gray-50 rounded-lg transition-all duration-300 hover:translate-x-1"
                           >
                             {sub.nombre}

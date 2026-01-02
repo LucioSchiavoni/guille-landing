@@ -13,6 +13,9 @@ const WhatsAppButton = dynamic(() => import("@/components/ui/whatsapp-button"), 
 // 🚀 Prefetch de rutas críticas (client component - se ejecuta después de hidratación)
 import RoutePrefetch from "@/components/ui/route-prefetch"
 
+// SEO: JSON-LD structured data
+import { OrganizationSchema, WebsiteSchema } from "@/components/seo/JsonLd"
+
 // 🎨 Configuración optimizada de fuentes Google
 const lato = Lato({
   subsets: ["latin"],
@@ -44,26 +47,24 @@ const sourceCodePro = Source_Code_Pro({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://todoenpackaging.com'),
+  metadataBase: new URL("https://todoenpackaging.com.uy"),
   title: {
-    default: "TodoEnPackaging | Soluciones en Packaging Ecológico y Descartable",
-    template: "%s | TodoEnPackaging",
+    default: "TODO EN PACKAGING - Envases y Descartables en Uruguay",
+    template: "%s | TODO EN PACKAGING",
   },
-  description: "Líderes en packaging ecológico y descartable en Uruguay. Soluciones sostenibles para la industria alimenticia: delivery, take away y gastronomía. Envíos a todo el país.",
+  description: "Venta de envases descartables, bandejas, vasos, cubiertos, packaging y embalajes para comercios en Uruguay. Productos genéricos y personalizados con la mejor atención.",
   applicationName: "TodoEnPackaging",
   authors: [{ name: "TodoEnPackaging", url: "https://todoenpackaging.com" }],
   generator: "Next.js",
   keywords: [
-    "packaging uruguay",
     "envases descartables",
-    "packaging ecologico",
-    "cajas para delivery",
-    "insumos gastronomicos",
-    "bolsas de papel",
-    "vasos biodegradables",
-    "bandejas comida",
-    "todo en packaging",
-    "proveedores gastronomia uruguay"
+    "packaging uruguay",
+    "bandejas descartables",
+    "vasos descartables",
+    "cubiertos descartables",
+    "embalajes",
+    "envases para comercios",
+    "todo en packaging"
   ],
   referrer: "origin-when-cross-origin",
   creator: "TodoEnPackaging",
@@ -75,15 +76,15 @@ export const metadata: Metadata = {
     telephone: false,
   },
   alternates: {
-    canonical: "/",
+    canonical: "https://todoenpackaging.com.uy",
   },
   openGraph: {
     type: "website",
     locale: "es_UY",
-    url: "https://todoenpackaging.com",
-    siteName: "TodoEnPackaging",
-    title: "TodoEnPackaging | Soluciones en Packaging Ecológico y Descartable",
-    description: "Distribución de envoltorios descartables eco-friendly y productos de higiene para la industria alimenticia en Uruguay. Catálogo completo online.",
+    url: "https://todoenpackaging.com.uy",
+    siteName: "TODO EN PACKAGING",
+    title: "TODO EN PACKAGING - Envases y Descartables en Uruguay",
+    description: "Venta de envases descartables, bandejas, vasos, cubiertos, packaging y embalajes para comercios en Uruguay. Productos genéricos y personalizados con la mejor atención.",
     images: [
       {
         url: "https://res.cloudinary.com/dbk2t0jy3/image/upload/v1764163493/LOGO_-_fondo_transparente_ioekip.png",
@@ -103,13 +104,6 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-    },
   },
   verification: {
     google: 'verification_token',
@@ -144,6 +138,8 @@ export default function RootLayout({
       <body
         className={`${lato.variable} ${merriweather.variable} ${sourceCodePro.variable} font-sans antialiased bg-stone-100`}
       >
+        <OrganizationSchema />
+        <WebsiteSchema />
         {children}
         {modal}
         <DeferredStyles />

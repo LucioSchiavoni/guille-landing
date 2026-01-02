@@ -12,6 +12,7 @@ export interface Variante {
 export interface Subcategoria {
   id: string
   nombre: string
+  slug?: string
   items?: Item[]
   variantes?: Variante[]
 }
@@ -19,6 +20,7 @@ export interface Subcategoria {
 export interface Categoria {
   id: string
   nombre: string
+  slug?: string
   subcategorias: Subcategoria[]
 }
 

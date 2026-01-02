@@ -64,9 +64,11 @@ export const menuQuery = groq`
       "categorias": *[_type == "category" && references(^._id) && active == true] | order(order asc) {
         "id": _id,
         "nombre": name,
+        "slug": slug.current,
         "subcategorias": *[_type == "subcategory" && category._ref == ^._id && active == true] | order(order asc) {
           "id": _id,
           "nombre": name,
+          "slug": slug.current,
           "items": *[_type == "product" && subcategory._ref == ^._id && active == true] | order(order asc) {
             "name": name,
             "slug": slug.current,
@@ -78,9 +80,11 @@ export const menuQuery = groq`
     "miscellaneousCategories": *[_type == "category" && active == true] | order(order asc) {
       "id": _id,
       "nombre": name,
+      "slug": slug.current,
       "subcategorias": *[_type == "subcategory" && category._ref == ^._id && active == true] | order(order asc) {
         "id": _id,
         "nombre": name,
+        "slug": slug.current,
         "items": *[_type == "product" && subcategory._ref == ^._id && active == true] | order(order asc) {
           "name": name,
           "slug": slug.current,
@@ -197,5 +201,53 @@ export const carouselQuery = groq`
       link
     },
     activo
+  }
+`
+
+// Get category by slug with its products
+export const categoryBySlugQuery = groq`
+  *[_type == "category" && slug.current == $slug && active == true][0] {
+    _id,
+    name,
+    slug,
+    description,
+    image,
+    "products": *[_type == "product" && active == true && subcategory->category._ref == ^._id] | order(order asc) {
+      _id,
+      name,
+      slug,
+      description,
+      image,
+      price,
+      subcategory->{
+        _id,
+        name,
+        slug
+      }
+    }
+  }
+`
+
+// Get subcategory by slug with its products
+export const subcategoryBySlugQuery = groq`
+  *[_type == "subcategory" && slug.current == $slug && active == true][0] {
+    _id,
+    name,
+    slug,
+    description,
+    image,
+    category->{
+      _id,
+      name,
+      slug
+    },
+    "products": *[_type == "product" && active == true && subcategory._ref == ^._id] | order(order asc) {
+      _id,
+      name,
+      slug,
+      description,
+      image,
+      price
+    }
   }
 `

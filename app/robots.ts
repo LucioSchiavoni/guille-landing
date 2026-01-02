@@ -9,6 +9,6 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ['/studio/', '/api/'],
       },
     ],
-    sitemap: 'https://todoenpackaging.com/sitemap.xml',
+    sitemap: 'https://todoenpackaging.com.uy/sitemap.xml',
   }
 }
