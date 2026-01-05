@@ -107,7 +107,7 @@ export default function HeroCarousel({ carousel }: HeroCarouselProps) {
 
   return (
     <div
-      className="relative w-full h-[50vh] md:h-[55vh] lg:h-[60vh] overflow-hidden bg-slate-950"
+      className="relative w-full h-[50vh] md:h-[55vh] lg:h-[60vh] overflow-hidden "
       onMouseEnter={() => setIsAutoPlaying(false)}
       onMouseLeave={() => setIsAutoPlaying(true)}
     >
@@ -129,7 +129,7 @@ export default function HeroCarousel({ carousel }: HeroCarouselProps) {
               skeletonClassName="bg-slate-900"
               sizes="100vw"
             />
-            <div className="absolute inset-0 bg-gradient-to-br from-slate-950/70 via-slate-900/50 to-transparent" />
+            {/* <div className="absolute inset-0 " /> */}
           </div>
         ))}
       </div>
@@ -169,9 +169,7 @@ export default function HeroCarousel({ carousel }: HeroCarouselProps) {
                   index === currentSlide ? "scale-100" : "scale-105"
                 )}
               />
-              {/* Overlay gradient para mejor lectura del texto */}
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-slate-950/40" />
-              <div className="absolute inset-0 bg-gradient-to-r from-slate-950/60 via-transparent to-transparent" />
+              {/* Overlay gradient eliminado para mostrar imagen limpia */}
             </div>
           </div>
         ))}
@@ -198,12 +196,12 @@ export default function HeroCarousel({ carousel }: HeroCarouselProps) {
               style={{ transitionDelay: '200ms' }}
             />
 
-            {/* Título con efecto de escritura */}
+            {/* Título con efecto de escritura y sombra pronunciada */}
             {slide.titulo && (
               <h2
                 className={cn(
                   "text-2xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-2 md:mb-3 lg:mb-4 transition-all duration-700 ease-out leading-tight font-['Lato']",
-                  "drop-shadow-[0_4px_20px_rgba(0,0,0,0.5)]",
+                  "drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] drop-shadow-[0_4px_12px_rgba(0,0,0,0.4)]",
                   index === currentSlide && showContent
                     ? "opacity-100 translate-x-0 blur-0"
                     : "opacity-0 -translate-x-8 blur-sm"
@@ -221,7 +219,7 @@ export default function HeroCarousel({ carousel }: HeroCarouselProps) {
                     )}
                     style={{
                       transitionDelay: `${400 + charIndex * 30}ms`,
-                      textShadow: '0 2px 10px rgba(0,0,0,0.3)'
+                      textShadow: '2px 2px 4px rgba(0,0,0,1)'
                     }}
                   >
                     {char === ' ' ? '\u00A0' : char}
@@ -230,20 +228,23 @@ export default function HeroCarousel({ carousel }: HeroCarouselProps) {
               </h2>
             )}
 
-            {/* Subtítulo con fade elegante */}
+            {/* Subtítulo con mismo diseño que el título pero menor tamaño */}
             {slide.subtitulo && (
-              <p
+              <h3
                 className={cn(
-                  "text-base md:text-xl lg:text-2xl xl:text-3xl text-white/90 font-medium tracking-wide transition-all duration-700 ease-out leading-relaxed font-['Lato']",
-                  "drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)]",
+                  "text-base md:text-xl lg:text-2xl xl:text-3xl font-bold text-white tracking-wide transition-all duration-700 ease-out leading-relaxed font-['Lato']",
+                  "drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] drop-shadow-[0_4px_12px_rgba(0,0,0,0.4)]",
                   index === currentSlide && showContent
                     ? "opacity-100 translate-x-0 blur-0"
                     : "opacity-0 -translate-x-4 blur-sm"
                 )}
-                style={{ transitionDelay: '600ms' }}
+                style={{
+                  transitionDelay: '600ms',
+                  textShadow: '2px 2px 4px rgba(0,0,0,1)'
+                }}
               >
                 {slide.subtitulo}
-              </p>
+              </h3>
             )}
 
             {/* Botón CTA si hay link */}
